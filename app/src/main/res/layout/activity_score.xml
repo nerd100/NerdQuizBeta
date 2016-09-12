@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,7 +55,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Dein Rang:"
-        android:id="@+id/textView15"
+        android:id="@+id/switchText"
         android:layout_below="@+id/tmpiq"
         android:layout_alignRight="@+id/textView14"
         android:layout_alignEnd="@+id/textView14"
@@ -80,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/points"
-        android:layout_above="@+id/textView15"
+        android:layout_above="@+id/switchText"
         android:layout_alignLeft="@+id/wrongAnswer"
         android:layout_alignStart="@+id/wrongAnswer" />
 
@@ -88,7 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/title"
-        android:layout_alignBottom="@+id/textView15"
+        android:layout_alignBottom="@+id/switchText"
         android:layout_alignLeft="@+id/points"
         android:layout_alignStart="@+id/points" />
 
@@ -96,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/tmpmed"
-        android:layout_below="@+id/textView15"
+        android:layout_below="@+id/switchText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:src="@drawable/logo"

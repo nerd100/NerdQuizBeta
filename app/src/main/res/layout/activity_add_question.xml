@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
     tools:context="com.example.dennis.nerdquiz.AddQuestion">
 
 
@@ -56,16 +57,15 @@
         android:entries="@array/categories"
         android:spinnerMode="dropdown"
         android:layout_alignBottom="@+id/textView6"
-        android:layout_alignLeft="@+id/button_add"
-        android:layout_alignStart="@+id/button_add">
-    </Spinner>
+        android:layout_toRightOf="@+id/textView6"
+        android:layout_toEndOf="@+id/textView6"/>
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spin2"
         android:entries="@array/difficulty"
-        android:layout_alignBottom="@+id/textView10"
+        android:layout_above="@+id/textView4"
         android:layout_alignLeft="@+id/spin"
         android:layout_alignStart="@+id/spin" />
     <TextView
@@ -74,10 +74,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Right Answer:"
         android:id="@+id/textView4"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="36dp"
         android:layout_below="@+id/textView10"
-        android:layout_alignRight="@+id/textView6"
-        android:layout_alignEnd="@+id/textView6" />
+        android:layout_toLeftOf="@+id/spin2"
+        android:layout_toStartOf="@+id/spin2" />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -139,13 +139,15 @@
         android:layout_alignParentEnd="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:text="Add Data"
         android:id="@+id/button_add"
         android:onClick="AddData"
+        android:background="@drawable/button"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        />
 
 
 </RelativeLayout>

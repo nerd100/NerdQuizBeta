@@ -9,6 +9,9 @@ import android.provider.ContactsContract;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.LineChart;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -18,18 +21,23 @@ public class StatisticGlobal extends Activity {
     SharedPreferences shared_preferences;
     SharedPreferences.Editor shared_preferences_editor;
     ArrayList<ImageView> test=new ArrayList<>();
-    TextView niq;
+    TextView niq,rang;
     ImageView k1m,k2m,k3m,k4m,k5m,k6m;
+
+    String title = "";
+
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statisticglobal);
         shared_preferences = getSharedPreferences("shared_preferences_test",
                 MODE_PRIVATE);
-
+        title = shared_preferences.getString("Rang","Default");
         niq = (TextView) findViewById(R.id.niq);
+        rang = (TextView) findViewById(R.id.title);
         niq.setText(String.valueOf(shared_preferences.getInt("countNerdIQ",0)));
-
+        rang.setText(title);
+        //LineChart chart = (LineChart) findViewById(R.id.chart);
         k1m = (ImageView) findViewById(R.id.k1m);
         k2m = (ImageView) findViewById(R.id.k2m);
         k3m = (ImageView) findViewById(R.id.k3m);
@@ -64,5 +72,7 @@ public class StatisticGlobal extends Activity {
                     break;
             }
         }
+
+
     }
 }

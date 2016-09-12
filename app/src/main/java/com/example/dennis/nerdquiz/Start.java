@@ -3,11 +3,14 @@ package com.example.dennis.nerdquiz;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +35,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
-
+import java.util.logging.Handler;
+import android.os.*;
 
 public class Start extends AppCompatActivity {
     SharedPreferences shared_preferences;
@@ -51,7 +55,7 @@ public class Start extends AppCompatActivity {
     int countWrongAnswers=0;
     int countNerdIQ=0;
 
-    private ProgressDialog loading;
+
     private static final String JSON_ARRAY = "server_response";
     private JSONArray ques = null;
 
@@ -70,10 +74,10 @@ public class Start extends AppCompatActivity {
         shared_preferences_editor.putInt("countRightAnswers",0);
         shared_preferences_editor.putInt("countWrongAnswers",0);
         shared_preferences_editor.apply();
-        //Toast.makeText(getApplicationContext(),whichQuiz,Toast.LENGTH_LONG).show();
-        if(whichQuiz == "1") {
+
+        if(whichQuiz.equals("1")) {
             getData("", "", String.valueOf(QuestionNumber));
-        }else if(whichQuiz == "0"){
+        }else if(whichQuiz.equals("0")){
             String Diff,Cate;
             Diff = shared_preferences.getString("Difficulty", "Default");
             Cate = shared_preferences.getString("Category", "Default");
@@ -84,7 +88,7 @@ public class Start extends AppCompatActivity {
 
     private ArrayList extractJSON(String response) {
         ArrayList<String> list = new ArrayList<String>();
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         try {
             JSONObject jsonObject = new JSONObject(response);
             ques = jsonObject.getJSONArray(JSON_ARRAY);        //Hier Parsen hopefully
@@ -95,11 +99,7 @@ public class Start extends AppCompatActivity {
                 String FA1 = jsonobject.getString("FA1");
                 String FA2 = jsonobject.getString("FA2");
                 String FA3 = jsonobject.getString("FA3");
-                buffer.append(Question + ";");
-                buffer.append(RA + ";");
-                buffer.append(FA1 + ";");
-                buffer.append(FA2 + ";");
-                buffer.append(FA3 + ";");
+                buffer.append(Question+";"+RA+";"+FA1+";"+FA2+";"+FA3);
                 list.add(buffer.toString());
                 buffer.delete(0, buffer.length());
             }
@@ -164,24 +164,23 @@ public class Start extends AppCompatActivity {
                 String tmpRAindex="button"+String.valueOf(test12+1);
                 shared_preferences_editor = shared_preferences.edit();
 
-                Toast.makeText(getApplicationContext(),String.valueOf(tmpRAindex),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),String.valueOf(tmpRAindex),Toast.LENGTH_LONG).show();
                // Toast.makeText(getApplicationContext(), String.valueOf(tmpRAindex),Toast.LENGTH_LONG).show();
                 if (v.toString().contains(tmpRAindex)) {
-                    Toast.makeText(getApplicationContext(),"HUSO",Toast.LENGTH_LONG).show();
+                    //v.setBackgroundColor(Color.GREEN);
                     countRightAnswers +=1;
                     countNerdIQ+=10;
-
                     shared_preferences_editor.putInt("countRightAnswers",countRightAnswers );
                     shared_preferences_editor.putInt("countNerdIQ",countNerdIQ );
                     shared_preferences_editor.apply();
                     if (QuestionAndButtons.size() > 0) {
-
                         next();
                     } else {
                         finish();
                         startActivity(new Intent(Start.this, Score.class));
                     }
                 } else {
+                    //v.setBackgroundColor(Color.RED);
                     countWrongAnswers+=1;
                     shared_preferences_editor.putInt("countWrongAnswers",countWrongAnswers );
                     shared_preferences_editor.apply();
@@ -207,7 +206,6 @@ public class Start extends AppCompatActivity {
         Category = Cate2;
         Number = Num;
         Toast.makeText(getApplicationContext(),Category,Toast.LENGTH_LONG).show();
-        //Toast.makeText(getApplicationContext(),Difficulty,Toast.LENGTH_LONG).show();
      class GetDataJSON extends AsyncTask<String, Void, String> {
         private ProgressDialog progressDialog;
 
@@ -249,6 +247,7 @@ public class Start extends AppCompatActivity {
                 inputStream.close();
                 httpURLConnection.disconnect();
                 result = stringBuilder.toString();
+
                 return result ;
 
 
@@ -263,7 +262,7 @@ public class Start extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            if(result == "Failed"){
+            if(result.equals("Failed")){
                 Toast.makeText(getApplicationContext(),"No Connection to Database",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(Start.this, MainActivity.class));
                 finish();
@@ -280,5 +279,15 @@ public class Start extends AppCompatActivity {
     }
         GetDataJSON asyncObject = new GetDataJSON();
         asyncObject.execute(Category,Difficulty,Number);
-}
+        //asyncObject.cancel(true);
+
+    }
+    private Runnable mMyRunnable = new Runnable()
+    {
+        @Override
+        public void run()
+        {
+            //Change state here
+        }
+    };
 }

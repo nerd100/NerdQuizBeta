@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="serif-monospace"
+        android:textStyle="bold"
+        android:shadowDx="-2"
+        android:shadowDy="2"
+        android:shadowRadius="0.01"
+
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Fortschritt"
         android:id="@+id/textView16"
@@ -203,5 +210,14 @@
         android:layout_alignTop="@+id/textView24"
         android:layout_alignLeft="@+id/k5m"
         android:layout_alignStart="@+id/k5m" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/title"
+        android:layout_alignTop="@+id/textView17"
+        android:layout_alignLeft="@+id/textView27"
+        android:layout_alignStart="@+id/textView27" />
 
 </RelativeLayout>

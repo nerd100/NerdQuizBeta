@@ -7,11 +7,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
     tools:context="com.example.dennis.nerdquiz.Start">
+
     <View android:id="@+id/strut"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_centerHorizontal="true"/>
+
     <Button
         android:layout_width="0dp"
         android:layout_height="100dp"
@@ -19,7 +22,7 @@
         android:layout_above="@+id/button3"
         android:layout_alignRight="@+id/strut"
         android:layout_alignParentLeft="true"
-
+        android:background="@drawable/button"
         />
     <Button
         android:layout_width="0dp"
@@ -28,6 +31,7 @@
         android:layout_above="@+id/button4"
         android:layout_alignLeft="@+id/strut"
         android:layout_alignParentRight="true"
+        android:background="@drawable/button"
         />
     <Button
         android:layout_width="0dp"
@@ -35,7 +39,10 @@
         android:id="@+id/button3"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/strut"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/button"
+        />
+
 
     <Button
         android:layout_width="0dp"
@@ -43,7 +50,8 @@
         android:id="@+id/button4"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/strut"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:background="@drawable/button"/>
 
     <TextView
         android:layout_width="wrap_content"
