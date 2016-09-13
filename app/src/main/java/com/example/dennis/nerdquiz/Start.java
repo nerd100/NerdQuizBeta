@@ -24,7 +24,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
+import android.os.Handler;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
-import java.util.logging.Handler;
+
 import android.os.*;
 
 public class Start extends AppCompatActivity {
@@ -173,6 +173,14 @@ public class Start extends AppCompatActivity {
                     shared_preferences_editor.putInt("countRightAnswers",countRightAnswers );
                     shared_preferences_editor.putInt("countNerdIQ",countNerdIQ );
                     shared_preferences_editor.apply();
+                    btn1.setBackgroundResource(R.drawable.silberm);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            btn1.setBackgroundResource(R.drawable.button);
+                        }
+                    }, 1000);;
                     if (QuestionAndButtons.size() > 0) {
                         next();
                     } else {
