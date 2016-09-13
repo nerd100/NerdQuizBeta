@@ -1,15 +1,21 @@
 package com.example.dennis.nerdquiz;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.LightingColorFilter;
+import android.icu.util.ValueIterator;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +47,7 @@ import android.os.*;
 public class Start extends AppCompatActivity {
     SharedPreferences shared_preferences;
     SharedPreferences.Editor shared_preferences_editor;
-    TextView question;
+    TextView question,timer;
     Button btn1, btn2, btn3, btn4;
     ArrayList QuestionAndButtons;
     String[] QuestionAndButtonsParts;
@@ -50,10 +56,11 @@ public class Start extends AppCompatActivity {
     int rightAnswer = 0;
     Random rand = new Random();
     Random r = new Random();
-
     int countRightAnswers=0;
     int countWrongAnswers=0;
     int countNerdIQ=0;
+
+
 
 
     private static final String JSON_ARRAY = "server_response";
@@ -75,6 +82,8 @@ public class Start extends AppCompatActivity {
         shared_preferences_editor.putInt("countWrongAnswers",0);
         shared_preferences_editor.apply();
 
+        createTimer();
+
         if(whichQuiz.equals("1")) {
             getData("", "", String.valueOf(QuestionNumber));
         }else if(whichQuiz.equals("0")){
@@ -84,6 +93,22 @@ public class Start extends AppCompatActivity {
             getData(Diff, Cate, String.valueOf(QuestionNumber));
         }
 
+    }
+
+    private void createTimer() {
+        timer = (TextView) findViewById(R.id.timer);
+        new CountDownTimer(60000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                timer.setText("done!");
+                startActivity(new Intent(Start.this, Score.class));
+                finish();
+            }
+        }.start();
     }
 
     private ArrayList extractJSON(String response) {
@@ -147,57 +172,35 @@ public class Start extends AppCompatActivity {
         tmpShuffle.add(FA2);
         tmpShuffle.add(FA3);
 
-
         Collections.shuffle(tmpShuffle);
-        final int test12=tmpShuffle.indexOf(RA);
-
-     //   Toast.makeText(getApplicationContext(), String.valueOf(test12),Toast.LENGTH_LONG).show();
+        final int indexRA=tmpShuffle.indexOf(RA);
 
         btn1.setText(tmpShuffle.get(0));
         btn2.setText(tmpShuffle.get(1));
         btn3.setText(tmpShuffle.get(2));
         btn4.setText(tmpShuffle.get(3));
 
+
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String tmpRAindex="button"+String.valueOf(test12+1);
+            public void onClick(final View v) {
+                String tmpRAindex="button"+String.valueOf(indexRA+1);
                 shared_preferences_editor = shared_preferences.edit();
 
-                //Toast.makeText(getApplicationContext(),String.valueOf(tmpRAindex),Toast.LENGTH_LONG).show();
-               // Toast.makeText(getApplicationContext(), String.valueOf(tmpRAindex),Toast.LENGTH_LONG).show();
-                if (v.toString().contains(tmpRAindex)) {
-                    //v.setBackgroundColor(Color.GREEN);
+                if (String.valueOf(getResources().getResourceName(v.getId())).contains(tmpRAindex)) {
                     countRightAnswers +=1;
                     countNerdIQ+=10;
                     shared_preferences_editor.putInt("countRightAnswers",countRightAnswers );
                     shared_preferences_editor.putInt("countNerdIQ",countNerdIQ );
                     shared_preferences_editor.apply();
-                    btn1.setBackgroundResource(R.drawable.silberm);
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            btn1.setBackgroundResource(R.drawable.button);
-                        }
-                    }, 1000);;
-                    if (QuestionAndButtons.size() > 0) {
-                        next();
-                    } else {
-                        finish();
-                        startActivity(new Intent(Start.this, Score.class));
-                    }
+                    v.getBackground().setColorFilter(new LightingColorFilter(Color.WHITE,Color.GREEN));
+                    setBGChangeIntent(v);
                 } else {
-                    //v.setBackgroundColor(Color.RED);
                     countWrongAnswers+=1;
                     shared_preferences_editor.putInt("countWrongAnswers",countWrongAnswers );
                     shared_preferences_editor.apply();
-                    if (QuestionAndButtons.size() > 0) {
-                        next();
-                    } else {
-                        startActivity(new Intent(Start.this, Score.class));
-                        finish();
-                    }
+                    v.getBackground().setColorFilter(new LightingColorFilter(Color.WHITE,Color.RED));
+                    setBGChangeIntent(v);
                 }
             }
         };
@@ -206,6 +209,28 @@ public class Start extends AppCompatActivity {
         btn2.setOnClickListener(listener);
         btn3.setOnClickListener(listener);
         btn4.setOnClickListener(listener);
+    }
+
+
+    private void setBGChangeIntent(final View v){
+
+        android.os.Handler h = new android.os.Handler();
+        h.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                //Put your conditions accordingly
+                v.getBackground().clearColorFilter();
+                if (QuestionAndButtons.size() > 0) {
+                    next();
+                } else {
+
+                    startActivity(new Intent(Start.this, Score.class));
+                    finish();
+                }
+            }
+        }, 1000);
+
     }
 
     private void getData(String Diff2,String Cate2,String Num){
