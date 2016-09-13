@@ -26,6 +26,10 @@ public class Score extends Activity {
     String title;
     StringBuilder buffer = new StringBuilder();
     ArrayList<String> ranks = new ArrayList<>();
+    int questionCounter;
+    int rightAns;
+
+    Map<String,Integer> category= new HashMap<>();
 
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -60,8 +64,29 @@ public class Score extends Activity {
             compareScore();
 
         }else if(getWhichQuiz.equals("0")){
+            shared_preferences_editor = shared_preferences.edit();
+            String cate = shared_preferences.getString("Category","Default");
             switchText.setText("Deine Medaille:");
-            tmpmed.setImageResource(R.drawable.diamandm);
+
+            category.put("Anime",1);
+            category.put("Serien",2);
+            category.put("Movies",3);
+            category.put("Games",4);
+            category.put("League of Legends",5);
+            category.put("Assi",6);
+
+            questionCounter = shared_preferences.getInt("questionCounter", 0);
+            rightAns = shared_preferences.getInt("countRightAnswers", 0);
+            int i = category.get(cate);
+            if (questionCounter-rightAns > questionCounter/2){
+                tmpmed.setImageResource(R.drawable.bronzem);
+                shared_preferences_editor.putInt("k"+String.valueOf(i)+"m", 1);
+            }else if(questionCounter-rightAns < questionCounter/2){
+                tmpmed.setImageResource(R.drawable.silberm);
+                shared_preferences_editor.putInt("k"+String.valueOf(i)+"m", 2);
+            }
+            shared_preferences_editor.apply();
+            //tmpmed.setImageResource(R.drawable.diamandm);
         }
 
         rightAnswer.setText(String.valueOf(shared_preferences.getInt("countRightAnswers", 0)));

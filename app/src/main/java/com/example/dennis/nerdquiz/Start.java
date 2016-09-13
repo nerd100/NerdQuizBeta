@@ -14,6 +14,8 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -49,6 +51,7 @@ public class Start extends AppCompatActivity {
     SharedPreferences.Editor shared_preferences_editor;
     TextView question,timer;
     Button btn1, btn2, btn3, btn4;
+    ProgressBar pb;
     ArrayList QuestionAndButtons;
     String[] QuestionAndButtonsParts;
     String firstQuestion = "";
@@ -59,19 +62,27 @@ public class Start extends AppCompatActivity {
     int countRightAnswers=0;
     int countWrongAnswers=0;
     int countNerdIQ=0;
-
-
-
-
+    int i = 0;
+    int questionCounter = 0;
+    CountDownTimer countDown;
     private static final String JSON_ARRAY = "server_response";
     private JSONArray ques = null;
 
     int QuestionNumber = 5;
-
+    Animation an;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+
+        pb = (ProgressBar) findViewById(R.id.progressBar);
+
+        //an = new RotateAnimation(270.0f, 270.0f, 400f, 273f);
+        //an.setFillAfter(true);
+
+
+
 
         shared_preferences = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
         shared_preferences_editor = shared_preferences.edit();
@@ -97,18 +108,23 @@ public class Start extends AppCompatActivity {
 
     private void createTimer() {
         timer = (TextView) findViewById(R.id.timer);
-        new CountDownTimer(60000, 1000) {
+        countDown = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                timer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                pb.setProgress(i++);
+                timer.setText(String.valueOf(millisUntilFinished / 1000));
+
+
             }
 
             public void onFinish() {
                 timer.setText("done!");
                 startActivity(new Intent(Start.this, Score.class));
                 finish();
+
             }
         }.start();
+
     }
 
     private ArrayList extractJSON(String response) {
@@ -184,6 +200,7 @@ public class Start extends AppCompatActivity {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                questionCounter++;
                 String tmpRAindex="button"+String.valueOf(indexRA+1);
                 shared_preferences_editor = shared_preferences.edit();
 
@@ -224,7 +241,10 @@ public class Start extends AppCompatActivity {
                 if (QuestionAndButtons.size() > 0) {
                     next();
                 } else {
-
+                    shared_preferences_editor = shared_preferences.edit();
+                    shared_preferences_editor.putInt("questionCounter",questionCounter);
+                    shared_preferences_editor.apply();
+                    countDown.cancel();
                     startActivity(new Intent(Start.this, Score.class));
                     finish();
                 }
