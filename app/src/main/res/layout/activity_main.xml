@@ -17,7 +17,10 @@
         android:id="@+id/btn_start1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="64dp"
-        android:background="@drawable/button"/>
+        android:background="@drawable/button"
+        android:textSize="50dp"
+        android:textColor="@color/text_shadow_white"
+        android:textStyle="bold|italic" />
 
     <Button
         android:layout_width="200dp"
@@ -27,7 +30,10 @@
         android:layout_below="@+id/btn_start1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:background="@drawable/button"/>
+        android:background="@drawable/button"
+        android:textStyle="bold|italic"
+        android:textSize="25dp"
+        android:textColor="#ffffff" />
 
     <Button
         android:layout_width="150dp"
@@ -37,7 +43,10 @@
         android:layout_below="@+id/btn_start2"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/button"/>
+        android:background="@drawable/button"
+        android:textSize="25dp"
+        android:textStyle="bold|italic"
+        android:textColor="#ffffff" />
     <Button
         android:layout_width="150dp"
         android:layout_height="50dp"
@@ -47,6 +56,9 @@
         android:layout_below="@+id/gstatistic"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:background="@drawable/button"/>
+        android:background="@drawable/button"
+        android:textStyle="bold|italic"
+        android:textColor="#ffffff"
+        android:textSize="20dp" />
 
 </RelativeLayout>

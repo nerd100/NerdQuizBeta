@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Quiz</string>
+    <string name="app_name">NerdQuiz</string>
 
     <string-array name="categories">
         <item>Anime</item>

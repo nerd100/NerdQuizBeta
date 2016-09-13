@@ -7,18 +7,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="serif-monospace"
-        android:textStyle="bold"
+        android:textStyle="bold|italic"
         android:shadowDx="-2"
         android:shadowDy="2"
         android:shadowRadius="0.01"
-
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Fortschritt"
         android:id="@+id/textView16"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="44dp" />
+        android:layout_marginTop="44dp"
+        android:textColor="#ffffff"
+        android:textSize="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,7 +30,9 @@
         android:layout_alignRight="@+id/textView16"
         android:layout_alignEnd="@+id/textView16"
         android:layout_marginTop="42dp"
-        android:layout_marginRight="100dp" />
+        android:layout_marginRight="100dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,7 +43,9 @@
         android:layout_below="@+id/textView17"
         android:layout_alignRight="@+id/textView17"
         android:layout_alignEnd="@+id/textView17"
-        android:layout_marginTop="35dp" />
+        android:layout_marginTop="35dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,7 +56,9 @@
         android:layout_below="@+id/textView18"
         android:layout_alignRight="@+id/textView17"
         android:layout_alignEnd="@+id/textView17"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="40dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,7 +69,9 @@
         android:layout_below="@+id/textView19"
         android:layout_alignRight="@+id/textView19"
         android:layout_alignEnd="@+id/textView19"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -74,7 +82,9 @@
         android:layout_below="@+id/textView20"
         android:layout_alignRight="@+id/textView17"
         android:layout_alignEnd="@+id/textView17"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -85,7 +95,9 @@
         android:layout_below="@+id/textView21"
         android:layout_alignRight="@+id/textView17"
         android:layout_alignEnd="@+id/textView17"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -96,7 +108,9 @@
         android:layout_below="@+id/textView22"
         android:layout_alignRight="@+id/textView17"
         android:layout_alignEnd="@+id/textView17"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -107,7 +121,9 @@
         android:layout_below="@+id/textView23"
         android:layout_alignRight="@+id/textView17"
         android:layout_alignEnd="@+id/textView17"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -116,7 +132,9 @@
         android:layout_alignBottom="@+id/textView17"
         android:layout_alignLeft="@+id/textView16"
         android:layout_alignStart="@+id/textView16"
-        android:layout_marginLeft="20dp" />
+        android:layout_marginLeft="20dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -124,7 +142,9 @@
         android:id="@+id/niq"
         android:layout_above="@+id/textView19"
         android:layout_alignLeft="@+id/quizrankglobal"
-        android:layout_alignStart="@+id/quizrankglobal" />
+        android:layout_alignStart="@+id/quizrankglobal"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -149,7 +169,9 @@
         android:layout_alignStart="@+id/niq"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="0dp"
-        android:layout_marginBottom="25dp" />
+        android:layout_marginBottom="25dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -218,6 +240,8 @@
         android:id="@+id/title"
         android:layout_alignTop="@+id/textView17"
         android:layout_alignLeft="@+id/textView27"
-        android:layout_alignStart="@+id/textView27" />
+        android:layout_alignStart="@+id/textView27"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"/>
 
 </RelativeLayout>
