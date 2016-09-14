@@ -56,7 +56,24 @@ public class Score extends Activity {
             rankSplit(buffer.toString());
             title = getNerdTitle(score);
 
+            String kat1 = "";
+            String kat2 = "";
+            String kat3 = "";
+
+            float kate1,kate2,kate3;
+
+            kat1 = whichKat(shared_preferences.getString("1kat","Default"));
+            kat2 = whichKat(shared_preferences.getString("2kat","Default"));
+            kat3 = whichKat(shared_preferences.getString("3kat","Default"));
+
+            kate1=shared_preferences.getFloat(kat1,0f);
+            kate2=shared_preferences.getFloat(kat2,0f);
+            kate3=shared_preferences.getFloat(kat3,0f);
+
             shared_preferences_editor = shared_preferences.edit();
+            shared_preferences_editor.putFloat(kat1, kate1+1);
+            shared_preferences_editor.putFloat(kat2, kate2+1);
+            shared_preferences_editor.putFloat(kat3, kate3+1);
             shared_preferences_editor.putString("Rang", title);
             shared_preferences_editor.apply();
 
@@ -133,5 +150,26 @@ public class Score extends Activity {
             }
         }
         return "no Rank";
+    }
+
+    public String whichKat(String kat){
+        if(kat.equals("Anime")){
+            return "1";
+        }
+        if(kat.equals("Serien")){
+            return "2";
+        }
+        if(kat.equals("Movies")){
+            return "3";
+        }
+        if(kat.equals("Games")){
+            return "4";
+        }
+        if(kat.equals("Assi")){
+            return "5";
+        }else{
+            return "0";
+        }
+
     }
 }

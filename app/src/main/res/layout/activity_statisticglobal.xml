@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
@@ -51,14 +53,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Anime"
+        android:text="Anime:"
         android:id="@+id/textView19"
-        android:layout_below="@+id/textView18"
-        android:layout_alignRight="@+id/textView17"
-        android:layout_alignEnd="@+id/textView17"
-        android:layout_marginTop="40dp"
         android:textColor="#ffffff"
-        android:textStyle="bold|italic"/>
+        android:textStyle="bold|italic"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/textView21"
+        android:layout_alignEnd="@+id/textView21" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -140,11 +141,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/niq"
-        android:layout_above="@+id/textView19"
-        android:layout_alignLeft="@+id/quizrankglobal"
-        android:layout_alignStart="@+id/quizrankglobal"
         android:textColor="#ffffff"
-        android:textStyle="bold|italic"/>
+        android:textStyle="bold|italic"
+        android:layout_alignBottom="@+id/textView18"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -164,14 +164,11 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medaillien"
         android:id="@+id/textView27"
-        android:layout_alignBottom="@+id/k1m"
-        android:layout_alignLeft="@+id/niq"
-        android:layout_alignStart="@+id/niq"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="25dp"
         android:textColor="#ffffff"
-        android:textStyle="bold|italic"/>
+        android:textStyle="bold|italic"
+        android:layout_above="@+id/k1m"
+        android:layout_alignLeft="@+id/niq"
+        android:layout_alignStart="@+id/niq" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -238,10 +235,20 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/title"
-        android:layout_alignTop="@+id/textView17"
-        android:layout_alignLeft="@+id/textView27"
-        android:layout_alignStart="@+id/textView27"
         android:textColor="#ffffff"
-        android:textStyle="bold|italic"/>
+        android:textStyle="bold|italic"
+        android:layout_above="@+id/textView18"
+        android:layout_alignLeft="@+id/niq"
+        android:layout_alignStart="@+id/niq" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Statistik"
+        android:id="@+id/radarChart"
+        android:layout_below="@+id/k6m"
+        android:layout_toRightOf="@+id/textView17"
+        android:layout_toEndOf="@+id/textView17" />
+
 
 </RelativeLayout>

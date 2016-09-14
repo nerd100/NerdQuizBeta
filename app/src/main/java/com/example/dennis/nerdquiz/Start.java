@@ -49,40 +49,42 @@ import android.os.*;
 public class Start extends AppCompatActivity {
     SharedPreferences shared_preferences;
     SharedPreferences.Editor shared_preferences_editor;
-    TextView question,timer;
+
+    TextView question,timer,category,difficulty;
+
     Button btn1, btn2, btn3, btn4;
+
     ProgressBar pb;
+    ArrayList<String> categoryList = new ArrayList<>();
     ArrayList QuestionAndButtons;
     String[] QuestionAndButtonsParts;
     String firstQuestion = "";
     String whichQuiz;
+    String Category = "";
+    String Difficulty = "";
+
+
     int rightAnswer = 0;
-    Random rand = new Random();
-    Random r = new Random();
     int countRightAnswers=0;
     int countWrongAnswers=0;
     int countNerdIQ=0;
-    int i = 0;
+    int progressBarIndex = 60;
     int questionCounter = 0;
+    int QuestionNumberQuiz = 2;
+    int QuestionNumberKatQuiz = 10;
+
+    Random rand = new Random();
+    Random r = new Random();
     CountDownTimer countDown;
     private static final String JSON_ARRAY = "server_response";
     private JSONArray ques = null;
 
-    int QuestionNumber = 5;
-    Animation an;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-
         pb = (ProgressBar) findViewById(R.id.progressBar);
-
-        //an = new RotateAnimation(270.0f, 270.0f, 400f, 273f);
-        //an.setFillAfter(true);
-
-
-
 
         shared_preferences = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
         shared_preferences_editor = shared_preferences.edit();
@@ -96,12 +98,24 @@ public class Start extends AppCompatActivity {
         createTimer();
 
         if(whichQuiz.equals("1")) {
-            getData("", "", String.valueOf(QuestionNumber));
+            categoryList.add("Anime");
+            categoryList.add("Serien");
+            categoryList.add("Movies");
+            categoryList.add("Games");
+            categoryList.add("Assi");
+            Collections.shuffle(categoryList);
+            shared_preferences_editor = shared_preferences.edit();
+            shared_preferences_editor.putString("1kat",categoryList.get(0));
+            shared_preferences_editor.putString("2kat",categoryList.get(1));
+            shared_preferences_editor.putString("3kat",categoryList.get(2));
+            shared_preferences_editor.apply();
+            getData("", categoryList.get(0), String.valueOf(QuestionNumberQuiz),categoryList.get(1),categoryList.get(2));
+
         }else if(whichQuiz.equals("0")){
             String Diff,Cate;
             Diff = shared_preferences.getString("Difficulty", "Default");
             Cate = shared_preferences.getString("Category", "Default");
-            getData(Diff, Cate, String.valueOf(QuestionNumber));
+            getData(Diff, Cate, String.valueOf(QuestionNumberKatQuiz),"","");
         }
 
     }
@@ -111,7 +125,7 @@ public class Start extends AppCompatActivity {
         countDown = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                pb.setProgress(i++);
+                pb.setProgress(progressBarIndex--);
                 timer.setText(String.valueOf(millisUntilFinished / 1000));
 
 
@@ -140,7 +154,10 @@ public class Start extends AppCompatActivity {
                 String FA1 = jsonobject.getString("FA1");
                 String FA2 = jsonobject.getString("FA2");
                 String FA3 = jsonobject.getString("FA3");
-                buffer.append(Question+";"+RA+";"+FA1+";"+FA2+";"+FA3);
+                Difficulty = jsonobject.getString("Difficulty");
+                Category = jsonobject.getString("Category");   //TODO: Category and Difficulty
+                buffer.append(Question + ";" + RA + ";" + FA1 + ";" + FA2 + ";" + FA3+";"+Category+";"+Difficulty);
+
                 list.add(buffer.toString());
                 buffer.delete(0, buffer.length());
             }
@@ -155,8 +172,8 @@ public class Start extends AppCompatActivity {
     public String Question(ArrayList questionList) {
         String question;
         int i = rand.nextInt(questionList.size());
-        question = questionList.get(i).toString();
-        questionList.remove(i);
+        question = questionList.get(0).toString();
+        questionList.remove(0);
         return question;
     }
 
@@ -174,13 +191,15 @@ public class Start extends AppCompatActivity {
         btn2 = (Button) findViewById(R.id.button2);
         btn3 = (Button) findViewById(R.id.button3);
         btn4 = (Button) findViewById(R.id.button4);
+        category = (TextView) findViewById(R.id.cate);
+        difficulty = (TextView) findViewById(R.id.diff);
         //mix all buttons
-        mixButtons(rightAnswer, QuestionAndButtonsParts[1], QuestionAndButtonsParts[2], QuestionAndButtonsParts[3], QuestionAndButtonsParts[4]);
+        mixButtons(rightAnswer, QuestionAndButtonsParts[1], QuestionAndButtonsParts[2], QuestionAndButtonsParts[3], QuestionAndButtonsParts[4], QuestionAndButtonsParts[5], QuestionAndButtonsParts[6]);
 
     }
 
 
-    public void mixButtons(int i, final String RA, String FA1, String FA2, String FA3) {
+    public void mixButtons(int i, final String RA, String FA1, String FA2, String FA3, String categoryText,String difficultyText) {
 
         ArrayList<String> tmpShuffle=new ArrayList<>();
         tmpShuffle.add(RA);
@@ -195,7 +214,8 @@ public class Start extends AppCompatActivity {
         btn2.setText(tmpShuffle.get(1));
         btn3.setText(tmpShuffle.get(2));
         btn4.setText(tmpShuffle.get(3));
-
+        category.setText(categoryText);
+        difficulty.setText(difficultyText);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -253,12 +273,15 @@ public class Start extends AppCompatActivity {
 
     }
 
-    private void getData(String Diff2,String Cate2,String Num){
-        String Difficulty,Category,Number;
+    private void getData(String Diff2, String Cate1, String Num,String Cate2, String Cate3){
+        String Difficulty,Category,Category2,Category3,Number;
         Difficulty = Diff2;
-        Category = Cate2;
+        Category = Cate1;
+        Category2 = Cate2;
+        Category3 = Cate3;
         Number = Num;
         Toast.makeText(getApplicationContext(),Category,Toast.LENGTH_LONG).show();
+
      class GetDataJSON extends AsyncTask<String, Void, String> {
         private ProgressDialog progressDialog;
 
@@ -268,7 +291,6 @@ public class Start extends AppCompatActivity {
         }
 
         protected String doInBackground(String... params) {
-            //Toast.makeText(getApplicationContext(),params[1],Toast.LENGTH_LONG).show();
             String JSON_STRING;
             String result = "";
 
@@ -281,13 +303,27 @@ public class Start extends AppCompatActivity {
                 httpURLConnection.setDoOutput(true);
                 OutputStream OS = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS, "UTF-8"));
-                String data =
-                        URLEncoder.encode("Category", "UTF-8") + "=" + URLEncoder.encode(params[0], "UTF-8") + "&" +
-                        URLEncoder.encode("Difficulty", "UTF-8") + "=" + URLEncoder.encode(params[1], "UTF-8") + "&" +
-                URLEncoder.encode("Number", "UTF-8") + "=" + URLEncoder.encode(params[2], "UTF-8");
-                bufferedWriter.write(data);
-                bufferedWriter.flush();
-                bufferedWriter.close();
+                if(whichQuiz.equals("1")){
+                    String data =
+                            URLEncoder.encode("Category", "UTF-8") + "=" + URLEncoder.encode(params[0], "UTF-8") + "&" +
+                                    URLEncoder.encode("Category2", "UTF-8") + "=" + URLEncoder.encode(params[3], "UTF-8") + "&" +
+                                    URLEncoder.encode("Category3", "UTF-8") + "=" + URLEncoder.encode(params[4], "UTF-8") + "&" +
+                                    URLEncoder.encode("Difficulty", "UTF-8") + "=" + URLEncoder.encode(params[1], "UTF-8") + "&" +
+                                    URLEncoder.encode("Number", "UTF-8") + "=" + URLEncoder.encode(params[2], "UTF-8");
+                    bufferedWriter.write(data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                }else if(whichQuiz.equals("0")) {
+                    String data =
+                            URLEncoder.encode("Category", "UTF-8") + "=" + URLEncoder.encode(params[0], "UTF-8") + "&" +
+                                    URLEncoder.encode("Difficulty", "UTF-8") + "=" + URLEncoder.encode(params[1], "UTF-8") + "&" +
+                                    URLEncoder.encode("Number", "UTF-8") + "=" + URLEncoder.encode(params[2], "UTF-8");
+
+                    bufferedWriter.write(data);
+                    bufferedWriter.flush();
+                    bufferedWriter.close();
+                }
+
 
                 InputStream inputStream = httpURLConnection.getInputStream();
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
@@ -331,7 +367,7 @@ public class Start extends AppCompatActivity {
         }
     }
         GetDataJSON asyncObject = new GetDataJSON();
-        asyncObject.execute(Category,Difficulty,Number);
+        asyncObject.execute(Category,Difficulty,Number,Category2,Category3);
         //asyncObject.cancel(true);
 
     }

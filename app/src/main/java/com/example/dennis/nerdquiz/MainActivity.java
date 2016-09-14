@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         shared_preferences = getSharedPreferences("shared_preferences_test",
                 MODE_PRIVATE);
 
