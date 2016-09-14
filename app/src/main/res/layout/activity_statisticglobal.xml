@@ -144,7 +144,10 @@
         android:layout_alignLeft="@+id/quizrankglobal"
         android:layout_alignStart="@+id/quizrankglobal"
         android:textColor="#ffffff"
-        android:textStyle="bold|italic"/>
+        android:textStyle="bold|italic"
+        android:layout_alignRight="@+id/quizrankglobal"
+        android:layout_alignEnd="@+id/quizrankglobal"
+        android:layout_marginLeft="70dp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -167,7 +170,7 @@
         android:layout_alignBottom="@+id/k1m"
         android:layout_alignLeft="@+id/niq"
         android:layout_alignStart="@+id/niq"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginBottom="25dp"
         android:textColor="#ffffff"
@@ -236,7 +239,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
         android:id="@+id/title"
         android:layout_alignTop="@+id/textView17"
         android:layout_alignLeft="@+id/textView27"

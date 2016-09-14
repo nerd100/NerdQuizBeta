@@ -69,6 +69,7 @@ public class Start extends AppCompatActivity {
     private JSONArray ques = null;
 
     int QuestionNumber = 5;
+    int countDownTicks = 0;
     Animation an;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +93,6 @@ public class Start extends AppCompatActivity {
         shared_preferences_editor.putInt("countRightAnswers",0);
         shared_preferences_editor.putInt("countWrongAnswers",0);
         shared_preferences_editor.apply();
-
         createTimer();
 
         if(whichQuiz.equals("1")) {
@@ -111,9 +111,26 @@ public class Start extends AppCompatActivity {
         countDown = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
+
+
                 pb.setProgress(i++);
+
                 timer.setText(String.valueOf(millisUntilFinished / 1000));
 
+                if((millisUntilFinished/1000)==59){
+
+                    pb.getProgressDrawable().setColorFilter(
+                            Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
+                }
+                if((millisUntilFinished/1000)==30){
+
+                    pb.getProgressDrawable().setColorFilter(
+                            Color.YELLOW, android.graphics.PorterDuff.Mode.SRC_IN);
+                }
+                if((millisUntilFinished/1000)==10){
+                    pb.getProgressDrawable().setColorFilter(
+                            Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                }
 
             }
 
