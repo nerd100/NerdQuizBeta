@@ -82,7 +82,7 @@ public class Start extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.quizstart);
 
         pb = (ProgressBar) findViewById(R.id.progressBar);
 
@@ -94,7 +94,6 @@ public class Start extends AppCompatActivity {
         shared_preferences_editor.putInt("countRightAnswers",0);
         shared_preferences_editor.putInt("countWrongAnswers",0);
         shared_preferences_editor.apply();
-
         createTimer();
 
         if(whichQuiz.equals("1")) {
@@ -128,6 +127,20 @@ public class Start extends AppCompatActivity {
                 pb.setProgress(progressBarIndex--);
                 timer.setText(String.valueOf(millisUntilFinished / 1000));
 
+                if((millisUntilFinished/1000)==59){
+
+                    pb.getProgressDrawable().setColorFilter(
+                            Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
+                }
+                if((millisUntilFinished/1000)==30){
+
+                    pb.getProgressDrawable().setColorFilter(
+                            Color.YELLOW, android.graphics.PorterDuff.Mode.SRC_IN);
+                }
+                if((millisUntilFinished/1000)==10){
+                    pb.getProgressDrawable().setColorFilter(
+                            Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                }
 
             }
 

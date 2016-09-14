@@ -71,14 +71,18 @@
         android:textColor="#ffffff" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/question1"
         android:layout_below="@+id/textView7"
         android:layout_centerHorizontal="true"
         android:textStyle="bold|italic"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:background="@drawable/roundedcorner"
+        android:gravity="center"
+        android:layout_above="@+id/progressBar"
+        android:textSize="15sp" />
 
     <TextView
         android:layout_width="wrap_content"

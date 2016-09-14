@@ -129,7 +129,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/quizrankglobal"
+        android:id="@+id/title"
         android:layout_alignBottom="@+id/textView17"
         android:layout_alignLeft="@+id/textView16"
         android:layout_alignStart="@+id/textView16"
@@ -141,10 +141,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/niq"
+        android:layout_above="@+id/textView19"
+        android:layout_alignLeft="@+id/title"
+        android:layout_alignStart="@+id/title"
         android:textColor="#ffffff"
         android:textStyle="bold|italic"
-        android:layout_alignBottom="@+id/textView18"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignRight="@+id/title"
+        android:layout_alignEnd="@+id/title"
+        android:layout_marginLeft="70dp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -168,7 +172,12 @@
         android:textStyle="bold|italic"
         android:layout_above="@+id/k1m"
         android:layout_alignLeft="@+id/niq"
-        android:layout_alignStart="@+id/niq" />
+        android:layout_alignStart="@+id/niq"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="25dp"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -233,7 +242,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
         android:id="@+id/title"
         android:textColor="#ffffff"
         android:textStyle="bold|italic"

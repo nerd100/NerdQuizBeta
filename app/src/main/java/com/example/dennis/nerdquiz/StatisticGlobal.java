@@ -49,14 +49,14 @@ public class StatisticGlobal extends Activity {
         k3m = (ImageView) findViewById(R.id.k3m);
         k4m = (ImageView) findViewById(R.id.k4m);
         k5m = (ImageView) findViewById(R.id.k5m);
-        k6m = (ImageView) findViewById(R.id.k6m);
+     //   k6m = (ImageView) findViewById(R.id.k6m);
 
         test.add(k1m);
         test.add(k2m);
         test.add(k3m);
         test.add(k4m);
         test.add(k5m);
-        test.add(k6m);
+    //    test.add(k6m);
 
 
 
