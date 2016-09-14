@@ -22,14 +22,14 @@ public class StatisticGlobal extends Activity {
     SharedPreferences.Editor shared_preferences_editor;
     ArrayList<ImageView> test=new ArrayList<>();
     TextView niq,rang;
-    ImageView k1m,k2m,k3m,k4m,k5m,k6m;
-
+    ImageView k1m,k2m,k3m,k4m,k5m;
+//k6m
     String title = "";
 
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_statisticglobal);
+        setContentView(R.layout.statisticglobal);
         shared_preferences = getSharedPreferences("shared_preferences_test",
                 MODE_PRIVATE);
         title = shared_preferences.getString("Rang","Default");
@@ -43,14 +43,14 @@ public class StatisticGlobal extends Activity {
         k3m = (ImageView) findViewById(R.id.k3m);
         k4m = (ImageView) findViewById(R.id.k4m);
         k5m = (ImageView) findViewById(R.id.k5m);
-        k6m = (ImageView) findViewById(R.id.k6m);
+     //   k6m = (ImageView) findViewById(R.id.k6m);
 
         test.add(k1m);
         test.add(k2m);
         test.add(k3m);
         test.add(k4m);
         test.add(k5m);
-        test.add(k6m);
+    //    test.add(k6m);
 
         for (int i = 0; i<test.size();i++){
             int j = shared_preferences.getInt("k"+String.valueOf(i+1)+"m",0);

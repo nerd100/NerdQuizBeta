@@ -62,7 +62,7 @@ public class Start extends AppCompatActivity {
     int countRightAnswers=0;
     int countWrongAnswers=0;
     int countNerdIQ=0;
-    int i = 0;
+    int i = 60;
     int questionCounter = 0;
     CountDownTimer countDown;
     private static final String JSON_ARRAY = "server_response";
@@ -74,7 +74,7 @@ public class Start extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.quizstart);
 
 
         pb = (ProgressBar) findViewById(R.id.progressBar);
@@ -113,7 +113,7 @@ public class Start extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
 
 
-                pb.setProgress(i++);
+                pb.setProgress(i--);
 
                 timer.setText(String.valueOf(millisUntilFinished / 1000));
 

@@ -128,7 +128,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/quizrankglobal"
+        android:id="@+id/title"
         android:layout_alignBottom="@+id/textView17"
         android:layout_alignLeft="@+id/textView16"
         android:layout_alignStart="@+id/textView16"
@@ -141,12 +141,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/niq"
         android:layout_above="@+id/textView19"
-        android:layout_alignLeft="@+id/quizrankglobal"
-        android:layout_alignStart="@+id/quizrankglobal"
+        android:layout_alignLeft="@+id/title"
+        android:layout_alignStart="@+id/title"
         android:textColor="#ffffff"
         android:textStyle="bold|italic"
-        android:layout_alignRight="@+id/quizrankglobal"
-        android:layout_alignEnd="@+id/quizrankglobal"
+        android:layout_alignRight="@+id/title"
+        android:layout_alignEnd="@+id/title"
         android:layout_marginLeft="70dp" />
 
     <ImageView
