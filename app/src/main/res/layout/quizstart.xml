@@ -10,6 +10,17 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/cate"
+            android:layout_gravity="left"
+            android:textStyle="bold|italic"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:text="Category" />
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -19,7 +30,18 @@
             android:gravity="center"
             android:textSize="40sp"
             android:textColor="#ffffff"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/diff"
+            android:layout_gravity="right"
+            android:textStyle="bold|italic"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:text="Difficulty" />
     </LinearLayout>
 
     <LinearLayout
@@ -69,7 +91,9 @@
             android:layout_gravity="center"
             android:textStyle="bold|italic"
             android:textColor="#ffffff"/>
+
     </FrameLayout>
+
 
     <LinearLayout
         android:orientation="horizontal"

@@ -32,7 +32,8 @@ public class StatisticGlobal extends Activity {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_statisticglobal);
+        setContentView(R.layout.statisticglobal);
+
         shared_preferences = getSharedPreferences("shared_preferences_test",
                 MODE_PRIVATE);
         title = shared_preferences.getString("Rang","Default");

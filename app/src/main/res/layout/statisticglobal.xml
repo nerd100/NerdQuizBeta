@@ -265,5 +265,21 @@
         </LinearLayout>
 
     </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1">
 
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radarChart"
+            android:background="@drawable/buttoncolorred"
+            android:text="Grafik"
+            android:textSize="30dp"
+            android:textStyle="bold|italic"
+            android:textColor="#ffffff"/>
+    </LinearLayout>
 </LinearLayout>

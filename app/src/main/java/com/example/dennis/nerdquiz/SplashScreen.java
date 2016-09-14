@@ -13,12 +13,12 @@ public class SplashScreen extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.animsplash);
+        setContentView(R.layout.splash);
 
-        ImageView screenView = (ImageView) findViewById(R.id.anim);
-        screenView.setBackgroundResource(R.drawable.splashanimation);
-        AnimationDrawable splashAnimation = (AnimationDrawable) screenView.getBackground();
-        splashAnimation.start();
+        //ImageView screenView = (ImageView) findViewById(R.id.anim);
+        //screenView.setBackgroundResource(R.drawable.splashanimation);
+        //AnimationDrawable splashAnimation = (AnimationDrawable) screenView.getBackground();
+        //splashAnimation.start();
 
 
         Thread timerThread = new Thread(){
