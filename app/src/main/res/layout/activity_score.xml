@@ -91,7 +91,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/points"
+        android:id="@+id/tmpiq"
         android:layout_above="@+id/switchText"
         android:layout_alignLeft="@+id/wrongAnswer"
         android:layout_alignStart="@+id/wrongAnswer" />
@@ -101,8 +101,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/title"
         android:layout_alignBottom="@+id/switchText"
-        android:layout_alignLeft="@+id/points"
-        android:layout_alignStart="@+id/points" />
+        android:layout_alignLeft="@+id/tmpiq"
+        android:layout_alignStart="@+id/tmpiq" />
 
     <ImageView
         android:layout_width="wrap_content"

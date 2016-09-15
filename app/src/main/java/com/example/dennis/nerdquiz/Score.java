@@ -1,13 +1,10 @@
 package com.example.dennis.nerdquiz;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +31,7 @@ public class Score extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_score);
+        setContentView(R.layout.score);
 
         shared_preferences = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
         getWhichQuiz = shared_preferences.getString("Number", "Default");

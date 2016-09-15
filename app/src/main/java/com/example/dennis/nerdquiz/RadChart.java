@@ -1,5 +1,6 @@
 package com.example.dennis.nerdquiz;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +25,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
-public class RadChart extends AppCompatActivity {
+public class RadChart extends Activity {
     SharedPreferences shared_preferences;
     SharedPreferences.Editor shared_preferences_editor;
     @Override
