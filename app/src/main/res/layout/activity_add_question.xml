@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/background"
+    android:background="#848282"
     tools:context="com.example.dennis.nerdquiz.AddQuestion">
 
 
@@ -169,7 +169,7 @@
         android:text="Add Data"
         android:id="@+id/button_add"
         android:onClick="AddData"
-        android:background="@drawable/button"
+        android:background="@drawable/buttoncolorred"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:textColor="#ffffff"

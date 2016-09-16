@@ -1,5 +1,6 @@
 package com.example.dennis.nerdquiz;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,7 +15,7 @@ import com.example.dennis.nerdquiz.R;
 /**
  * Created by Dennis on 25.08.2016.
  */
-public class AddQuestion extends AppCompatActivity {
+public class AddQuestion extends Activity {
 
     EditText editQuestion, editRA, editFA1, editFA2, editFA3;
     Button btnAddData;

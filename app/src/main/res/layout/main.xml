@@ -2,64 +2,96 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#40110D">
+    android:background="#848282">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#40110D">
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Nerd Quiz"
+            android:text="Menü"
             android:id="@+id/textView33"
             android:textColor="#ffffff"
             android:textSize="40sp"
-            android:gravity="center_vertical|center_horizontal" />
+            android:gravity="center_vertical|center_horizontal"
+            android:textStyle="bold|italic" />
     </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="100dp"
-            android:text="Quiz"
-            android:id="@+id/button"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="86dp"
-            android:background="@drawable/buttoncolorred" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:background="#3d3534">
 
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="100dp"
-            android:text="Kategoriequiz"
-            android:id="@+id/button5"
-            android:layout_below="@+id/button"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/buttoncolorred" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:gravity="center">
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:text="Statistik"
-            android:id="@+id/button6"
-            android:layout_below="@+id/button5"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/buttoncolorred" />
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Quiz"
+                    android:id="@+id/btn_start1"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/buttoncolorred"
+                    android:textSize="30dp"
+                    android:textColor="@color/text_shadow_white"
+                    android:textStyle="bold|italic" />
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:text="AddQuestion"
-            android:id="@+id/button7"
-            android:layout_below="@+id/button6"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/buttoncolorred" />
-    </RelativeLayout>
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kategorie-Quiz"
+                    android:id="@+id/btn_start2"
+                    android:layout_below="@+id/btn_start1"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/buttoncolorred"
+                    android:textSize="30dp"
+                    android:textColor="@color/text_shadow_white"
+                    android:textStyle="bold|italic" />
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Statistik"
+                    android:id="@+id/gstatistic"
+                    android:layout_below="@+id/btn_start2"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/buttoncolorred"
+                    android:textSize="25dp"
+                    android:textColor="@color/text_shadow_white"
+                    android:textStyle="bold|italic" />
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="AddQuestion"
+                    android:id="@+id/addquestion"
+                    android:layout_below="@+id/gstatistic"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/buttoncolorred"
+                    android:textSize="25dp"
+                    android:textColor="@color/text_shadow_white"
+                    android:textStyle="bold|italic" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

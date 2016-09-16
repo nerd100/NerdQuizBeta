@@ -3,6 +3,7 @@ package com.example.dennis.nerdquiz;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -48,7 +49,7 @@ import java.util.Random;
 
 import android.os.*;
 
-public class Start extends AppCompatActivity {
+public class Start extends Activity {
     SharedPreferences shared_preferences;
     SharedPreferences.Editor shared_preferences_editor;
 
