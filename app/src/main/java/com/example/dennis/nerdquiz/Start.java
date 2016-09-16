@@ -14,6 +14,8 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
@@ -79,6 +81,9 @@ public class Start extends AppCompatActivity {
     private static final String JSON_ARRAY = "server_response";
     private JSONArray ques = null;
 
+    float Kat1Answer = 0f;
+    float Kat2Answer = 0f;
+    float Kat3Answer = 0f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,8 +93,10 @@ public class Start extends AppCompatActivity {
 
         shared_preferences = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
         shared_preferences_editor = shared_preferences.edit();
+
         whichQuiz = shared_preferences.getString("Number", "Default");
         rightAnswer = r.nextInt(4);
+
         shared_preferences_editor.putInt("countNerdIQ",0);
         shared_preferences_editor.putInt("countRightAnswers",0);
         shared_preferences_editor.putInt("countWrongAnswers",0);
@@ -200,19 +207,24 @@ public class Start extends AppCompatActivity {
     public void NameButtons() {
         question = (TextView) findViewById(R.id.question1);
         question.setText(QuestionAndButtonsParts[0]);
+
+        category = (TextView) findViewById(R.id.cate);
+        difficulty = (TextView) findViewById(R.id.diff);
+
+        category.setText(QuestionAndButtonsParts[5]);
+        difficulty.setText(QuestionAndButtonsParts[6]);
+
         btn1 = (Button) findViewById(R.id.button1);
         btn2 = (Button) findViewById(R.id.button2);
         btn3 = (Button) findViewById(R.id.button3);
         btn4 = (Button) findViewById(R.id.button4);
-        category = (TextView) findViewById(R.id.cate);
-        difficulty = (TextView) findViewById(R.id.diff);
         //mix all buttons
-        mixButtons(rightAnswer, QuestionAndButtonsParts[1], QuestionAndButtonsParts[2], QuestionAndButtonsParts[3], QuestionAndButtonsParts[4], QuestionAndButtonsParts[5], QuestionAndButtonsParts[6]);
+        mixButtons(rightAnswer, QuestionAndButtonsParts[1], QuestionAndButtonsParts[2], QuestionAndButtonsParts[3], QuestionAndButtonsParts[4]);
 
     }
 
 
-    public void mixButtons(int i, final String RA, String FA1, String FA2, String FA3, String categoryText,String difficultyText) {
+    public void mixButtons(int i, final String RA, String FA1, String FA2, String FA3) {
 
         ArrayList<String> tmpShuffle=new ArrayList<>();
         tmpShuffle.add(RA);
@@ -227,8 +239,7 @@ public class Start extends AppCompatActivity {
         btn2.setText(tmpShuffle.get(1));
         btn3.setText(tmpShuffle.get(2));
         btn4.setText(tmpShuffle.get(3));
-        category.setText(categoryText);
-        difficulty.setText(difficultyText);
+
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -241,6 +252,16 @@ public class Start extends AppCompatActivity {
                     countRightAnswers +=1;
                     countNerdIQ+=10;
                     shared_preferences_editor.putInt("countRightAnswers",countRightAnswers );
+                    if(questionCounter <= QuestionNumberQuiz*3) {
+                        Kat1Answer++;
+                    } else if(questionCounter <= QuestionNumberQuiz*6) {
+                        Kat2Answer++;
+                    } else if(questionCounter <= QuestionNumberQuiz*9) {
+                        Kat3Answer++;
+                    }
+                    shared_preferences_editor.putFloat("countRightAnswersKat1", Kat1Answer);
+                    shared_preferences_editor.putFloat("countRightAnswersKat2", Kat2Answer);
+                    shared_preferences_editor.putFloat("countRightAnswersKat3", Kat3Answer);
                     shared_preferences_editor.putInt("countNerdIQ",countNerdIQ );
                     shared_preferences_editor.apply();
                     v.getBackground().setColorFilter(new LightingColorFilter(Color.WHITE,Color.GREEN));

@@ -69,11 +69,13 @@ public class Score extends Activity {
             kate1=shared_preferences.getFloat(kat1,0f);
             kate2=shared_preferences.getFloat(kat2,0f);
             kate3=shared_preferences.getFloat(kat3,0f);
-
+            kate1 += shared_preferences.getFloat("countRightAnswersKat1",0f)/10;
+            kate2 += shared_preferences.getFloat("countRightAnswersKat2",0f)/10;
+            kate3 += shared_preferences.getFloat("countRightAnswersKat3",0f)/10;
             shared_preferences_editor = shared_preferences.edit();
-            shared_preferences_editor.putFloat(kat1, kate1+1);
-            shared_preferences_editor.putFloat(kat2, kate2+1);
-            shared_preferences_editor.putFloat(kat3, kate3+1);
+            shared_preferences_editor.putFloat(kat1, kate1);
+            shared_preferences_editor.putFloat(kat2, kate2);
+            shared_preferences_editor.putFloat(kat3, kate3);
             shared_preferences_editor.putString("Rang", title);
             shared_preferences_editor.apply();
 
