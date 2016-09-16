@@ -23,7 +23,7 @@ public class Choose extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose);
+        setContentView(R.layout.choosecategory);
 
         editSpinner1 = (Spinner) findViewById(R.id.spinner1);
         editSpinner2 = (Spinner) findViewById(R.id.spinner2);
