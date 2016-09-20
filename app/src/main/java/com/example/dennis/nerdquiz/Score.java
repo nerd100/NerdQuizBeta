@@ -48,7 +48,7 @@ public class Score extends Activity {
             switchText.setText("Dein Rang:");
             int score = shared_preferences.getInt("countNerdIQ",0);
             buffer.append("0,Anfänger,50,CasualNerd,100,KonsolenFan,200,ComputerUser" +
-                    ",300,Programmer,400,Allrounder,500,Nerd,600,Geek,700,HardcoreGamer," +
+                    ",300,Programmer,400,Allrounder,500,Senpai,600,NerdGod,700,HardcoreGamer," +
                     "800,All-Star,1000,NerdQuizDeveloper");
             rankSplit(buffer.toString());
             title = getNerdTitle(score);

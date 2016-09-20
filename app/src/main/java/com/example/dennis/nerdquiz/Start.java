@@ -1,8 +1,5 @@
 package com.example.dennis.nerdquiz;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,10 +12,6 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -60,21 +53,33 @@ public class Start extends Activity {
     ProgressBar pb;
     ArrayList<String> categoryList = new ArrayList<>();
     ArrayList QuestionAndButtons;
+
+    ArrayList<String> Cat1 = new ArrayList<>();
+    ArrayList<String> Cat2 = new ArrayList<>();
+    ArrayList<String> Cat3 = new ArrayList<>();
+
     String[] QuestionAndButtonsParts;
     String firstQuestion = "";
     String whichQuiz;
     String Category = "";
     String Difficulty = "";
 
-
+    int boundEM = 2;
+    int boundMH = 4;
     int rightAnswer = 0;
     int countRightAnswers=0;
     int countWrongAnswers=0;
     int countNerdIQ=0;
     int progressBarIndex = 60;
     int questionCounter = 0;
-    int QuestionNumberQuiz = 2;
+    int QuestionNumberQuiz = 30;
     int QuestionNumberKatQuiz = 10;
+    int right = 0;
+    int wrong = 0;
+
+    int globalCounter = 0;
+
+    ImageView diffLogo;
 
     Random rand = new Random();
     Random r = new Random();
@@ -85,6 +90,8 @@ public class Start extends Activity {
     float Kat1Answer = 0f;
     float Kat2Answer = 0f;
     float Kat3Answer = 0f;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +99,8 @@ public class Start extends Activity {
 
         pb = (ProgressBar) findViewById(R.id.progressBar);
 
+        diffLogo = (ImageView) findViewById(R.id.difflogo);
+        diffLogo.setImageResource(R.drawable.easylogo);
         shared_preferences = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
         shared_preferences_editor = shared_preferences.edit();
 
@@ -127,9 +136,19 @@ public class Start extends Activity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        countDown.cancel();
+        finish();
+        super.onBackPressed();
+
+    }
+
+
+
     private void createTimer() {
         timer = (TextView) findViewById(R.id.timer);
-        countDown = new CountDownTimer(60000, 1000) {
+        countDown = new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 pb.setProgress(progressBarIndex--);
@@ -153,18 +172,38 @@ public class Start extends Activity {
             }
 
             public void onFinish() {
-                timer.setText("done!");
-                startActivity(new Intent(Start.this, Score.class));
-                finish();
+                timer.setText("0");
+                globalCounter++;
 
+                if(globalCounter==3) {
+                    startActivity(new Intent(Start.this, Score.class));
+                    finish();
+                }else {
+                    reset();
+                }
             }
         }.start();
 
     }
 
-    private ArrayList extractJSON(String response) {
+
+    void reset(){
+        right = 0;
+        wrong = 0;
+        createTimer();
+        if(globalCounter == 1) {
+            QuestionAndButtons = Cat2;
+        }else if(globalCounter == 2){
+            QuestionAndButtons = Cat3;
+        }
+        next();
+    }
+
+    public void extractJSON(String response) {
+        String tmpKat= shared_preferences.getString("1kat",categoryList.get(0));
         ArrayList<String> list = new ArrayList<String>();
         StringBuilder buffer = new StringBuilder();
+        int counter = 0;
         try {
             JSONObject jsonObject = new JSONObject(response);
             ques = jsonObject.getJSONArray(JSON_ARRAY);        //Hier Parsen hopefully
@@ -178,29 +217,55 @@ public class Start extends Activity {
                 Difficulty = jsonobject.getString("Difficulty");
                 Category = jsonobject.getString("Category");   //TODO: Category and Difficulty
                 buffer.append(Question + ";" + RA + ";" + FA1 + ";" + FA2 + ";" + FA3+";"+Category+";"+Difficulty);
-
-                list.add(buffer.toString());
+                if(!Category.contains(tmpKat)){
+                    tmpKat = Category;
+                    counter++;
+                }
+                if(counter == 0) {
+                    Cat1.add(buffer.toString());
+                }else if(counter == 1){
+                    Cat2.add(buffer.toString());
+                }else{
+                    Cat3.add(buffer.toString());
+                }
                 buffer.delete(0, buffer.length());
+
             }
 
         } catch (JSONException e) {
             Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
-        return list;
+
     }
 
-    public String Question(ArrayList questionList) {
+    public String Question(ArrayList questionList,String Difficulty) {
         String question;
-        int i = rand.nextInt(questionList.size());
-        question = questionList.get(0).toString();
-        questionList.remove(0);
-        return question;
+        for(int i = 0 ; i < questionList.size()-1;i++){
+            if (questionList.get(i).toString().contains(Difficulty)){
+                question = questionList.get(i).toString();
+                questionList.remove(i);
+                return question;
+            }
+
+
+        }
+        //question = questionList.get(0).toString();
+        return "Default";
     }
 
     public void next() {
         rightAnswer = r.nextInt(4);
-        firstQuestion = Question(QuestionAndButtons);
+        if(right-wrong >= boundMH) {
+            firstQuestion = Question(QuestionAndButtons,"Hard");
+            diffLogo.setImageResource(R.drawable.hardlogo);
+        }else if(right-wrong >= boundEM) {
+            firstQuestion = Question(QuestionAndButtons,"Medium");
+            diffLogo.setImageResource(R.drawable.mediumlogo);
+        }else{
+            firstQuestion = Question(QuestionAndButtons,"Easy");
+            diffLogo.setImageResource(R.drawable.easylogo);
+        }
         QuestionAndButtonsParts = firstQuestion.split(";");
         NameButtons();
     }
@@ -250,6 +315,7 @@ public class Start extends Activity {
                 shared_preferences_editor = shared_preferences.edit();
 
                 if (String.valueOf(getResources().getResourceName(v.getId())).contains(tmpRAindex)) {
+                    right++;
                     countRightAnswers +=1;
                     countNerdIQ+=10;
                     shared_preferences_editor.putInt("countRightAnswers",countRightAnswers );
@@ -268,6 +334,7 @@ public class Start extends Activity {
                     v.getBackground().setColorFilter(new LightingColorFilter(Color.WHITE,Color.GREEN));
                     setBGChangeIntent(v);
                 } else {
+                    wrong++;
                     countWrongAnswers+=1;
                     shared_preferences_editor.putInt("countWrongAnswers",countWrongAnswers );
                     shared_preferences_editor.apply();
@@ -285,7 +352,10 @@ public class Start extends Activity {
 
 
     private void setBGChangeIntent(final View v){
-
+        btn1.setOnClickListener(null);
+        btn2.setOnClickListener(null);
+        btn3.setOnClickListener(null);
+        btn4.setOnClickListener(null);
         android.os.Handler h = new android.os.Handler();
         h.postDelayed(new Runnable() {
 
@@ -308,7 +378,7 @@ public class Start extends Activity {
 
     }
 
-    private void getData(String Diff2, String Cate1, String Num,String Cate2, String Cate3){
+    private void getData(String Diff2, final String Cate1, String Num, String Cate2, String Cate3){
         String Difficulty,Category,Category2,Category3,Number;
         Difficulty = Diff2;
         Category = Cate1;
@@ -393,8 +463,10 @@ public class Start extends Activity {
             }else {
                 super.onPostExecute(result);
                 progressDialog.dismiss();
-                QuestionAndButtons = extractJSON(result);
-                firstQuestion = Question(QuestionAndButtons);
+                extractJSON(result);
+                QuestionAndButtons = Cat1;
+                Toast.makeText(getApplicationContext(),String.valueOf(QuestionAndButtons.size()),Toast.LENGTH_LONG).show();
+                firstQuestion = Question(QuestionAndButtons,"Easy");
                 QuestionAndButtonsParts = firstQuestion.split(";");
 
                 NameButtons();
