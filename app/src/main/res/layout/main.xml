@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#848282">
-
     <LinearLayout
-        android:orientation="horizontal"
+
+    android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#40110D">
@@ -19,7 +20,9 @@
             android:textColor="#ffffff"
             android:textSize="40sp"
             android:gravity="center_vertical|center_horizontal"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"/>
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -41,6 +44,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:gravity="center">
+
 
                 <Button
                     android:layout_width="fill_parent"
@@ -89,9 +93,21 @@
                     android:textSize="25dp"
                     android:textColor="@color/text_shadow_white"
                     android:textStyle="bold|italic" />
+
+                <com.google.android.gms.ads.AdView
+                    android:id="@+id/adView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="@string/banner_ad_unit_id">
+                </com.google.android.gms.ads.AdView>
+
             </LinearLayout>
 
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

@@ -10,17 +10,28 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 public class MainActivity extends Activity {
     SharedPreferences shared_preferences;
     SharedPreferences.Editor shared_preferences_editor;
 
     Button addbtn, startbtn1, startbtn2, gstatbtn;
 
+    //private AdView mAdView;
 
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        mAdView.loadAd(adRequest);
 
         shared_preferences = getSharedPreferences("shared_preferences_test",
                 MODE_PRIVATE);

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "41836110356",
+    "firebase_url": "https://nerdquiz-2278d.firebaseio.com",
+    "project_id": "nerdquiz-2278d",
+    "storage_bucket": "nerdquiz-2278d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41836110356:android:9886119a3ac8adf8",
+        "android_client_info": {
+          "package_name": "com.example.dennis.nerdquiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41836110356-0n7sb4cnr7iu6anul6h9ulo9vhbgg1j5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3uxY6FU1LPjQoQnUsJG7p0nG_j-9-2l8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
