@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
-import android.icu.util.ValueIterator;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +26,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import android.os.Handler;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -36,11 +33,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
-
-import android.os.*;
 
 public class Start extends Activity {
     SharedPreferences shared_preferences;
@@ -78,19 +72,21 @@ public class Start extends Activity {
     int wrong = 0;
 
     int globalCounter = 0;
-
+    android.os.Handler h;
     ImageView diffLogo;
 
     Random rand = new Random();
     Random r = new Random();
     CountDownTimer countDown;
+    int ourCountDownTimer=0;
+    int msfinished;
     private static final String JSON_ARRAY = "server_response";
     private JSONArray ques = null;
 
     float Kat1Answer = 0f;
     float Kat2Answer = 0f;
     float Kat3Answer = 0f;
-
+    View v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +135,12 @@ public class Start extends Activity {
     @Override
     public void onBackPressed() {
         countDown.cancel();
+
+        h.removeCallbacksAndMessages(null);
+        btn1.getBackground().clearColorFilter();
+        btn2.getBackground().clearColorFilter();
+        btn3.getBackground().clearColorFilter();
+        btn4.getBackground().clearColorFilter();
         finish();
         super.onBackPressed();
 
@@ -148,10 +150,11 @@ public class Start extends Activity {
 
     private void createTimer() {
         timer = (TextView) findViewById(R.id.timer);
-        countDown = new CountDownTimer(10000, 1000) {
+        countDown = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 pb.setProgress(progressBarIndex--);
+                ourCountDownTimer = (int)(millisUntilFinished / 1000);
                 timer.setText(String.valueOf(millisUntilFinished / 1000));
 
                 if((millisUntilFinished/1000)==59){
@@ -172,14 +175,25 @@ public class Start extends Activity {
             }
 
             public void onFinish() {
-                timer.setText("0");
-                globalCounter++;
+                //btn1.getBackground().clearColorFilter();
+               // btn2.getBackground().clearColorFilter();
+               // btn3.getBackground().clearColorFilter();
+               // btn4.getBackground().clearColorFilter();
+               // btn4.getBackground().clearColorFilter();
 
-                if(globalCounter==3) {
+                if(whichQuiz.equals("1")) {
+                    timer.setText("0");
+                    globalCounter++;
+
+                    if (globalCounter == 3) {
+                        startActivity(new Intent(Start.this, Score.class));
+                        finish();
+                    } else {
+                        reset();
+                    }
+                }else{
                     startActivity(new Intent(Start.this, Score.class));
                     finish();
-                }else {
-                    reset();
                 }
             }
         }.start();
@@ -200,7 +214,10 @@ public class Start extends Activity {
     }
 
     public void extractJSON(String response) {
-        String tmpKat= shared_preferences.getString("1kat",categoryList.get(0));
+        String tmpKat = "";
+        if(whichQuiz.equals("1")) {
+             tmpKat = shared_preferences.getString("1kat", categoryList.get(0));
+        }
         ArrayList<String> list = new ArrayList<String>();
         StringBuilder buffer = new StringBuilder();
         int counter = 0;
@@ -217,9 +234,11 @@ public class Start extends Activity {
                 Difficulty = jsonobject.getString("Difficulty");
                 Category = jsonobject.getString("Category");   //TODO: Category and Difficulty
                 buffer.append(Question + ";" + RA + ";" + FA1 + ";" + FA2 + ";" + FA3+";"+Category+";"+Difficulty);
-                if(!Category.contains(tmpKat)){
-                    tmpKat = Category;
-                    counter++;
+                if(whichQuiz.equals("1")) {
+                    if (!Category.contains(tmpKat)) {
+                        tmpKat = Category;
+                        counter++;
+                    }
                 }
                 if(counter == 0) {
                     Cat1.add(buffer.toString());
@@ -241,30 +260,51 @@ public class Start extends Activity {
 
     public String Question(ArrayList questionList,String Difficulty) {
         String question;
-        for(int i = 0 ; i < questionList.size()-1;i++){
-            if (questionList.get(i).toString().contains(Difficulty)){
+        if(whichQuiz.equals("1")){
+        for(int i = 0 ; i < questionList.size()-1;i++) {
+
+            if (questionList.get(i).toString().contains(Difficulty)) {
+                question = questionList.get(i).toString();
+                questionList.remove(i);
+                return question;
+                ////////////////////////////////////////////////////////////////////Delete
+            }else if (questionList.get(i).toString().contains("Medium")) {
+                question = questionList.get(i).toString();
+                questionList.remove(i);
+                return question;
+
+            }else if (questionList.get(i).toString().contains("Hard")) {
                 question = questionList.get(i).toString();
                 questionList.remove(i);
                 return question;
             }
-
-
         }
+            ////////////////////////////////////////////////////////////////////Delete
+        }else{
+                    question = questionList.get(0).toString();
+                    questionList.remove(0);
+                    return question;
+            }
+
         //question = questionList.get(0).toString();
         return "Default";
     }
 
     public void next() {
         rightAnswer = r.nextInt(4);
-        if(right-wrong >= boundMH) {
-            firstQuestion = Question(QuestionAndButtons,"Hard");
-            diffLogo.setImageResource(R.drawable.hardlogo);
-        }else if(right-wrong >= boundEM) {
-            firstQuestion = Question(QuestionAndButtons,"Medium");
-            diffLogo.setImageResource(R.drawable.mediumlogo);
+        if(whichQuiz.equals("1")) {
+            if (right - wrong >= boundMH) {
+                firstQuestion = Question(QuestionAndButtons, "Hard");
+                diffLogo.setImageResource(R.drawable.hardlogo);
+            } else if (right - wrong >= boundEM) {
+                firstQuestion = Question(QuestionAndButtons, "Medium");
+                diffLogo.setImageResource(R.drawable.mediumlogo);
+            } else {
+                firstQuestion = Question(QuestionAndButtons, "Easy");
+                diffLogo.setImageResource(R.drawable.easylogo);
+            }
         }else{
-            firstQuestion = Question(QuestionAndButtons,"Easy");
-            diffLogo.setImageResource(R.drawable.easylogo);
+            firstQuestion = Question(QuestionAndButtons, "");
         }
         QuestionAndButtonsParts = firstQuestion.split(";");
         NameButtons();
@@ -309,7 +349,7 @@ public class Start extends Activity {
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
-            public void onClick(final View v) {
+            public void onClick(View v) {
                 questionCounter++;
                 String tmpRAindex="button"+String.valueOf(indexRA+1);
                 shared_preferences_editor = shared_preferences.edit();
@@ -351,19 +391,20 @@ public class Start extends Activity {
     }
 
 
-    private void setBGChangeIntent(final View v){
+    public void setBGChangeIntent(final View v){
         btn1.setOnClickListener(null);
         btn2.setOnClickListener(null);
         btn3.setOnClickListener(null);
         btn4.setOnClickListener(null);
-        android.os.Handler h = new android.os.Handler();
+        h = new android.os.Handler();
+
         h.postDelayed(new Runnable() {
 
             @Override
             public void run() {
                 //Put your conditions accordingly
                 v.getBackground().clearColorFilter();
-                if (QuestionAndButtons.size() > 0) {
+                if (QuestionAndButtons.size() > 0 && ourCountDownTimer >= 1) {
                     next();
                 } else {
                     shared_preferences_editor = shared_preferences.edit();
@@ -378,7 +419,7 @@ public class Start extends Activity {
 
     }
 
-    private void getData(String Diff2, final String Cate1, String Num, String Cate2, String Cate3){
+    private void getData(String Diff2, String Cate1, String Num, String Cate2, String Cate3){
         String Difficulty,Category,Category2,Category3,Number;
         Difficulty = Diff2;
         Category = Cate1;
@@ -466,7 +507,9 @@ public class Start extends Activity {
                 extractJSON(result);
                 QuestionAndButtons = Cat1;
                 Toast.makeText(getApplicationContext(),String.valueOf(QuestionAndButtons.size()),Toast.LENGTH_LONG).show();
-                firstQuestion = Question(QuestionAndButtons,"Easy");
+                if(whichQuiz.equals("1")) {
+                    firstQuestion = Question(QuestionAndButtons, "Easy");
+                }else{firstQuestion = Question(QuestionAndButtons, "");}
                 QuestionAndButtonsParts = firstQuestion.split(";");
 
                 NameButtons();

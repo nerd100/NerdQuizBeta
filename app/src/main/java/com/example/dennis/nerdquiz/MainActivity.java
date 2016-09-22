@@ -3,11 +3,8 @@ package com.example.dennis.nerdquiz;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 
 import com.google.android.gms.ads.AdRequest;
@@ -47,8 +44,8 @@ public class MainActivity extends Activity {
                 shared_preferences_editor = shared_preferences.edit();
                 shared_preferences_editor.putString("Number", "1");
                 shared_preferences_editor.apply();
-
-                startActivity(new Intent(MainActivity.this, Start.class));
+                //startActivity(new Intent(MainActivity.this, CountDownCounter.class));
+                startActivity(new Intent(MainActivity.this, CountDownCounter.class));
             }
         });
 

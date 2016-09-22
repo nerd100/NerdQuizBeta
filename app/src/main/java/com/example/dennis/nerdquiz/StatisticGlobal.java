@@ -64,43 +64,46 @@ public class StatisticGlobal extends Activity {
         k5h = (ImageView) findViewById(R.id.k5h);
 
         medals.add(k1e);
-        medals.add(k2e);
-        medals.add(k3e);
-        medals.add(k4e);
-        medals.add(k5e);
         medals.add(k1m);
-        medals.add(k2m);
-        medals.add(k3m);
-        medals.add(k4m);
-        medals.add(k5m);
         medals.add(k1h);
+        medals.add(k2e);
+        medals.add(k2m);
         medals.add(k2h);
+        medals.add(k3e);
+        medals.add(k3m);
         medals.add(k3h);
+        medals.add(k4e);
+        medals.add(k4m);
         medals.add(k4h);
+        medals.add(k5e);
+        medals.add(k5m);
         medals.add(k5h);
 
-
-        for (int i = 0; i<medals.size();i++){
-            int j = shared_preferences.getInt("k"+String.valueOf(i+1)+"m",0);
-            switch (j){
-                case 1:
-                    medals.get(i).setImageResource(R.drawable.bronzem);
-                    break;
-                case 2:
-                    medals.get(i).setImageResource(R.drawable.silberm);
-                    break;
-                case 3:
-                    medals.get(i).setImageResource(R.drawable.goldm);
-                    break;
-                case 4:
-                    medals.get(i).setImageResource(R.drawable.diamandm);
-                    break;
-                default:
-                    medals.get(i).setImageResource(R.drawable.defaultm);
-                    break;
+        String[] letterMed= {"e","m","h"};
+        int counterPos=0;
+        for (int i = 0; i<5;i++) {
+            for (int j = 0; j < letterMed.length; j++) {
+                int k = shared_preferences.getInt("k" + String.valueOf(i + 1) + letterMed[j], 0);
+                switch (k) {
+                    case 1:
+                        medals.get(counterPos).setImageResource(R.drawable.bronzem);
+                        break;
+                    case 2:
+                        medals.get(counterPos).setImageResource(R.drawable.silberm);
+                        break;
+                    case 3:
+                        medals.get(counterPos).setImageResource(R.drawable.goldm);
+                        break;
+                    case 4:
+                        medals.get(counterPos).setImageResource(R.drawable.diamandm);
+                        break;
+                    default:
+                        medals.get(counterPos).setImageResource(R.drawable.defaultm);
+                        break;
+                }
+                counterPos++;
             }
         }
-
         radarChart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

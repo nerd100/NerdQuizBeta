@@ -50,6 +50,9 @@
         <activity
             android:name=".StatisticGlobal"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".CountDownCounter"
+            android:screenOrientation="portrait" />
         <activity android:name=".RadChart"></activity>
     </application>
 
