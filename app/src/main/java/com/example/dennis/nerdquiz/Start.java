@@ -107,7 +107,7 @@ public class Start extends Activity {
         shared_preferences_editor.putInt("countRightAnswers",0);
         shared_preferences_editor.putInt("countWrongAnswers",0);
         shared_preferences_editor.apply();
-        createTimer();
+        //createTimer();
 
         if(whichQuiz.equals("1")) {
             categoryList.add("Anime");
@@ -151,7 +151,7 @@ public class Start extends Activity {
 
     private void createTimer() {
         timer = (TextView) findViewById(R.id.timer);
-        countDown = new CountDownTimer(60000, 1000) {
+        countDown = new CountDownTimer(61000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 pb.setProgress(progressBarIndex--);
@@ -270,7 +270,8 @@ public class Start extends Activity {
                 questionList.remove(i);
                 return question;
                 ////////////////////////////////////////////////////////////////////Delete
-            }else if (questionList.get(i).toString().contains("Medium")) {
+            }
+            /*else if (questionList.get(i).toString().contains("Medium")) {
                 question = questionList.get(i).toString();
                 questionList.remove(i);
                 return question;
@@ -279,7 +280,7 @@ public class Start extends Activity {
                 question = questionList.get(i).toString();
                 questionList.remove(i);
                 return question;
-            }
+            }*/
         }
             ////////////////////////////////////////////////////////////////////Delete
         }else{
@@ -499,6 +500,7 @@ public class Start extends Activity {
 
         @Override
         protected void onPostExecute(String result) {
+            createTimer();
             if(result.equals("Failed")){
                 Toast.makeText(getApplicationContext(),"No Connection to Database",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(Start.this, MainActivity.class));
