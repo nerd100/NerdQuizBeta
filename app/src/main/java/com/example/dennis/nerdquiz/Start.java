@@ -136,11 +136,12 @@ public class Start extends Activity {
     public void onBackPressed() {
         countDown.cancel();
 
-        h.removeCallbacksAndMessages(null);
+//        h.removeCallbacksAndMessages(null);
         btn1.getBackground().clearColorFilter();
         btn2.getBackground().clearColorFilter();
         btn3.getBackground().clearColorFilter();
         btn4.getBackground().clearColorFilter();
+        startActivity(new Intent(Start.this, MainActivity.class));
         finish();
         super.onBackPressed();
 
@@ -204,6 +205,7 @@ public class Start extends Activity {
     void reset(){
         right = 0;
         wrong = 0;
+        progressBarIndex = 60;
         createTimer();
         if(globalCounter == 1) {
             QuestionAndButtons = Cat2;

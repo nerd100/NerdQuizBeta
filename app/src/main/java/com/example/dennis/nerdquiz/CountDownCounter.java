@@ -13,6 +13,8 @@ public class CountDownCounter extends Activity{
 
     TextView title;
     TextView counter;
+
+    CountDownTimer countdown;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +28,18 @@ public class CountDownCounter extends Activity{
         count_down();
 
     }
+
+    @Override
+    public void onBackPressed() {
+        countdown.cancel();
+        startActivity(new Intent(CountDownCounter.this, MainActivity.class));
+        finish();
+        super.onBackPressed();
+    }
+
     public void count_down(){
 
-        new CountDownTimer(4000, 1000) {
+        countdown = new CountDownTimer(4000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 counter.setText(String.valueOf(millisUntilFinished / 1000));

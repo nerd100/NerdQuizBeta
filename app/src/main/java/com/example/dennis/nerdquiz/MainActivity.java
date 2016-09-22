@@ -46,6 +46,7 @@ public class MainActivity extends Activity {
                 shared_preferences_editor.apply();
                 //startActivity(new Intent(MainActivity.this, CountDownCounter.class));
                 startActivity(new Intent(MainActivity.this, CountDownCounter.class));
+                finish();
             }
         });
 
@@ -56,6 +57,7 @@ public class MainActivity extends Activity {
                 shared_preferences_editor.putString("Number", "0");
                 shared_preferences_editor.apply();
                 startActivity(new Intent(MainActivity.this, Choose.class));
+                finish();
             }
         });
 
@@ -63,12 +65,14 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, StatisticGlobal.class));
+                finish();
             }
         });
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, AddQuestion.class));
+                finish();
             }
         });
 
