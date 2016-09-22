@@ -4,31 +4,51 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#848282">
-    <LinearLayout
 
-    android:orientation="horizontal"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:background="#40110D">
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Menü"
-            android:id="@+id/textView33"
+            android:text="Nerd Quiz"
+            android:id="@+id/textView42"
             android:textColor="#ffffff"
             android:textSize="40sp"
-            android:gravity="center_vertical|center_horizontal"
-            android:textStyle="bold|italic"/>
-
-
+            android:textStyle="bold|italic"
+            android:gravity="center" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <LinearLayout
+
+        android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#40110D">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Menü"
+                android:id="@+id/textView33"
+                android:textColor="#ffffff"
+                android:textSize="30sp"
+                android:gravity="center_vertical|center_horizontal"
+                android:textStyle="bold|italic"/>
+
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -56,7 +76,8 @@
                     android:background="@drawable/buttoncolorred"
                     android:textSize="30dp"
                     android:textColor="@color/text_shadow_white"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold|italic"
+                    android:layout_margin="1dp" />
 
                 <Button
                     android:layout_width="fill_parent"
@@ -68,7 +89,8 @@
                     android:background="@drawable/buttoncolorred"
                     android:textSize="30dp"
                     android:textColor="@color/text_shadow_white"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold|italic"
+                    android:layout_margin="1dp" />
 
                 <Button
                     android:layout_width="fill_parent"
@@ -80,7 +102,8 @@
                     android:background="@drawable/buttoncolorred"
                     android:textSize="25dp"
                     android:textColor="@color/text_shadow_white"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold|italic"
+                    android:layout_margin="1dp" />
 
                 <Button
                     android:layout_width="fill_parent"
@@ -92,7 +115,8 @@
                     android:background="@drawable/buttoncolorred"
                     android:textSize="25dp"
                     android:textColor="@color/text_shadow_white"
-                    android:textStyle="bold|italic" />
+                    android:textStyle="bold|italic"
+                    android:layout_margin="1dp" />
 
                 <com.google.android.gms.ads.AdView
                     android:id="@+id/adView"
@@ -101,7 +125,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentBottom="true"
                     ads:adSize="BANNER"
-                    ads:adUnitId="@string/banner_ad_unit_id">
+                    ads:adUnitId="@string/banner_ad_unit_id"
+                    android:layout_margin="2dp">
                 </com.google.android.gms.ads.AdView>
 
             </LinearLayout>
