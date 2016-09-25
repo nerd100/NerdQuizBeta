@@ -103,6 +103,7 @@ public class MainActivity extends Activity {
         });
 
         //Get device-ID and hash it.
+
         if (shared_preferences.getString("DeviceId", "Default").equals("Default")) {
             final TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
 

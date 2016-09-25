@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Bundle;
@@ -41,7 +42,7 @@ public class Start extends Activity {
     SharedPreferences.Editor shared_preferences_editor;
 
     TextView question,timer,category,difficulty;
-
+    ImageView imageViewDiff,imageViewCate;
     Button btn1, btn2, btn3, btn4;
 
     ProgressBar pb;
@@ -108,6 +109,8 @@ public class Start extends Activity {
         shared_preferences_editor.putInt("countWrongAnswers",0);
         shared_preferences_editor.apply();
         //createTimer();
+
+        imageViewDiff = (ImageView) findViewById(R.id.imageView_diff);
 
         if(whichQuiz.equals("1")) {
             categoryList.add("Anime");
@@ -297,12 +300,15 @@ public class Start extends Activity {
         rightAnswer = r.nextInt(4);
         if(whichQuiz.equals("1")) {
             if (right - wrong >= boundMH) {
+                imageViewDiff.setImageResource(R.drawable.diff_hard);
                 firstQuestion = Question(QuestionAndButtons, "Hard");
                 diffLogo.setImageResource(R.drawable.hardlogo);
             } else if (right - wrong >= boundEM) {
+                imageViewDiff.setImageResource(R.drawable.diff_medium);
                 firstQuestion = Question(QuestionAndButtons, "Medium");
                 diffLogo.setImageResource(R.drawable.mediumlogo);
             } else {
+                imageViewDiff.setImageResource(R.drawable.diff_easy);
                 firstQuestion = Question(QuestionAndButtons, "Easy");
                 diffLogo.setImageResource(R.drawable.easylogo);
             }
