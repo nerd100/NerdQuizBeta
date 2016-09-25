@@ -88,8 +88,7 @@ public class Score extends Activity {
             category.put("Serien",2);
             category.put("Movies",3);
             category.put("Games",4);
-            category.put("League of Legends",5);
-            category.put("Assi",6);
+            category.put("Assi",5);
 
             questionCounter = shared_preferences.getInt("questionCounter", 0);
             rightAns = shared_preferences.getInt("countRightAnswers", 0);
