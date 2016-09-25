@@ -48,4 +48,10 @@ public class Choose extends Activity {
 
 
     }
+    public void onBackPressed() {
+
+        startActivity(new Intent(Choose.this, MainActivity.class));
+        finish();
+        super.onBackPressed();
+    }
 }

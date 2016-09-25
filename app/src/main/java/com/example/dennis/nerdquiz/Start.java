@@ -64,7 +64,7 @@ public class Start extends Activity {
     int countRightAnswers=0;
     int countWrongAnswers=0;
     int countNerdIQ=0;
-    int progressBarIndex = 60;
+    int progressBarIndex = 15;
     int questionCounter = 0;
     int QuestionNumberQuiz = 30;
     int QuestionNumberKatQuiz = 10;
@@ -107,7 +107,7 @@ public class Start extends Activity {
         shared_preferences_editor.putInt("countRightAnswers",0);
         shared_preferences_editor.putInt("countWrongAnswers",0);
         shared_preferences_editor.apply();
-        createTimer();
+        //createTimer();
 
         if(whichQuiz.equals("1")) {
             categoryList.add("Anime");
@@ -136,11 +136,12 @@ public class Start extends Activity {
     public void onBackPressed() {
         countDown.cancel();
 
-        h.removeCallbacksAndMessages(null);
+//        h.removeCallbacksAndMessages(null);
         btn1.getBackground().clearColorFilter();
         btn2.getBackground().clearColorFilter();
         btn3.getBackground().clearColorFilter();
         btn4.getBackground().clearColorFilter();
+        startActivity(new Intent(Start.this, MainActivity.class));
         finish();
         super.onBackPressed();
 
@@ -150,7 +151,7 @@ public class Start extends Activity {
 
     private void createTimer() {
         timer = (TextView) findViewById(R.id.timer);
-        countDown = new CountDownTimer(10000, 1000) {
+        countDown = new CountDownTimer(progressBarIndex*1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 pb.setProgress(progressBarIndex--);
@@ -202,6 +203,7 @@ public class Start extends Activity {
 
 
     void reset(){
+        progressBarIndex = 15;
         right = 0;
         wrong = 0;
         createTimer();
@@ -268,7 +270,8 @@ public class Start extends Activity {
                 questionList.remove(i);
                 return question;
                 ////////////////////////////////////////////////////////////////////Delete
-            }else if (questionList.get(i).toString().contains("Medium")) {
+            }
+            /*else if (questionList.get(i).toString().contains("Medium")) {
                 question = questionList.get(i).toString();
                 questionList.remove(i);
                 return question;
@@ -277,7 +280,7 @@ public class Start extends Activity {
                 question = questionList.get(i).toString();
                 questionList.remove(i);
                 return question;
-            }
+            }*/
         }
             ////////////////////////////////////////////////////////////////////Delete
         }else{
@@ -497,6 +500,7 @@ public class Start extends Activity {
 
         @Override
         protected void onPostExecute(String result) {
+            createTimer();
             if(result.equals("Failed")){
                 Toast.makeText(getApplicationContext(),"No Connection to Database",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(Start.this, MainActivity.class));

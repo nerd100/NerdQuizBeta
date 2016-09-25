@@ -1,6 +1,7 @@
 package com.example.dennis.nerdquiz;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -27,7 +28,7 @@ public class Score extends Activity {
     int rightAns;
 
     Map<String,Integer> category= new HashMap<>();
-
+    Map<String,String> difficulty= new HashMap<>();
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
@@ -82,6 +83,7 @@ public class Score extends Activity {
         }else if(getWhichQuiz.equals("0")){
             shared_preferences_editor = shared_preferences.edit();
             String cate = shared_preferences.getString("Category","Default");
+            String diff = shared_preferences.getString("Difficulty","Default");
             switchText.setText("Deine Medaille:");
 
             category.put("Anime",1);
@@ -89,17 +91,28 @@ public class Score extends Activity {
             category.put("Movies",3);
             category.put("Games",4);
             category.put("Assi",5);
+            difficulty.put("Easy","e");
+            difficulty.put("Medium","m");
+            difficulty.put("Hard","h");
 
             questionCounter = shared_preferences.getInt("questionCounter", 0);
             rightAns = shared_preferences.getInt("countRightAnswers", 0);
             int i = category.get(cate);
-            if (questionCounter-rightAns > questionCounter/2){
-                tmpmed.setImageResource(R.drawable.bronzem);
-                shared_preferences_editor.putInt("k"+String.valueOf(i)+"m", 1);
-            }else if(questionCounter-rightAns < questionCounter/2){
+            String j = difficulty.get(diff);
+            if (rightAns > 20){
+                tmpmed.setImageResource(R.drawable.diamandm);
+                compareMedaille(4,"k"+String.valueOf(i)+j);
+            }else if(rightAns>15){
+                tmpmed.setImageResource(R.drawable.goldm);
+                compareMedaille(3,"k"+String.valueOf(i)+j);
+            }else if(rightAns>10){
                 tmpmed.setImageResource(R.drawable.silberm);
-                shared_preferences_editor.putInt("k"+String.valueOf(i)+"m", 2);
+                compareMedaille(2,"k"+String.valueOf(i)+j);
+            }else if(rightAns>5){
+                tmpmed.setImageResource(R.drawable.bronzem);
+                compareMedaille(1,"k"+String.valueOf(i)+j);
             }
+
             shared_preferences_editor.apply();
             //tmpmed.setImageResource(R.drawable.diamandm);
         }
@@ -113,6 +126,9 @@ public class Score extends Activity {
     public int readHighscore() {
         return shared_preferences.getInt("HIGHSCORE", 0);
     }
+    public int readMedaille(String katMed) {
+        return shared_preferences.getInt(katMed, 0);
+    }
 
     public void writeHighscore(int highscore) {
         shared_preferences_editor = shared_preferences.edit();
@@ -120,10 +136,27 @@ public class Score extends Activity {
         shared_preferences_editor.apply();
 
     }
+    public void writeMedaille(int highscore,String katMed) {
+        shared_preferences_editor = shared_preferences.edit();
+        shared_preferences_editor.putInt(katMed, highscore);
+        shared_preferences_editor.apply();
+
+    }
 
     public void compareScore() {
         if (shared_preferences.getInt("countNerdIQ",0) > readHighscore()) {
             writeHighscore(shared_preferences.getInt("countNerdIQ",0));
+            String HashedDeviceID = shared_preferences.getString("DeviceId","Default");
+            String Name = shared_preferences.getString("username","Default");
+            String Score = String.valueOf(shared_preferences.getInt("countNerdIQ",0));
+            String method = "InsertScore";
+            BackgroundTaskScore backgroundTask = new BackgroundTaskScore(this);
+            backgroundTask.execute(method,HashedDeviceID,Name,Score);
+        }
+    }
+    public void compareMedaille(int currentMed,String katMed) {
+        if (currentMed > readMedaille(katMed)) {
+            writeMedaille(currentMed,katMed);
         }
     }
 
@@ -169,5 +202,12 @@ public class Score extends Activity {
             return "0";
         }
 
+    }
+
+    public void onBackPressed() {
+
+        startActivity(new Intent(Score.this, MainActivity.class));
+        finish();
+        super.onBackPressed();
     }
 }
