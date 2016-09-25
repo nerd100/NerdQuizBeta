@@ -110,9 +110,15 @@ public class StatisticGlobal extends Activity {
                 shared_preferences_editor = shared_preferences.edit();
                 shared_preferences_editor.putString("Number", "1");
                 shared_preferences_editor.apply();
-
                 startActivity(new Intent(StatisticGlobal.this, RadChart.class));
+                finish();
             }
         });
+    }
+    public void onBackPressed() {
+
+        startActivity(new Intent(StatisticGlobal.this, MainActivity.class));
+        finish();
+        super.onBackPressed();
     }
 }

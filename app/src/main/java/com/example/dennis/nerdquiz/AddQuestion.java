@@ -2,6 +2,7 @@ package com.example.dennis.nerdquiz;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -63,4 +64,10 @@ public class AddQuestion extends Activity {
         finish();
     }
 
+    public void onBackPressed() {
+
+        startActivity(new Intent(AddQuestion.this, MainActivity.class));
+        finish();
+        super.onBackPressed();
+    }
 }

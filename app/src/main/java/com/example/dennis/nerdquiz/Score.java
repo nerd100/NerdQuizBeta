@@ -1,6 +1,7 @@
 package com.example.dennis.nerdquiz;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -145,6 +146,12 @@ public class Score extends Activity {
     public void compareScore() {
         if (shared_preferences.getInt("countNerdIQ",0) > readHighscore()) {
             writeHighscore(shared_preferences.getInt("countNerdIQ",0));
+            String HashedDeviceID = shared_preferences.getString("DeviceId","Default");
+            String Name = shared_preferences.getString("username","Default");
+            String Score = String.valueOf(shared_preferences.getInt("countNerdIQ",0));
+            String method = "InsertScore";
+            BackgroundTaskScore backgroundTask = new BackgroundTaskScore(this);
+            backgroundTask.execute(method,HashedDeviceID,Name,Score);
         }
     }
     public void compareMedaille(int currentMed,String katMed) {
@@ -195,5 +202,12 @@ public class Score extends Activity {
             return "0";
         }
 
+    }
+
+    public void onBackPressed() {
+
+        startActivity(new Intent(Score.this, MainActivity.class));
+        finish();
+        super.onBackPressed();
     }
 }

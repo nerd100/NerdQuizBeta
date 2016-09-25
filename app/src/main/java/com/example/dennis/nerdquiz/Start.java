@@ -64,7 +64,7 @@ public class Start extends Activity {
     int countRightAnswers=0;
     int countWrongAnswers=0;
     int countNerdIQ=0;
-    int progressBarIndex = 60;
+    int progressBarIndex = 15;
     int questionCounter = 0;
     int QuestionNumberQuiz = 30;
     int QuestionNumberKatQuiz = 10;
@@ -151,7 +151,7 @@ public class Start extends Activity {
 
     private void createTimer() {
         timer = (TextView) findViewById(R.id.timer);
-        countDown = new CountDownTimer(61000, 1000) {
+        countDown = new CountDownTimer(progressBarIndex*1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 pb.setProgress(progressBarIndex--);
@@ -203,9 +203,9 @@ public class Start extends Activity {
 
 
     void reset(){
+        progressBarIndex = 15;
         right = 0;
         wrong = 0;
-        progressBarIndex = 60;
         createTimer();
         if(globalCounter == 1) {
             QuestionAndButtons = Cat2;

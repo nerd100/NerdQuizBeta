@@ -108,6 +108,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             return null;
         }
     }
+
 /*
     protected String doInBackground() {
         String json_url;

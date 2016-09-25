@@ -42,11 +42,15 @@ public class CountDownCounter extends Activity{
         countdown = new CountDownTimer(4000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                counter.setText(String.valueOf(millisUntilFinished / 1000));
+
+                if(millisUntilFinished/1000>= 1){
+                    counter.setText(String.valueOf(millisUntilFinished / 1000));
+                }else{
+                    counter.setText("GO");
+                }
             }
 
             public void onFinish() {
-                counter.setText("GO!");
                 startActivity(new Intent(CountDownCounter.this, Start.class));
                 finish();
             }

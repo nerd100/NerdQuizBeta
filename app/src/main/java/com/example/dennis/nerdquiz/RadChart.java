@@ -1,6 +1,7 @@
 package com.example.dennis.nerdquiz;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -79,5 +80,11 @@ public class RadChart extends Activity {
         chart.invalidate();
         chart.animate();
 
+    }
+    public void onBackPressed() {
+
+        startActivity(new Intent(RadChart.this, MainActivity.class));
+        finish();
+        super.onBackPressed();
     }
 }
