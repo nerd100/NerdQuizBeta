@@ -71,6 +71,19 @@
             android:textStyle="bold|italic"
             android:textColor="#ffffff"/>
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView_category"
+            android:layout_gravity="left|center_vertical" />
+
+        <ImageView
+            android:layout_width="98dp"
+            android:layout_height="34dp"
+            android:id="@+id/imageView_diff"
+            android:src="@drawable/diff_easy"
+            android:layout_gravity="right|center_vertical" />
+
     </FrameLayout>
 
 
