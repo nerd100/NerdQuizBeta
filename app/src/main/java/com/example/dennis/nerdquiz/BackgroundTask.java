@@ -72,7 +72,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                     OS.close();
                     InputStream IS = httpURLConnection.getInputStream();
                     IS.close();
-                    return "Data Inserted";
+                    return "Frage erfolgreich hinzugefügt";
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

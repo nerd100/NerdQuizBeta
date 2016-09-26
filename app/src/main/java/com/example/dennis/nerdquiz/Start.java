@@ -59,8 +59,8 @@ public class Start extends Activity {
     String Category = "";
     String Difficulty = "";
 
-    int boundEM = 2;
-    int boundMH = 4;
+    int boundEM = 8;
+    int boundMH = 6;
     int rightAnswer = 0;
     int countRightAnswers=0;
     int countWrongAnswers=0;
@@ -83,11 +83,21 @@ public class Start extends Activity {
     int msfinished;
     private static final String JSON_ARRAY = "server_response";
     private JSONArray ques = null;
-
+    View v;
     float Kat1Answer = 0f;
     float Kat2Answer = 0f;
     float Kat3Answer = 0f;
-    View v;
+
+
+    // Points distribution
+    int easyCounter=0;
+    int mediumCounter=0;
+    int hardCounter = 0;
+    int easyPoints[] ={10,15,20,25,30};
+    int mediumPoints[] ={35,45,55};
+    int hardPoints[] ={65,80};
+    String tmpCatNow="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,7 +159,6 @@ public class Start extends Activity {
         super.onBackPressed();
 
     }
-
 
 
     private void createTimer() {
@@ -324,10 +333,12 @@ public class Start extends Activity {
         question.setText(QuestionAndButtonsParts[0]);
 
         category = (TextView) findViewById(R.id.cate);
-        difficulty = (TextView) findViewById(R.id.diff);
+       // difficulty = (TextView) findViewById(R.id.diff);
 
         category.setText(QuestionAndButtonsParts[5]);
-        difficulty.setText(QuestionAndButtonsParts[6]);
+       // difficulty.setText(QuestionAndButtonsParts[6]);
+
+
 
         btn1 = (Button) findViewById(R.id.button1);
         btn2 = (Button) findViewById(R.id.button2);
@@ -362,11 +373,41 @@ public class Start extends Activity {
                 questionCounter++;
                 String tmpRAindex="button"+String.valueOf(indexRA+1);
                 shared_preferences_editor = shared_preferences.edit();
+                String diffNow = QuestionAndButtonsParts[6];
 
+                if(!category.getText().toString().equals(tmpCatNow)){
+                    easyCounter=0;
+                    mediumCounter=0;
+                    hardCounter=0;
+                    //Toast.makeText(getApplicationContext(),diffNow,Toast.LENGTH_LONG).show();
+                    tmpCatNow =category.getText().toString();
+
+                }
                 if (String.valueOf(getResources().getResourceName(v.getId())).contains(tmpRAindex)) {
+
                     right++;
                     countRightAnswers +=1;
-                    countNerdIQ+=10;
+                  //  countNerdIQ+=10;
+                    switch (diffNow){
+                        case "Easy":
+                            if(easyCounter<=4){
+                                countNerdIQ += easyPoints[easyCounter];
+                                easyCounter +=1;
+                            }else countNerdIQ += easyPoints[easyPoints.length-1];
+                            break;
+                        case "Medium":
+                            if(mediumCounter<=2){
+                                countNerdIQ += mediumPoints[mediumCounter];
+                                mediumCounter +=1;
+                            }else countNerdIQ += mediumPoints[mediumPoints.length-1];
+                            break;
+                        case "Hard":
+                            if(hardCounter==0){
+                                countNerdIQ += hardPoints[hardCounter];
+                                hardCounter +=1;
+                            }else countNerdIQ += hardPoints[hardPoints.length-1];
+                            break;
+                    }
                     shared_preferences_editor.putInt("countRightAnswers",countRightAnswers );
                     if(questionCounter <= QuestionNumberQuiz*3) {
                         Kat1Answer++;
@@ -383,6 +424,17 @@ public class Start extends Activity {
                     v.getBackground().setColorFilter(new LightingColorFilter(Color.WHITE,Color.GREEN));
                     setBGChangeIntent(v);
                 } else {
+                    switch (diffNow){
+                        case "Easy":
+                            easyCounter=0;
+                            break;
+                        case "Medium":
+                            mediumCounter=0;
+                            break;
+                        case "Hard":
+                            hardCounter=0;
+                            break;
+                    }
                     wrong++;
                     countWrongAnswers+=1;
                     shared_preferences_editor.putInt("countWrongAnswers",countWrongAnswers );
@@ -435,7 +487,7 @@ public class Start extends Activity {
         Category2 = Cate2;
         Category3 = Cate3;
         Number = Num;
-        Toast.makeText(getApplicationContext(),Category,Toast.LENGTH_LONG).show();
+      //  Toast.makeText(getApplicationContext(),Category,Toast.LENGTH_LONG).show();
 
      class GetDataJSON extends AsyncTask<String, Void, String> {
         private ProgressDialog progressDialog;

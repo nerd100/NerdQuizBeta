@@ -30,14 +30,14 @@ public class AddQuestion extends Activity {
 
 
 
-        editSpinner1 = (Spinner) findViewById(R.id.spin);
-        editSpinner2 = (Spinner) findViewById(R.id.spin2);
+        editSpinner1 = (Spinner) findViewById(R.id.editSpinner1);
+        editSpinner2 = (Spinner) findViewById(R.id.editSpinner2);
         editQuestion = (EditText) findViewById(R.id.editQuestion);
-        editRA = (EditText) findViewById(R.id.editRightAnswer);
-        editFA1 = (EditText) findViewById(R.id.editFalseAnswer1);
-        editFA2 = (EditText) findViewById(R.id.editFalseAnswer2);
-        editFA3 = (EditText) findViewById(R.id.editFalseAnswer3);
-        btnAddData = (Button) findViewById(R.id.button_add);
+        editRA = (EditText) findViewById(R.id.editRA);
+        editFA1 = (EditText) findViewById(R.id.editFA1);
+        editFA2 = (EditText) findViewById(R.id.editFA2);
+        editFA3 = (EditText) findViewById(R.id.editFA3);
+        btnAddData = (Button) findViewById(R.id.add_button);
 
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -60,6 +60,7 @@ public class AddQuestion extends Activity {
         String method = "Insert";
         BackgroundTask backgroundTask = new BackgroundTask(this);
         backgroundTask.execute(method,Category,Difficulty,Question,RA,FA1,FA2,FA3);
+        clearFields();
     }
 
     public void onBackPressed() {
@@ -67,5 +68,13 @@ public class AddQuestion extends Activity {
         startActivity(new Intent(AddQuestion.this, MainActivity.class));
         finish();
         super.onBackPressed();
+    }
+
+    public void clearFields(){
+        editQuestion.setText("");
+        editRA.setText("");
+        editFA1.setText("");
+        editFA2.setText("");
+        editFA3.setText("");
     }
 }

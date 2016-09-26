@@ -77,13 +77,6 @@
             android:id="@+id/imageView_category"
             android:layout_gravity="left|center_vertical" />
 
-        <ImageView
-            android:layout_width="98dp"
-            android:layout_height="34dp"
-            android:id="@+id/imageView_diff"
-            android:src="@drawable/diff_easy"
-            android:layout_gravity="right|center_vertical" />
-
     </FrameLayout>
 
 
@@ -104,17 +97,14 @@
             android:gravity="center_horizontal"
             android:layout_marginRight="3dp" />
 
-        <TextView
+        <ImageView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/diff"
-            android:layout_gravity="right"
-            android:textStyle="bold|italic"
-            android:textColor="#ffffff"
+            android:id="@+id/imageView_diff"
+            android:src="@drawable/diff_easy"
+            android:layout_gravity="right|center_vertical"
             android:layout_weight="1"
-            android:text="Difficulty"
-            android:layout_marginLeft="3dp" />
+            android:layout_margin="1dp" />
 
         <ImageView
             android:layout_width="fill_parent"

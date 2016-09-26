@@ -43,7 +43,7 @@ public class CountDownCounter extends Activity{
 
             public void onTick(long millisUntilFinished) {
 
-                if(millisUntilFinished/1000+1 >= 2){
+                if(millisUntilFinished/1000 >= 1){
                     counter.setText(String.valueOf(millisUntilFinished / 1000));
                 }else {
                     counter.setText("GO");
