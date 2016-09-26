@@ -39,13 +39,13 @@ public class CountDownCounter extends Activity{
 
     public void count_down(){
 
-        countdown = new CountDownTimer(4000, 1000) {
+        countdown = new CountDownTimer(4000, 500) {
 
             public void onTick(long millisUntilFinished) {
 
-                if(millisUntilFinished/1000>= 1){
+                if(millisUntilFinished/1000+1 >= 2){
                     counter.setText(String.valueOf(millisUntilFinished / 1000));
-                }else{
+                }else {
                     counter.setText("GO");
                 }
             }

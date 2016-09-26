@@ -144,7 +144,7 @@
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="AddQuestion"
+                    android:text="Frage hinzufügen"
                     android:id="@+id/addquestion"
                     android:layout_below="@+id/gstatistic"
                     android:layout_centerHorizontal="true"

@@ -22,12 +22,11 @@ public class AddQuestion extends Activity {
     Button btnAddData;
     Spinner editSpinner1,editSpinner2;
     String Question,Category,Difficulty,RA,FA1,FA2,FA3;
-    boolean isInserted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_question);
+        setContentView(R.layout.addquestion);
 
 
 
@@ -61,7 +60,6 @@ public class AddQuestion extends Activity {
         String method = "Insert";
         BackgroundTask backgroundTask = new BackgroundTask(this);
         backgroundTask.execute(method,Category,Difficulty,Question,RA,FA1,FA2,FA3);
-        finish();
     }
 
     public void onBackPressed() {

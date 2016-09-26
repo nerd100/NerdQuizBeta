@@ -67,8 +67,7 @@
             android:gravity="center"
             android:background="#3d3534"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp">
+            android:layout_marginRight="5dp">
 
             <TextView
                 android:layout_width="fill_parent"
@@ -102,7 +101,10 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="4dp">
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="#3d3534">
 
             <Button
                 android:layout_width="fill_parent"
@@ -113,7 +115,8 @@
                 android:background="@drawable/buttoncolorred"
                 android:textStyle="bold"
                 android:textSize="40sp"
-                android:textColor="#ffffff" />
+                android:textColor="#ffffff"
+                android:layout_margin="50dp" />
         </LinearLayout>
     </LinearLayout>
 

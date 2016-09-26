@@ -78,7 +78,8 @@
         android:entries="@array/difficulty"
         android:layout_alignTop="@+id/textView10"
         android:layout_alignLeft="@+id/spin"
-        android:layout_alignStart="@+id/spin" />
+        android:layout_alignStart="@+id/spin"
+        android:spinnerMode="dropdown" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
