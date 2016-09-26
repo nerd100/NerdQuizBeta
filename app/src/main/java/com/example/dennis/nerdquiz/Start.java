@@ -94,8 +94,8 @@ public class Start extends Activity {
     int mediumCounter=0;
     int hardCounter = 0;
     int easyPoints[] ={10,15,20,25,30};
-    int mediumPoints[] ={35,45,55};
-    int hardPoints[] ={65,80};
+    int mediumPoints[] ={35,40,45,55};
+    int hardPoints[] ={65,70,80};
     String tmpCatNow="";
 
 
@@ -396,13 +396,13 @@ public class Start extends Activity {
                             }else countNerdIQ += easyPoints[easyPoints.length-1];
                             break;
                         case "Medium":
-                            if(mediumCounter<=2){
+                            if(mediumCounter<=3){
                                 countNerdIQ += mediumPoints[mediumCounter];
                                 mediumCounter +=1;
                             }else countNerdIQ += mediumPoints[mediumPoints.length-1];
                             break;
                         case "Hard":
-                            if(hardCounter==0){
+                            if(hardCounter<=1){
                                 countNerdIQ += hardPoints[hardCounter];
                                 hardCounter +=1;
                             }else countNerdIQ += hardPoints[hardPoints.length-1];

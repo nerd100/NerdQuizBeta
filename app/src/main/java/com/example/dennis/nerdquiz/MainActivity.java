@@ -121,6 +121,7 @@ public class MainActivity extends Activity {
 
 
 
+
       /*  Question = editQuestion.getText().toString();
         Category = editSpinner1.getSelectedItem().toString();
         Difficulty = editSpinner2.getSelectedItem().toString();
@@ -131,6 +132,10 @@ public class MainActivity extends Activity {
         String method = "Insert";
         BackgroundTask backgroundTask = new BackgroundTask(this);
         backgroundTask.execute(method,Category,Difficulty,Question,RA,FA1,FA2,FA3);*/
+    }
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
 

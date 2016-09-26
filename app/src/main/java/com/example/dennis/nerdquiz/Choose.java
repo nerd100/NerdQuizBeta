@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import com.example.dennis.nerdquiz.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 public class Choose extends Activity {
     public static final String GAME_PREFERENCES = "GamePrefs";
@@ -28,6 +31,11 @@ public class Choose extends Activity {
         editSpinner1 = (Spinner) findViewById(R.id.spinner1);
         editSpinner2 = (Spinner) findViewById(R.id.spinner2);
 
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build();
+        mAdView.loadAd(adRequest);
         shared_preferences = getSharedPreferences("shared_preferences_test",
                 MODE_PRIVATE);
 
