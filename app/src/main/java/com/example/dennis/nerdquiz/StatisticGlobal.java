@@ -1,6 +1,7 @@
 package com.example.dennis.nerdquiz;
 
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,6 +40,8 @@ public class StatisticGlobal extends Activity {
 
         setContentView(R.layout.statisticglobal);
 
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         shared_preferences = getSharedPreferences("shared_preferences_test",
                 MODE_PRIVATE);
         title = shared_preferences.getString("Rang","Default");
@@ -104,6 +109,23 @@ public class StatisticGlobal extends Activity {
                 counterPos++;
             }
         }
+       radarChart.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    radarChart.setBackgroundResource(R.drawable.pressedbutton);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    shared_preferences_editor = shared_preferences.edit();
+                    shared_preferences_editor.putString("Number", "1");
+                    shared_preferences_editor.apply();
+                    shared_preferences_editor.commit();
+                    startActivity(new Intent(StatisticGlobal.this, RadChart.class));
+                    finish();
+                }
+                return true;
+            }
+        });
+        /*
         radarChart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,11 +136,22 @@ public class StatisticGlobal extends Activity {
                 finish();
             }
         });
+        */
     }
     public void onBackPressed() {
 
         startActivity(new Intent(StatisticGlobal.this, MainActivity.class));
         finish();
         super.onBackPressed();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                startActivity(new Intent(StatisticGlobal.this, MainActivity.class));
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

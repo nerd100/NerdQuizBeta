@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,7 +23,8 @@ public class NicknameDialog extends DialogFragment {
     SharedPreferences.Editor shared_preferences_editor;
     EditText usernameedit;
 
-    @Override
+
+
     public Dialog onCreateDialog(Bundle savedInstanceState)
     {
         shared_preferences = getActivity().getSharedPreferences("username",0);
@@ -34,13 +36,11 @@ public class NicknameDialog extends DialogFragment {
         builder.setView(v)
                 .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-
                         //shared_preferences.edit().remove("username");
                         shared_preferences_editor = shared_preferences.edit();
                         shared_preferences_editor.putString("username",usernameedit.getText().toString());
+                        shared_preferences_editor.putBoolean("userset",true);
                         shared_preferences_editor.apply();
-                        Button test=(Button)getActivity().findViewById(R.id.username);
-                        test.setText(shared_preferences.getString("username", "Default"));
 
                     }
                 })

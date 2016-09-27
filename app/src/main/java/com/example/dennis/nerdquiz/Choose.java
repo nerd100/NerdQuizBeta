@@ -1,10 +1,14 @@
 package com.example.dennis.nerdquiz;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -31,6 +35,9 @@ public class Choose extends Activity {
         editSpinner1 = (Spinner) findViewById(R.id.spinner1);
         editSpinner2 = (Spinner) findViewById(R.id.spinner2);
 
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         MobileAds.initialize(getApplicationContext(), "ca-app-pub-3940256099942544~3347511713");
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
@@ -42,7 +49,23 @@ public class Choose extends Activity {
 
         startbtn2 = (Button) findViewById(R.id.start_btn2);
 
-        startbtn2.setOnClickListener(new View.OnClickListener() {
+        startbtn2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    startbtn2.setBackgroundResource(R.drawable.pressedbutton);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    shared_preferences_editor = shared_preferences.edit();
+                    shared_preferences_editor.putString("Category",editSpinner1.getSelectedItem().toString());
+                    shared_preferences_editor.putString("Difficulty",editSpinner2.getSelectedItem().toString());
+                    shared_preferences_editor.commit();
+                    startActivity(new Intent(Choose.this, Start.class));
+                    finish();
+                }
+                return true;
+            }
+        });
+       /* startbtn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 shared_preferences_editor = shared_preferences.edit();
@@ -53,6 +76,7 @@ public class Choose extends Activity {
                 finish();
             }
         });
+        */
 
 
     }
@@ -61,5 +85,15 @@ public class Choose extends Activity {
         startActivity(new Intent(Choose.this, MainActivity.class));
         finish();
         super.onBackPressed();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                startActivity(new Intent(Choose.this, MainActivity.class));
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -1,9 +1,11 @@
 package com.example.dennis.nerdquiz;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,13 +36,15 @@ public class Score extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score);
 
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         shared_preferences = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
         getWhichQuiz = shared_preferences.getString("Number", "Default");
 
         rightAnswer = (TextView) findViewById(R.id.rightAnswer);
         wrongAnswer = (TextView) findViewById(R.id.wrongAnswer);
         points = (TextView) findViewById(R.id.points);
-        tmpiq = (TextView) findViewById(R.id.tmpiq);
+     //   tmpiq = (TextView) findViewById(R.id.tmpiq);
         tmpmed = (ImageView) findViewById(R.id.tmpmed);
         rank = (TextView) findViewById(R.id.title);
         switchText = (TextView) findViewById(R.id.switchText);
@@ -209,5 +213,15 @@ public class Score extends Activity {
         startActivity(new Intent(Score.this, MainActivity.class));
         finish();
         super.onBackPressed();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                startActivity(new Intent(Score.this, MainActivity.class));
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

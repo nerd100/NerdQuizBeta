@@ -3,43 +3,61 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#4f4c4b">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#40110D">
+        android:layout_height="60dp"
+        android:background="@drawable/titlebg">
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Kategorie-Quiz"
             android:id="@+id/textView37"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:textSize="40sp"
-            android:textStyle="bold|italic" />
+            android:textStyle="bold|italic"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:background="#848282">
+        android:layout_margin="5dp"
+        android:layout_weight="0.3">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
+            android:layout_height="50dp"
+            android:background="@drawable/subtitlebg"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Optionen"
+                android:id="@+id/textView42"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:background="#3d3534"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp">
+            android:background="@drawable/middlebg"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="fill_parent"
@@ -50,26 +68,29 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:gravity="center|right" />
+                android:gravity="center|right"
+                android:textColor="#ffffff" />
 
             <Spinner
+
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:entries="@array/categories"
                 android:id="@+id/spinner1"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:theme="@android:style/Theme.NoTitleBar"
+                android:spinnerMode="dropdown"
+                style="@android:style/Theme.NoTitleBar" />
 
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:background="#3d3534"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp">
+            android:background="@drawable/bottilebg"
+            android:layout_weight="1">
 
             <TextView
                 android:layout_width="fill_parent"
@@ -80,7 +101,8 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:gravity="center|right" />
+                android:gravity="center|right"
+                android:textColor="#ffffff" />
 
             <Spinner
                 android:layout_width="fill_parent"
@@ -88,62 +110,48 @@
 
                 android:id="@+id/spinner2"
                 android:entries="@array/difficulty"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:theme="@android:style/Theme.NoTitleBar"
+                style="@android:style/Theme.NoTitleBar" />
         </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Start"
+                android:id="@+id/start_btn2"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/buttonbg"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:textColor="#ffffff"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#848282">
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <com.google.android.gms.ads.AdView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/adView"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id"
+            android:layout_gravity="bottom" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:background="#3d3534"
-                android:layout_weight="0.5">
-
-                <Button
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Start"
-                    android:id="@+id/start_btn2"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/buttoncolorred"
-                    android:textStyle="bold"
-                    android:textSize="40sp"
-                    android:textColor="#ffffff" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="#848282">
-
-                <com.google.android.gms.ads.AdView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/adView"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentBottom="true"
-                    ads:adSize="BANNER"
-                    ads:adUnitId="@string/banner_ad_unit_id"
-                    android:layout_gravity="bottom" />
-
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>
