@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ public class AddQuestion extends Activity {
 
     EditText editQuestion, editRA, editFA1, editFA2, editFA3;
     Button btnAddData;
+    SharedPreferences shared_preferences;
+    SharedPreferences.Editor shared_preferences_editor;
     Spinner editSpinner1,editSpinner2;
     String Question,Category,Difficulty,RA,FA1,FA2,FA3;
 
@@ -34,7 +37,7 @@ public class AddQuestion extends Activity {
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
+        shared_preferences = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
         editSpinner1 = (Spinner) findViewById(R.id.editSpinner1);
         editSpinner2 = (Spinner) findViewById(R.id.editSpinner2);
         editQuestion = (EditText) findViewById(R.id.editQuestion);
@@ -70,7 +73,30 @@ public class AddQuestion extends Activity {
                     backgroundTask.execute(method,Category,Difficulty,Question,RA,FA1,FA2,FA3);
                     clearFields();
                     btnAddData.setBackgroundResource(R.drawable.buttonbg);
+
+                    //Achievements
+                    int tmpcaq=shared_preferences.getInt("counterAddq",0);
+                    tmpcaq+=1;
+                    shared_preferences_editor=shared_preferences.edit();
+                    shared_preferences_editor.putInt("counterAddq",tmpcaq).apply();
+                    if(tmpcaq<=100){
+                        switch(tmpcaq){
+                            case 10:
+                                shared_preferences_editor.putBoolean("A5",true).apply();
+                                break;
+                            case 25:
+                                shared_preferences_editor.putBoolean("A6",true).apply();
+                                break;
+                            case 50:
+                                shared_preferences_editor.putBoolean("A7",true).apply();
+                                break;
+                            case 100:
+                                shared_preferences_editor.putBoolean("A8",true).apply();
+                                break;
+                        }
                 }
+
+            }
                 return true;
             }
         });

@@ -58,6 +58,65 @@ public class Score extends Activity {
             rankSplit(buffer.toString());
             title = getNerdTitle(score);
 
+            //Achievements
+            int tmpc=shared_preferences.getInt("counterQuiz",0);
+            tmpc+=1;
+            shared_preferences_editor=shared_preferences.edit();
+            shared_preferences_editor.putInt("counterQuiz",tmpc).apply();
+            if(tmpc<=100){
+            switch(tmpc){
+                case 5:
+                    shared_preferences_editor.putBoolean("A1",true).apply();
+                    break;
+                case 10:
+                    shared_preferences_editor.putBoolean("A2",true).apply();
+                    break;
+                case 25:
+                    shared_preferences_editor.putBoolean("A3",true).apply();
+                    break;
+                case 100:
+                    shared_preferences_editor.putBoolean("A4",true).apply();
+                    break;
+                }
+            }
+
+
+            switch(title){
+                case "Anfänger":
+                    shared_preferences_editor.putBoolean("A13",true).apply();
+                    break;
+                case "CasualNerd":
+                    setAchievements(1);
+                    break;
+                case "KonsolenFan":
+                    setAchievements(2);
+                    break;
+                case "ComputerUser":
+                    setAchievements(3);
+                    break;
+                case "Programmer":
+                    setAchievements(4);
+                    break;
+                case "Allrounder":
+                    setAchievements(5);
+                    break;
+                case "Senpai":
+                    setAchievements(6);
+                    break;
+                case "NerdGod":
+                    setAchievements(7);
+                    break;
+                case "HardcoreGamer":
+                    setAchievements(8);
+                    break;
+                case "All-Star":
+                    setAchievements(9);
+                    break;
+                case "NerdQuizDeveloper":
+                    setAchievements(10);
+                    break;
+            }
+
             String kat1 = "";
             String kat2 = "";
             String kat3 = "";
@@ -106,14 +165,18 @@ public class Score extends Activity {
             if (rightAns > 20){
                 tmpmed.setImageResource(R.drawable.diamandm);
                 compareMedaille(4,"k"+String.valueOf(i)+j);
+                shared_preferences_editor.putBoolean("A12",true).apply();
             }else if(rightAns>15){
                 tmpmed.setImageResource(R.drawable.goldm);
+                shared_preferences_editor.putBoolean("A11",true).apply();
                 compareMedaille(3,"k"+String.valueOf(i)+j);
             }else if(rightAns>10){
                 tmpmed.setImageResource(R.drawable.silberm);
+                shared_preferences_editor.putBoolean("A10",true).apply();
                 compareMedaille(2,"k"+String.valueOf(i)+j);
             }else if(rightAns>5){
                 tmpmed.setImageResource(R.drawable.bronzem);
+                shared_preferences_editor.putBoolean("A9",true).apply();
                 compareMedaille(1,"k"+String.valueOf(i)+j);
             }
 
@@ -125,6 +188,14 @@ public class Score extends Activity {
         wrongAnswer.setText(String.valueOf(shared_preferences.getInt("countWrongAnswers", 0)));
         points.setText(String.valueOf(shared_preferences.getInt("countNerdIQ", 0)));
 
+    }
+
+    public void setAchievements(int numA){
+        for(int i=0; i<=numA; i++ ){
+            int x=i+13;
+            String tmop="A"+String.valueOf(x);
+            shared_preferences_editor.putBoolean(tmop,true).apply();
+        }
     }
 
     public int readHighscore() {

@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
     SharedPreferences shared_preferences;
     SharedPreferences.Editor shared_preferences_editor;
 
-    Button addbtn, startbtn1, startbtn2, gstatbtn,userNamebtn;
+    Button addbtn, startbtn1, startbtn2, gstatbtn,userNamebtn,achieve;
 
 
     //private AdView mAdView;
@@ -49,18 +49,25 @@ public class MainActivity extends Activity {
         startbtn2 = (Button) findViewById(R.id.btn_start2);
         addbtn = (Button) findViewById(R.id.addquestion);
         gstatbtn = (Button) findViewById(R.id.gstatistic);
-        userNamebtn = (Button) findViewById(R.id.username);
+        achieve = (Button) findViewById(R.id.achieve);
+        if(shared_preferences.getString("username","Default").equals("Default")){
+            userNamebtn = (Button) findViewById(R.id.username);
+            shared_preferences_editor.putString("username","Default").apply();
+        }else{
+            userNamebtn = (Button) findViewById(R.id.username);
+            userNamebtn.setText(shared_preferences.getString("username","Default"));
+            userNamebtn.setEnabled(false);
+        }
 
-        shared_preferences_editor.putString("username","Default");
-        shared_preferences_editor.putString("DeviceId", "Default");
-        shared_preferences_editor.apply();
-        if(!shared_preferences.getBoolean("userset",false)) {
+        shared_preferences_editor.putString("DeviceId", "Default").apply();
+
+   /*     if(!shared_preferences.getBoolean("userset",false)) {
             Toast.makeText(getApplicationContext(),shared_preferences.getString("username", "Default"),Toast.LENGTH_LONG).show();
             userNamebtn.setText(shared_preferences.getString("username", "Default"));
         }else{
             userNamebtn.setEnabled(false);
         }
-
+*/
         startbtn1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -97,6 +104,18 @@ public class MainActivity extends Activity {
                     gstatbtn.setBackgroundResource(R.drawable.pressedbutton);
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     startActivity(new Intent(MainActivity.this, StatisticGlobal.class));
+                    finish();
+                }
+                return true;
+            }
+        });
+        achieve.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    achieve.setBackgroundResource(R.drawable.pressedbutton);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    startActivity(new Intent(MainActivity.this, Achievements.class));
                     finish();
                 }
                 return true;
@@ -162,6 +181,7 @@ public class MainActivity extends Activity {
         userNamebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 DialogFragment dialog = new NicknameDialog();
                 dialog.show(getFragmentManager(), "tag");
 
