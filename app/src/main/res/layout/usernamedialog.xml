@@ -7,9 +7,9 @@
     <TextView
         android:text="NerdQuiz"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="50dp"
         android:scaleType="center"
-        android:background="#FFFFBB33"
+        android:background="@drawable/titlebg"
         android:contentDescription="@string/app_name"
         android:gravity="center"
         android:textSize="40dp"

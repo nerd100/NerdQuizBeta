@@ -1,9 +1,11 @@
 package com.example.dennis.nerdquiz;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,13 +36,15 @@ public class Score extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score);
 
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         shared_preferences = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
         getWhichQuiz = shared_preferences.getString("Number", "Default");
 
         rightAnswer = (TextView) findViewById(R.id.rightAnswer);
         wrongAnswer = (TextView) findViewById(R.id.wrongAnswer);
         points = (TextView) findViewById(R.id.points);
-        tmpiq = (TextView) findViewById(R.id.tmpiq);
+     //   tmpiq = (TextView) findViewById(R.id.tmpiq);
         tmpmed = (ImageView) findViewById(R.id.tmpmed);
         rank = (TextView) findViewById(R.id.title);
         switchText = (TextView) findViewById(R.id.switchText);
@@ -53,6 +57,65 @@ public class Score extends Activity {
                     "800,All-Star,1000,NerdQuizDeveloper");
             rankSplit(buffer.toString());
             title = getNerdTitle(score);
+
+            //Achievements
+            int tmpc=shared_preferences.getInt("counterQuiz",0);
+            tmpc+=1;
+            shared_preferences_editor=shared_preferences.edit();
+            shared_preferences_editor.putInt("counterQuiz",tmpc).apply();
+            if(tmpc<=100){
+            switch(tmpc){
+                case 5:
+                    shared_preferences_editor.putBoolean("A1",true).apply();
+                    break;
+                case 10:
+                    shared_preferences_editor.putBoolean("A2",true).apply();
+                    break;
+                case 25:
+                    shared_preferences_editor.putBoolean("A3",true).apply();
+                    break;
+                case 100:
+                    shared_preferences_editor.putBoolean("A4",true).apply();
+                    break;
+                }
+            }
+
+
+            switch(title){
+                case "Anfänger":
+                    shared_preferences_editor.putBoolean("A13",true).apply();
+                    break;
+                case "CasualNerd":
+                    setAchievements(1);
+                    break;
+                case "KonsolenFan":
+                    setAchievements(2);
+                    break;
+                case "ComputerUser":
+                    setAchievements(3);
+                    break;
+                case "Programmer":
+                    setAchievements(4);
+                    break;
+                case "Allrounder":
+                    setAchievements(5);
+                    break;
+                case "Senpai":
+                    setAchievements(6);
+                    break;
+                case "NerdGod":
+                    setAchievements(7);
+                    break;
+                case "HardcoreGamer":
+                    setAchievements(8);
+                    break;
+                case "All-Star":
+                    setAchievements(9);
+                    break;
+                case "NerdQuizDeveloper":
+                    setAchievements(10);
+                    break;
+            }
 
             String kat1 = "";
             String kat2 = "";
@@ -102,14 +165,18 @@ public class Score extends Activity {
             if (rightAns > 20){
                 tmpmed.setImageResource(R.drawable.diamandm);
                 compareMedaille(4,"k"+String.valueOf(i)+j);
+                shared_preferences_editor.putBoolean("A12",true).apply();
             }else if(rightAns>15){
                 tmpmed.setImageResource(R.drawable.goldm);
+                shared_preferences_editor.putBoolean("A11",true).apply();
                 compareMedaille(3,"k"+String.valueOf(i)+j);
             }else if(rightAns>10){
                 tmpmed.setImageResource(R.drawable.silberm);
+                shared_preferences_editor.putBoolean("A10",true).apply();
                 compareMedaille(2,"k"+String.valueOf(i)+j);
             }else if(rightAns>5){
                 tmpmed.setImageResource(R.drawable.bronzem);
+                shared_preferences_editor.putBoolean("A9",true).apply();
                 compareMedaille(1,"k"+String.valueOf(i)+j);
             }
 
@@ -121,6 +188,14 @@ public class Score extends Activity {
         wrongAnswer.setText(String.valueOf(shared_preferences.getInt("countWrongAnswers", 0)));
         points.setText(String.valueOf(shared_preferences.getInt("countNerdIQ", 0)));
 
+    }
+
+    public void setAchievements(int numA){
+        for(int i=0; i<=numA; i++ ){
+            int x=i+13;
+            String tmop="A"+String.valueOf(x);
+            shared_preferences_editor.putBoolean(tmop,true).apply();
+        }
     }
 
     public int readHighscore() {
@@ -209,5 +284,15 @@ public class Score extends Activity {
         startActivity(new Intent(Score.this, MainActivity.class));
         finish();
         super.onBackPressed();
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                startActivity(new Intent(Score.this, MainActivity.class));
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

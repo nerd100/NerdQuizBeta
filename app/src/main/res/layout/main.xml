@@ -3,26 +3,7 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#848282">
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:background="#40110D">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Nerd Quiz"
-            android:id="@+id/textView42"
-            android:textColor="#ffffff"
-            android:textSize="40sp"
-            android:textStyle="bold|italic"
-            android:gravity="center" />
-    </LinearLayout>
+    android:background="#4f4c4b">
 
     <LinearLayout
         android:orientation="vertical"
@@ -33,19 +14,19 @@
 
         android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#40110D">
+            android:layout_height="60dp"
+            android:background="@drawable/titlebg">
 
             <TextView
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Menü"
                 android:id="@+id/textView33"
                 android:textColor="#ffffff"
-                android:textSize="30sp"
-                android:gravity="center_vertical|center_horizontal"
-                android:textStyle="bold|italic"/>
+                android:textSize="40dp"
+                android:textStyle="bold|italic"
+                android:gravity="center" />
 
 
         </LinearLayout>
@@ -56,28 +37,15 @@
             android:layout_height="wrap_content"
             android:gravity="center">
 
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textView45"
-                android:layout_weight="1" />
-
             <Button
                 style="?android:attr/buttonStyleSmall"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Username"
                 android:id="@+id/username"
-                android:layout_weight="1"
-                android:layout_margin="5dp" />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textView46"
-                android:layout_weight="1" />
+                android:layout_margin="5dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -86,7 +54,7 @@
             android:layout_height="fill_parent"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="#3d3534">
+            android:background="#4f4c4b">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -102,7 +70,7 @@
                     android:id="@+id/btn_start1"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/buttoncolorred"
+                    android:background="@drawable/buttonbg"
                     android:textSize="30dp"
                     android:textColor="@color/text_shadow_white"
                     android:textStyle="bold|italic"
@@ -116,7 +84,7 @@
                     android:id="@+id/btn_start2"
                     android:layout_below="@+id/btn_start1"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/buttoncolorred"
+                    android:background="@drawable/buttonbg"
                     android:textSize="30dp"
                     android:textColor="@color/text_shadow_white"
                     android:textStyle="bold|italic"
@@ -130,7 +98,7 @@
                     android:id="@+id/gstatistic"
                     android:layout_below="@+id/btn_start2"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/buttoncolorred"
+                    android:background="@drawable/buttonbg"
                     android:textSize="25dp"
                     android:textColor="@color/text_shadow_white"
                     android:textStyle="bold|italic"
@@ -140,11 +108,22 @@
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:text="Achievements"
+                    android:id="@+id/achieve"
+                    android:background="@drawable/buttonbg"
+                    android:textSize="25dp"
+                    android:textColor="@color/text_shadow_white"
+                    android:textStyle="bold|italic"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
                     android:text="Frage hinzufügen"
                     android:id="@+id/addquestion"
                     android:layout_below="@+id/gstatistic"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/buttoncolorred"
+                    android:background="@drawable/buttonbg"
                     android:textSize="25dp"
                     android:textColor="@color/text_shadow_white"
                     android:textStyle="bold|italic"
