@@ -114,7 +114,8 @@
                     android:textSize="25dp"
                     android:textColor="@color/text_shadow_white"
                     android:textStyle="bold|italic"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:layout_margin="1dp" />
 
                 <Button
                     android:layout_width="fill_parent"

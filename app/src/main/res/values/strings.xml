@@ -7,7 +7,7 @@
         <item>Serien</item>
         <item>Movies</item>
         <item>Games</item>
-        <item>Assi</item>
+        <item>MINT</item>
     </string-array>
 
     <string-array name="difficulty">
@@ -16,16 +16,5 @@
         <item>Hard</item>
     </string-array>
 
-    <string-array name="ranks">
-        <item>Neuling</item>
-        <item>Handlanger</item>
-        <item>Geschäftsmann</item>
-        <item>Lehrer</item>
-        <item>Architekt</item>
-        <item>Handlanger</item>
-        <item>Unternehmer</item>
-        <item>Meister</item>
-        <item>Großmeister</item>
-        <item>König</item>
-    </string-array>
+
 </resources>

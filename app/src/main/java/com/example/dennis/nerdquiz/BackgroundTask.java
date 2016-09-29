@@ -109,35 +109,6 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
         }
     }
 
-/*
-    protected String doInBackground() {
-        String json_url;
-        String JSON_STRING;
-        json_url = "http://quizdb.net23.net/json_get_data.php";
-        try {
-            URL url = new URL(json_url);
-            HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
-            InputStream inputStream = httpURLConnection.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            StringBuilder stringBuilder = new StringBuilder();
-            while ((JSON_STRING = bufferedReader.readLine())!=null){
-                stringBuilder.append(JSON_STRING+"\n");
-            }
-
-            bufferedReader.close();
-            inputStream.close();
-            httpURLConnection.disconnect();
-
-            return stringBuilder.toString().trim();
-
-        }catch(MalformedURLException e){
-            e.printStackTrace();
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-    */
     @Override
     protected void onProgressUpdate(Void... values) {
         super.onProgressUpdate(values);

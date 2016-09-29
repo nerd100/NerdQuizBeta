@@ -46,8 +46,7 @@
         <activity
             android:name=".Start"
             android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity"
-            android:theme="@android:style/Theme.NoTitleBar"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Choose"
             android:parentActivityName=".MainActivity"
