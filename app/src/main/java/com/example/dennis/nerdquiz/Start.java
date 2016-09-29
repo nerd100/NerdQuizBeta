@@ -592,6 +592,7 @@ public class Start extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                countDown.cancel();
                 startActivity(new Intent(Start.this, MainActivity.class));
                 finish();
                 return true;

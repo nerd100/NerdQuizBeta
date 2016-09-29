@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NerdQuiz-clean.iml" filepath="$PROJECT_DIR$/NerdQuiz-clean.iml" />
       <module fileurl="file://$PROJECT_DIR$/NerdQuizBeta.iml" filepath="$PROJECT_DIR$/NerdQuizBeta.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
