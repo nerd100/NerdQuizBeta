@@ -7,10 +7,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.media.Image;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +26,7 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -336,13 +340,12 @@ public class Start extends Activity {
     public void NameButtons() {
         question = (TextView) findViewById(R.id.question1);
         question.setText(QuestionAndButtonsParts[0]);
-
+       // resize(question, v.getHeight(),question.getHeight());
         category = (TextView) findViewById(R.id.cate);
        // difficulty = (TextView) findViewById(R.id.diff);
 
         category.setText(QuestionAndButtonsParts[5]);
        // difficulty.setText(QuestionAndButtonsParts[6]);
-
 
 
         btn1 = (Button) findViewById(R.id.button1);
@@ -353,8 +356,16 @@ public class Start extends Activity {
         mixButtons(rightAnswer, QuestionAndButtonsParts[1], QuestionAndButtonsParts[2], QuestionAndButtonsParts[3], QuestionAndButtonsParts[4]);
 
     }
+/*
+    public void resize(TextView text, float layheight, float textViewHeight) {
+        int minTSize=15;
+     //   float layheight=text.getLayout().getHeight();
+        while(textViewHeight >= layheight && text.getTextSize() >minTSize) {
+            text.setTextSize(TypedValue.COMPLEX_UNIT_SP,text.getTextSize()-2);
+        }
 
-
+    }
+    */
     public void mixButtons(int i, final String RA, String FA1, String FA2, String FA3) {
 
         ArrayList<String> tmpShuffle=new ArrayList<>();
