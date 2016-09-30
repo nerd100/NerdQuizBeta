@@ -67,7 +67,7 @@ public class Start extends Activity {
     int countRightAnswers=0;
     int countWrongAnswers=0;
     int countNerdIQ=0;
-    int progressBarIndex = 60;
+    int progressBarIndex = 20;
     int questionCounter = 0;
     int QuestionNumberQuiz = 30;
     int QuestionNumberKatQuiz = 10;
@@ -145,6 +145,16 @@ public class Start extends Activity {
             String Diff,Cate;
             Diff = shared_preferences.getString("Difficulty", "Default");
             Cate = shared_preferences.getString("Category", "Default");
+            if(Diff.equals("Easy")){
+                diffLogo.setImageResource(R.drawable.easylogo);
+                imageViewDiff.setImageResource(R.drawable.diff_easy);
+            }else if(Diff.equals("Medium")){
+                diffLogo.setImageResource(R.drawable.mediumlogo);
+                imageViewDiff.setImageResource(R.drawable.diff_medium);
+            }else if(Diff.equals("Hard")) {
+                diffLogo.setImageResource(R.drawable.hardlogo);
+                imageViewDiff.setImageResource(R.drawable.diff_hard);
+            }
             getData(Diff, Cate, String.valueOf(QuestionNumberKatQuiz),"","");
         }
 
@@ -220,7 +230,7 @@ public class Start extends Activity {
 
 
     void reset(){
-        progressBarIndex = 60;
+        progressBarIndex = 20;
         right = 0;
         wrong = 0;
         createTimer();

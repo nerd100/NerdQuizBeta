@@ -5,9 +5,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,9 +54,9 @@ public class Score extends Activity {
         if(getWhichQuiz.equals("1")){
             switchText.setText("Dein Rang:");
             int score = shared_preferences.getInt("countNerdIQ",0);
-            buffer.append("0,Anfänger,50,CasualNerd,100,KonsolenFan,200,ComputerUser" +
-                    ",300,Programmer,400,Allrounder,500,Senpai,600,NerdGod,700,HardcoreGamer," +
-                    "800,All-Star,1000,NerdQuizDeveloper");
+            buffer.append("0,Anfänger,50,CasualNerd,100,KonsolenFan,200,ComputerUser,300,Programmer," +
+                    "400,Allrounder,500,Senpai,600,NerdGod,700,HardcoreGamer,800,All-Star,1000,NerdQuizDeveloper");
+            //Toast.makeText(getApplicationContext(),String.valueOf(score),Toast.LENGTH_LONG).show();
             rankSplit(buffer.toString());
             title = getNerdTitle(score);
 
@@ -147,6 +149,8 @@ public class Score extends Activity {
             shared_preferences_editor = shared_preferences.edit();
             String cate = shared_preferences.getString("Category","Default");
             String diff = shared_preferences.getString("Difficulty","Default");
+            rank.setText("");
+            //switchText.setGravity(Gravity.CENTER_VERTICAL);
             switchText.setText("Deine Medaille:");
 
             category.put("Anime",1);
@@ -240,7 +244,7 @@ public class Score extends Activity {
         String score;
         String title;
         stringCutter = rankArray.split(",");
-
+        Toast.makeText(getApplicationContext(),String.valueOf(rankArray),Toast.LENGTH_LONG).show();
         for (int i = 0 ; i < stringCutter.length/2 ; i+=2){
             score = stringCutter[i];
             title = stringCutter[i+1];
@@ -249,8 +253,8 @@ public class Score extends Activity {
         }
 
     }
-    public String getNerdTitle(int Score){
-        for(int i = 0; i < ranks.size()/2; i+=2){
+    public String getNerdTitle(int Score){              //r
+        for(int i = 0; i < ranks.size(); i+=2){
             if(Score < Integer.parseInt(ranks.get(i+2))){
                 return ranks.get(i+1);
             }
