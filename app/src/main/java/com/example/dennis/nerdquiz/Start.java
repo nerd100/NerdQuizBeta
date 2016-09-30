@@ -59,13 +59,13 @@ public class Start extends Activity {
     String Category = "";
     String Difficulty = "";
 
-    int boundEM = 8;
+    int boundEM = 2;
     int boundMH = 6;
     int rightAnswer = 0;
     int countRightAnswers=0;
     int countWrongAnswers=0;
     int countNerdIQ=0;
-    int progressBarIndex = 15;
+    int progressBarIndex = 60;
     int questionCounter = 0;
     int QuestionNumberQuiz = 30;
     int QuestionNumberKatQuiz = 10;
@@ -215,7 +215,7 @@ public class Start extends Activity {
 
 
     void reset(){
-        progressBarIndex = 15;
+        progressBarIndex = 60;
         right = 0;
         wrong = 0;
         createTimer();
