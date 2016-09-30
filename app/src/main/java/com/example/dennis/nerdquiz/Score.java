@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +34,7 @@ public class Score extends Activity {
 
     Map<String,Integer> category= new HashMap<>();
     Map<String,String> difficulty= new HashMap<>();
+
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
@@ -146,6 +148,7 @@ public class Score extends Activity {
             compareScore();
 
         }else if(getWhichQuiz.equals("0")){
+
             shared_preferences_editor = shared_preferences.edit();
             String cate = shared_preferences.getString("Category","Default");
             String diff = shared_preferences.getString("Difficulty","Default");
@@ -157,7 +160,7 @@ public class Score extends Activity {
             category.put("Serien",2);
             category.put("Movies",3);
             category.put("Games",4);
-            category.put("Assi",5);
+            category.put("MINT",5);
             difficulty.put("Easy","e");
             difficulty.put("Medium","m");
             difficulty.put("Hard","h");
@@ -186,12 +189,13 @@ public class Score extends Activity {
 
             shared_preferences_editor.apply();
             //tmpmed.setImageResource(R.drawable.diamandm);
-        }
+
 
         rightAnswer.setText(String.valueOf(shared_preferences.getInt("countRightAnswers", 0)));
         wrongAnswer.setText(String.valueOf(shared_preferences.getInt("countWrongAnswers", 0)));
         points.setText(String.valueOf(shared_preferences.getInt("countNerdIQ", 0)));
 
+    }
     }
 
     public void setAchievements(int numA){

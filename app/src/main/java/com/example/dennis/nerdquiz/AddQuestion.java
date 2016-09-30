@@ -2,8 +2,10 @@ package com.example.dennis.nerdquiz;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -69,9 +71,13 @@ public class AddQuestion extends Activity {
                     FA2 = editFA2.getText().toString();
                     FA3 = editFA3.getText().toString();
                     String method = "Insert";
-                    BackgroundTask backgroundTask = new BackgroundTask(getApplicationContext());
-                    backgroundTask.execute(method,Category,Difficulty,Question,RA,FA1,FA2,FA3);
-                    clearFields();
+                    if(!Question.equals("") && !RA.equals("") && !FA1.equals("")&& !FA2.equals("")&& !FA3.equals("")) {
+                        BackgroundTask backgroundTask = new BackgroundTask(getApplicationContext());
+                        backgroundTask.execute(method, Category, Difficulty, Question, RA, FA1, FA2, FA3);
+                        clearFields();
+                    }else{
+                        new AlertDialog.Builder(AddQuestion.this).setTitle("Bitte alle Felder ausfüllen").setPositiveButton(android.R.string.ok, null).show();
+                    }
                     btnAddData.setBackgroundResource(R.drawable.buttonbg);
 
                     //Achievements
