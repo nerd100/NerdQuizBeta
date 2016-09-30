@@ -247,7 +247,7 @@ public class Score extends Activity {
         String score;
         String title;
         stringCutter = rankArray.split(",");
-      //  Toast.makeText(getApplicationContext(),String.valueOf(rankArray),Toast.LENGTH_LONG).show();
+
         for (int i = 0 ; i < stringCutter.length ; i+=2){
             score = stringCutter[i];
             title = stringCutter[i+1];

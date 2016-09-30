@@ -15,6 +15,9 @@ import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,12 +35,25 @@ public class RadChart extends Activity {
     private JSONArray nameaScore = null;
     ArrayList<TextView> ns = new ArrayList<>();
     ArrayList<TextView> ps = new ArrayList<>();
+    InterstitialAd mInterstitialAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.radarchart);
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.admob_interstitial_id));
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded(){
+                displayInterstitial();
+            }
+        });
+
+        requestNewInterstitial();
+
 
         n1=(TextView)findViewById(R.id.n1);
         n2=(TextView)findViewById(R.id.n2);
@@ -159,6 +175,19 @@ public class RadChart extends Activity {
         test.execute();
 
     }
+    private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        mInterstitialAd.loadAd(adRequest);
+    }
+    public void displayInterstitial(){
+        if(mInterstitialAd.isLoaded()){
+            mInterstitialAd.show();
+        }
+    }
+
     public void onBackPressed() {
 
         startActivity(new Intent(RadChart.this, MainActivity.class));
@@ -169,7 +198,7 @@ public class RadChart extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                startActivity(new Intent(RadChart.this, MainActivity.class));
+                startActivity(new Intent(RadChart.this, StatisticGlobal.class));
                 finish();
                 return true;
         }
