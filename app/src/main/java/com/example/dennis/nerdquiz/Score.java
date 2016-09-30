@@ -33,7 +33,6 @@ public class Score extends Activity {
     Map<String,Integer> category= new HashMap<>();
     Map<String,String> difficulty= new HashMap<>();
 
-
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
@@ -146,52 +145,53 @@ public class Score extends Activity {
             rank.setText(title);
             compareScore();
 
-        }else if(getWhichQuiz.equals("0")) {
+        }else if(getWhichQuiz.equals("0")){
 
             shared_preferences_editor = shared_preferences.edit();
-            String cate = shared_preferences.getString("Category", "Default");
-            String diff = shared_preferences.getString("Difficulty", "Default");
+            String cate = shared_preferences.getString("Category","Default");
+            String diff = shared_preferences.getString("Difficulty","Default");
             switchText.setText("Deine Medaille:");
 
-            category.put("Anime", 1);
-            category.put("Serien", 2);
-            category.put("Movies", 3);
-            category.put("Games", 4);
-            category.put("MINT", 5);
-            difficulty.put("Easy", "e");
-            difficulty.put("Medium", "m");
-            difficulty.put("Hard", "h");
+            category.put("Anime",1);
+            category.put("Serien",2);
+            category.put("Movies",3);
+            category.put("Games",4);
+            category.put("MINT",5);
+            difficulty.put("Easy","e");
+            difficulty.put("Medium","m");
+            difficulty.put("Hard","h");
 
             questionCounter = shared_preferences.getInt("questionCounter", 0);
             rightAns = shared_preferences.getInt("countRightAnswers", 0);
             int i = category.get(cate);
             String j = difficulty.get(diff);
-            if (rightAns > 20) {
+            if (rightAns > 20){
                 tmpmed.setImageResource(R.drawable.diamandm);
-                compareMedaille(4, "k" + String.valueOf(i) + j);
-                shared_preferences_editor.putBoolean("A12", true).apply();
-            } else if (rightAns > 15) {
+                compareMedaille(4,"k"+String.valueOf(i)+j);
+                shared_preferences_editor.putBoolean("A12",true).apply();
+            }else if(rightAns>15){
                 tmpmed.setImageResource(R.drawable.goldm);
-                shared_preferences_editor.putBoolean("A11", true).apply();
-                compareMedaille(3, "k" + String.valueOf(i) + j);
-            } else if (rightAns > 10) {
+                shared_preferences_editor.putBoolean("A11",true).apply();
+                compareMedaille(3,"k"+String.valueOf(i)+j);
+            }else if(rightAns>10){
                 tmpmed.setImageResource(R.drawable.silberm);
-                shared_preferences_editor.putBoolean("A10", true).apply();
-                compareMedaille(2, "k" + String.valueOf(i) + j);
-            } else if (rightAns > 5) {
+                shared_preferences_editor.putBoolean("A10",true).apply();
+                compareMedaille(2,"k"+String.valueOf(i)+j);
+            }else if(rightAns>5){
                 tmpmed.setImageResource(R.drawable.bronzem);
-                shared_preferences_editor.putBoolean("A9", true).apply();
-                compareMedaille(1, "k" + String.valueOf(i) + j);
+                shared_preferences_editor.putBoolean("A9",true).apply();
+                compareMedaille(1,"k"+String.valueOf(i)+j);
             }
 
             shared_preferences_editor.apply();
             //tmpmed.setImageResource(R.drawable.diamandm);
-        }
+
 
         rightAnswer.setText(String.valueOf(shared_preferences.getInt("countRightAnswers", 0)));
         wrongAnswer.setText(String.valueOf(shared_preferences.getInt("countWrongAnswers", 0)));
         points.setText(String.valueOf(shared_preferences.getInt("countNerdIQ", 0)));
 
+    }
     }
 
     public void setAchievements(int numA){
