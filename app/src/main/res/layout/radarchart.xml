@@ -1,24 +1,431 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#848282"
-    tools:context=".RadChart">
+    android:background="#4f4c4b"
+   >
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <com.github.mikephil.charting.charts.RadarChart
-        android:id="@+id/chart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Highscore"
+                android:id="@+id/textView3"
+                android:background="@drawable/titlebg"
+                android:gravity="center"
+                android:textSize="40sp"
+                android:textColor="#ffffff"
+                android:textStyle="bold|italic"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/middlebg"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Deine Stärken"
+                android:id="@+id/textView2"
+                android:textStyle="bold"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            tools:context=".RadChart">
+
+            <com.github.mikephil.charting.charts.RadarChart
+                android:id="@+id/chart"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+          />
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/middlebg">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Weltweite Highscores"
+                        android:id="@+id/textView22"
+                        android:textStyle="bold"
+                        android:textColor="#ffffff"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/subtitlebg"
+                    android:gravity="bottom">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nickname"
+                        android:id="@+id/textView4"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textColor="#ffffff" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nerd IQ"
+                        android:id="@+id/textView5"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/middlebg"
+                    android:gravity="bottom" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nickname"
+                        android:id="@+id/n1"
+                        android:layout_weight="1"
+                        android:textStyle="normal"
+                        android:textColor="#ffffff"
+                        android:layout_marginLeft="40dp"
+                        android:gravity="left|center_vertical" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nerd IQ"
+                        android:id="@+id/p1"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/middlebg"
+                    android:gravity="bottom" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nickname"
+                        android:id="@+id/n2"
+                        android:layout_weight="1"
+                        android:textStyle="normal"
+                        android:textColor="#ffffff"
+                        android:layout_marginLeft="40dp"
+                        android:gravity="left|center_vertical" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nerd IQ"
+                        android:id="@+id/p2"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/middlebg"
+                    android:gravity="bottom" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nickname"
+                        android:id="@+id/n3"
+                        android:layout_weight="1"
+                        android:textStyle="normal"
+                        android:textColor="#ffffff"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="40dp" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nerd IQ"
+                        android:id="@+id/p3"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/middlebg"
+                    android:gravity="bottom" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nickname"
+                        android:id="@+id/n4"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:textStyle="normal"
+                        android:textColor="#ffffff"
+                        android:layout_marginLeft="40dp" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nerd IQ"
+                        android:id="@+id/p4"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/middlebg"
+                    android:gravity="bottom" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nickname"
+                        android:id="@+id/n5"
+                        android:layout_weight="1"
+                        android:textStyle="normal"
+                        android:textColor="#ffffff"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="40dp" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nerd IQ"
+                        android:id="@+id/p5"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/middlebg"
+                    android:gravity="bottom" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nickname"
+                        android:id="@+id/n6"
+                        android:layout_weight="1"
+                        android:textStyle="normal"
+                        android:textColor="#ffffff"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="40dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nerd IQ"
+                        android:id="@+id/p6"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/middlebg"
+                    android:gravity="bottom" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nickname"
+                        android:id="@+id/n7"
+                        android:layout_weight="1"
+                        android:textStyle="normal"
+                        android:textColor="#ffffff"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="40dp" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nerd IQ"
+                        android:id="@+id/p7"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/middlebg"
+                    android:gravity="bottom" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nickname"
+                        android:id="@+id/n8"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:textStyle="normal"
+                        android:textColor="#ffffff"
+                        android:layout_marginLeft="40dp" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nerd IQ"
+                        android:id="@+id/p8"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/middlebg"
+                    android:gravity="bottom" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nickname"
+                        android:id="@+id/n9"
+                        android:layout_weight="1"
+                        android:textStyle="normal"
+                        android:textColor="#ffffff"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="40dp" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nerd IQ"
+                        android:id="@+id/p9"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bottilebg"
+                    android:gravity="bottom" >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nickname"
+                        android:id="@+id/n10"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:textStyle="normal"
+                        android:textColor="#ffffff"
+                        android:layout_marginLeft="40dp" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Nerd IQ"
+                        android:id="@+id/p10"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+            </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+
+</LinearLayout>

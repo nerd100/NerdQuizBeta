@@ -271,7 +271,7 @@ public class Score extends Activity {
         if(kat.equals("Games")){
             return "4";
         }
-        if(kat.equals("Assi")){
+        if(kat.equals("MINT")){
             return "5";
         }else{
             return "0";

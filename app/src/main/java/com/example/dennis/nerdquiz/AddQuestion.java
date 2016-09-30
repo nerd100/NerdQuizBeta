@@ -129,6 +129,7 @@ public class AddQuestion extends Activity {
         editFA1.setText("");
         editFA2.setText("");
         editFA3.setText("");
+        editQuestion.requestFocus();
     }
 
     @Override

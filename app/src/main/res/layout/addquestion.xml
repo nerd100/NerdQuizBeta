@@ -270,7 +270,7 @@
                     <Button
                         android:layout_width="fill_parent"
                         android:layout_height="70dp"
-                        android:text="Upload"
+                        android:text="Versenden"
                         android:id="@+id/add_button"
                         android:background="@drawable/buttonbg"
                         android:textStyle="bold"

@@ -43,7 +43,7 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/subtitlebg"
                     android:layout_weight="1">
 
@@ -136,6 +136,26 @@
                 android:gravity="center">
 
                 <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/subtitlebg">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Medaillien"
+                        android:id="@+id/textView"
+                        android:layout_weight="1"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold"
+                        android:gravity="left|bottom"
+                        android:layout_marginLeft="5dp" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -148,22 +168,21 @@
                         android:layout_height="fill_parent"
                         android:layout_weight="1">
 
-                        <TextView
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="Medaillien"
-                            android:id="@+id/textView34"
-                            android:layout_weight="1"
-                            android:textColor="#ffffff"
-                            android:textStyle="bold"
-                            android:gravity="center" />
-
                         <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5">
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:id="@+id/textView34"
+                                android:layout_weight="0.85"
+                                android:textColor="#ffffff"
+                                android:textStyle="bold"
+                                android:gravity="center" />
 
                             <TextView
                                 android:layout_width="fill_parent"
@@ -418,7 +437,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Assi"
+                        android:text="MINT"
                         android:id="@+id/textView29"
                         android:layout_weight="1"
                         android:textColor="#ffffff"
@@ -479,7 +498,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/radarChart"
                     android:background="@drawable/buttonbg"
-                    android:text="Grafik"
+                    android:text="Highscore"
                     android:textSize="30dp"
                     android:textStyle="bold|italic"
                     android:textColor="#ffffff"

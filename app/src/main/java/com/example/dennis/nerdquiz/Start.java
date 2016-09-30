@@ -1,5 +1,6 @@
 package com.example.dennis.nerdquiz;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.media.Image;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -106,6 +108,9 @@ public class Start extends Activity {
 
         pb = (ProgressBar) findViewById(R.id.progressBar);
 
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         diffLogo = (ImageView) findViewById(R.id.difflogo);
         diffLogo.setImageResource(R.drawable.easylogo);
         shared_preferences = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
@@ -127,7 +132,7 @@ public class Start extends Activity {
             categoryList.add("Serien");
             categoryList.add("Movies");
             categoryList.add("Games");
-            categoryList.add("Assi");
+            categoryList.add("MINT");
             Collections.shuffle(categoryList);
             shared_preferences_editor = shared_preferences.edit();
             shared_preferences_editor.putString("1kat",categoryList.get(0));
@@ -583,6 +588,18 @@ public class Start extends Activity {
         //asyncObject.cancel(true);
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                countDown.cancel();
+                startActivity(new Intent(Start.this, MainActivity.class));
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private Runnable mMyRunnable = new Runnable()
     {
         @Override

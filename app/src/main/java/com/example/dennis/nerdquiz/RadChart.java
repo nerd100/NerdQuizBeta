@@ -8,23 +8,81 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class RadChart extends Activity {
     SharedPreferences shared_preferences;
     SharedPreferences.Editor shared_preferences_editor;
+    TextView n1,n2,n3,n4,n5,n6,n7,n8,n9,n10;
+    TextView p1,p2,p3,p4,p5,p6,p7,p8,p9,p10;
+    private static final String JSON_ARRAY = "server_response";
+    private JSONArray nameaScore = null;
+    ArrayList<TextView> ns = new ArrayList<>();
+    ArrayList<TextView> ps = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.radarchart);
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        n1=(TextView)findViewById(R.id.n1);
+        n2=(TextView)findViewById(R.id.n2);
+        n3=(TextView)findViewById(R.id.n3);
+        n4=(TextView)findViewById(R.id.n4);
+        n5=(TextView)findViewById(R.id.n5);
+        n6=(TextView)findViewById(R.id.n6);
+        n7=(TextView)findViewById(R.id.n7);
+        n8=(TextView)findViewById(R.id.n8);
+        n9=(TextView)findViewById(R.id.n9);
+        n10=(TextView)findViewById(R.id.n10);
+        ns.add(n1);
+        ns.add(n2);
+        ns.add(n3);
+        ns.add(n4);
+        ns.add(n5);
+        ns.add(n6);
+        ns.add(n7);
+        ns.add(n8);
+        ns.add(n9);
+        ns.add(n10);
+
+        p1=(TextView)findViewById(R.id.p1);
+        p2=(TextView)findViewById(R.id.p2);
+        p3=(TextView)findViewById(R.id.p3);
+        p4=(TextView)findViewById(R.id.p4);
+        p5=(TextView)findViewById(R.id.p5);
+        p6=(TextView)findViewById(R.id.p6);
+        p7=(TextView)findViewById(R.id.p7);
+        p8=(TextView)findViewById(R.id.p8);
+        p9=(TextView)findViewById(R.id.p9);
+        p10=(TextView)findViewById(R.id.p10);
+        ps.add(p1);
+        ps.add(p2);
+        ps.add(p3);
+        ps.add(p4);
+        ps.add(p5);
+        ps.add(p6);
+        ps.add(p7);
+        ps.add(p8);
+        ps.add(p9);
+        ps.add(p10);
+
+
+
         shared_preferences = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
         float katIQ1 = shared_preferences.getFloat("1",0);      //shared_praferences
         float katIQ2 = shared_preferences.getFloat("2",0);
@@ -54,7 +112,7 @@ public class RadChart extends Activity {
         labels.add("Serien");
         labels.add("Movies");
         labels.add("Games");
-        labels.add("Assi");
+        labels.add("MINT");
 
         RadarData data = new RadarData(labels, dataSets);
         data.setValueTextColor(Color.WHITE);
@@ -71,6 +129,34 @@ public class RadChart extends Activity {
         chart.getYAxis().setEnabled(false);
         chart.invalidate();
         chart.animate();
+
+
+        BackgroundTaskGetHighscores test=new BackgroundTaskGetHighscores(this) {
+            @Override
+            public void onResponseReceived(String result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    nameaScore = jsonObject.getJSONArray(JSON_ARRAY);
+                    for (int i = 0; i <ns.size() ; i++) {
+                        if(i<nameaScore.length()) {
+                            JSONObject jsonobject = nameaScore.getJSONObject(i);
+                            String Name = jsonobject.getString("Name");
+                            String Score = jsonobject.getString("max");
+                            ns.get(i).setText(String.valueOf(i+1)+". "+Name);
+                            ps.get(i).setText(Score);
+                        }else{
+                            ns.get(i).setText(String.valueOf(i+1)+".");
+                            ps.get(i).setText("");
+                        }
+                    }
+
+                } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        };
+        test.execute();
 
     }
     public void onBackPressed() {
@@ -89,4 +175,5 @@ public class RadChart extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
