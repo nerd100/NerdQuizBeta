@@ -5,16 +5,24 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Bundle;
 
+import android.util.Log;
+import android.view.Display;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.RadarChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.formatter.YAxisValueFormatter;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -35,6 +43,7 @@ public class RadChart extends Activity {
     private JSONArray nameaScore = null;
     ArrayList<TextView> ns = new ArrayList<>();
     ArrayList<TextView> ps = new ArrayList<>();
+    PercentFormatter percentageSymbol= new PercentFormatter();
     InterstitialAd mInterstitialAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,22 +107,51 @@ public class RadChart extends Activity {
         ps.add(p10);
 
 
-
         shared_preferences = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
-        float katIQ1 = shared_preferences.getFloat("1",0);      //shared_praferences
+      /*  float katIQ1 = shared_preferences.getFloat("1",0);      //shared_praferences
         float katIQ2 = shared_preferences.getFloat("2",0);
         float katIQ3 = shared_preferences.getFloat("3",0);
         float katIQ4 = shared_preferences.getFloat("4",0);
-        float katIQ5 = shared_preferences.getFloat("5",0);
+        float katIQ5 = shared_preferences.getFloat("5",0);*/
+
+        float aR=shared_preferences.getFloat("AnimeR",0);
+        float aW=shared_preferences.getFloat("AnimeW",0);
+        float ARWproc=Math.round(aR/(aR+aW)*1000)/10f;
+        float sR=shared_preferences.getFloat("SerienR",0);
+        float sW=shared_preferences.getFloat("SerienW",0);
+        float SRWproc=Math.round(sR/(sR+sW)*1000)/10f;
+        float mR=shared_preferences.getFloat("MoviesR",0);
+        float mW=shared_preferences.getFloat("MoviesW",0);
+        float MRWproc=Math.round(mR/(mR+mW)*1000)/10f;
+        float gR=shared_preferences.getFloat("GamesR",0);
+        float gW=shared_preferences.getFloat("GamesW",0);
+        float GRWproc=Math.round(gR/(gR+gW)*1000)/10f;
+        float mintR=shared_preferences.getFloat("MINTR",0);
+        float mintW=shared_preferences.getFloat("MINTW",0);
+        float MINTRWproc=Math.round(mintR/(mintR+mintW)*1000)/10f;
+
 
         RadarChart chart = (RadarChart) findViewById(R.id.chart);
 
+        YAxis yaxis=chart.getYAxis();
+        yaxis.setAxisMinValue(0);
+        yaxis.setAxisMaxValue(100);
+
+
         ArrayList<Entry> entries = new ArrayList<>();
-        entries.add(new Entry(katIQ1, 0));
+
+        /*entries.add(new Entry(katIQ1, 0));
         entries.add(new Entry(katIQ2, 1));
         entries.add(new Entry(katIQ3, 2));
         entries.add(new Entry(katIQ4, 3));
-        entries.add(new Entry(katIQ5, 4));
+        entries.add(new Entry(katIQ5, 4));*/
+
+        entries.add(new Entry(ARWproc, 0));
+        entries.add(new Entry(SRWproc, 1));
+        entries.add(new Entry(MRWproc, 2));
+        entries.add(new Entry(GRWproc, 3));
+        entries.add(new Entry(MINTRWproc, 4));
+
 
         RadarDataSet dataset_comp1 = new RadarDataSet(entries,"");
 
@@ -131,6 +169,7 @@ public class RadChart extends Activity {
         labels.add("MINT");
 
         RadarData data = new RadarData(labels, dataSets);
+        data.setValueFormatter(percentageSymbol);
         data.setValueTextColor(Color.WHITE);
         data.setValueTextSize(10f);
         chart.setWebColor(Color.WHITE);
