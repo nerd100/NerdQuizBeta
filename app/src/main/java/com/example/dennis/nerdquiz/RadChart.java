@@ -117,7 +117,7 @@ public class RadChart extends Activity {
 
         RadarDataSet dataset_comp1 = new RadarDataSet(entries,"");
 
-        dataset_comp1.setColor(Color.CYAN);
+        dataset_comp1.setColor(Color.argb(0,202,68,33));
         dataset_comp1.setDrawFilled(true);
 
         ArrayList<RadarDataSet> dataSets = new ArrayList<RadarDataSet>();

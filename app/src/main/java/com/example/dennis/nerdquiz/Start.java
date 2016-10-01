@@ -413,6 +413,7 @@ public class Start extends Activity {
 
                     right++;
                     countRightAnswers +=1;
+
                   //  countNerdIQ+=10;
                     switch (diffNow){
                         case "Easy":
@@ -445,6 +446,12 @@ public class Start extends Activity {
                     shared_preferences_editor.putFloat("countRightAnswersKat1", Kat1Answer);
                     shared_preferences_editor.putFloat("countRightAnswersKat2", Kat2Answer);
                     shared_preferences_editor.putFloat("countRightAnswersKat3", Kat3Answer);
+
+                    shared_preferences_editor.putFloat(category.getText().toString()+"R", Kat1Answer);
+                    shared_preferences_editor.putFloat("countRightAnswersKat2", Kat2Answer);
+                    shared_preferences_editor.putFloat("countRightAnswersKat3", Kat3Answer);
+
+
                     shared_preferences_editor.putInt("countNerdIQ",countNerdIQ );
                     shared_preferences_editor.apply();
                     v.getBackground().setColorFilter(new LightingColorFilter(Color.WHITE,Color.GREEN));

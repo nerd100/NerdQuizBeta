@@ -16,7 +16,7 @@
             android:id="@+id/title_counter"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="#594242"
+            android:background="#553939"
             android:textStyle="bold"
             android:textSize="30sp" />
 
@@ -26,7 +26,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="3"
             android:id="@+id/counter"
-            android:background="#5c5252"
+            android:background="#50403b"
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="200sp"

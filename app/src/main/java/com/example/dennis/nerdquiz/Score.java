@@ -168,6 +168,7 @@ public class Score extends Activity {
 
             questionCounter = shared_preferences.getInt("questionCounter", 0);
             rightAns = shared_preferences.getInt("countRightAnswers", 0);
+
             int i = category.get(cate);
             String j = difficulty.get(diff);
             if (rightAns > 20){
@@ -192,6 +193,7 @@ public class Score extends Activity {
             //tmpmed.setImageResource(R.drawable.diamandm);
 
     }
+
         rightAnswer.setText(String.valueOf(shared_preferences.getInt("countRightAnswers", 0)));
         wrongAnswer.setText(String.valueOf(shared_preferences.getInt("countWrongAnswers", 0)));
         points.setText(String.valueOf(shared_preferences.getInt("countNerdIQ", 0)));
