@@ -95,6 +95,7 @@ public class Start extends Activity {
     float Kat3Answer = 0f;
 
 
+
     // Points distribution
     int easyCounter=0;
     int mediumCounter=0;
@@ -103,8 +104,8 @@ public class Start extends Activity {
     int mediumPoints[] ={35,40,45,55};
     int hardPoints[] ={65,70,80};
     String tmpCatNow="";
-
-
+    int getCatRightAnswer=0;
+    int getCatWrongAnswer=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +123,7 @@ public class Start extends Activity {
 
         whichQuiz = shared_preferences.getString("Number", "Default");
         rightAnswer = r.nextInt(4);
+
 
         shared_preferences_editor.putInt("countNerdIQ",0);
         shared_preferences_editor.putInt("countRightAnswers",0);
@@ -405,6 +407,8 @@ public class Start extends Activity {
                     easyCounter=0;
                     mediumCounter=0;
                     hardCounter=0;
+                    getCatRightAnswer=0;
+                    getCatWrongAnswer=0;
                     //Toast.makeText(getApplicationContext(),diffNow,Toast.LENGTH_LONG).show();
                     tmpCatNow =category.getText().toString();
 
@@ -413,6 +417,9 @@ public class Start extends Activity {
 
                     right++;
                     countRightAnswers +=1;
+
+                    //fuer radchart
+                    getCatRightAnswer +=1;
                   //  countNerdIQ+=10;
                     switch (diffNow){
                         case "Easy":
@@ -445,6 +452,9 @@ public class Start extends Activity {
                     shared_preferences_editor.putFloat("countRightAnswersKat1", Kat1Answer);
                     shared_preferences_editor.putFloat("countRightAnswersKat2", Kat2Answer);
                     shared_preferences_editor.putFloat("countRightAnswersKat3", Kat3Answer);
+
+                    float tmpRa=shared_preferences.getFloat(category.getText().toString()+"R",0f)+getCatRightAnswer;
+                    shared_preferences_editor.putFloat(category.getText().toString()+"R", tmpRa);
                     shared_preferences_editor.putInt("countNerdIQ",countNerdIQ );
                     shared_preferences_editor.apply();
                     v.getBackground().setColorFilter(new LightingColorFilter(Color.WHITE,Color.GREEN));
@@ -463,7 +473,10 @@ public class Start extends Activity {
                     }
                     wrong++;
                     countWrongAnswers+=1;
+                    getCatWrongAnswer+=1;
+                    float tmpWa=shared_preferences.getFloat(category.getText().toString()+"R",0f)+getCatWrongAnswer;
                     shared_preferences_editor.putInt("countWrongAnswers",countWrongAnswers );
+                    shared_preferences_editor.putFloat(category.getText().toString()+"W", tmpWa);
                     shared_preferences_editor.apply();
                     v.getBackground().setColorFilter(new LightingColorFilter(Color.WHITE,Color.RED));
                     setBGChangeIntent(v);
