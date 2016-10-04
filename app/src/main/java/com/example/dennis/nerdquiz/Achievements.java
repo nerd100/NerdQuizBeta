@@ -220,4 +220,11 @@ public class Achievements extends Activity{
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Achievements.this, MainActivity.class));
+        finish();
+    }
 }

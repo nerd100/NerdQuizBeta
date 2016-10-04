@@ -2,183 +2,223 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#50403b"
-
-    >
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="60dp"
-        android:layout_weight="1"
-        android:background="@drawable/titlebg">
+    android:background="#50403b">
 
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Frage"
-            android:id="@+id/questiontitle"
-            android:gravity="center"
-            android:textSize="40sp"
-            android:textColor="#ffffff"
-            android:textStyle="bold|italic" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="200">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:background="@drawable/titlebg">
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Frage"
+                    android:id="@+id/questiontitle"
+                    android:gravity="center"
+                    android:textSize="40sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold|italic" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="200">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/roundedcorner">
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textStyle="bold|italic"
+                        android:textColor="#ffffff"
+                        android:id="@+id/question1"
+                        android:gravity="center"
+                        android:layout_margin="10dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foregroundGravity="center">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:indeterminate="false"
+                    android:progressDrawable="@drawable/circleprogressbar"
+                    android:background="@drawable/circleprogressbar_bg"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:max="60"
+                    android:progress="0"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/timer"
+                    android:layout_gravity="center"
+                    android:textStyle="bold|italic"
+                    android:textColor="#ffffff"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView_category"
+                    android:layout_gravity="left|center_vertical" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/cate"
+                    android:textStyle="bold|italic"
+                    android:textColor="#ffffff"
+                    android:layout_weight="0.5"
+                    android:text="Category"
+                    android:gravity="center_horizontal"
+                    android:layout_marginRight="3dp" />
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/imageView_diff"
+                    android:src="@drawable/diff_easy"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_weight="1"
+                    android:layout_margin="1dp" />
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/difflogo"
+                    android:layout_weight="1"
+                    android:layout_marginRight="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:baselineAligned="false">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1">
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/button1"
+                        android:background="@drawable/buttoncolorred"
+                        android:textStyle="bold|italic"
+                        android:textColor="#ffffff"/>
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/button3"
+                        android:background="@drawable/buttoncolorred"
+                        android:textStyle="bold|italic"
+                        android:textColor="#ffffff"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:layout_marginRight="5dp">
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/button2"
+                        android:background="@drawable/buttoncolorred"
+                        android:textStyle="bold|italic"
+                        android:textColor="#ffffff"/>
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/button4"
+                        android:background="@drawable/buttoncolorred"
+                        android:textStyle="bold|italic"
+                        android:textColor="#ffffff"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@drawable/roundedcorner">
-
+            android:weightSum="1">
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textStyle="bold|italic"
-                android:textColor="#ffffff"
-                android:id="@+id/question1"
+                android:text="Next Category"
+                android:id="@+id/title_counter"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:layout_margin="10dp" />
+                android:background="#553939"
+                android:textStyle="bold"
+                android:textSize="30sp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="378dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="3"
+                android:id="@+id/counter"
+                android:background="#50403b"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="200sp" />
+
         </LinearLayout>
-
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:foregroundGravity="center">
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:indeterminate="false"
-            android:progressDrawable="@drawable/circleprogressbar"
-            android:background="@drawable/circleprogressbar_bg"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:max="60"
-            android:progress="0"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/timer"
-            android:layout_gravity="center"
-            android:textStyle="bold|italic"
-            android:textColor="#ffffff"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView_category"
-            android:layout_gravity="left|center_vertical" />
-
     </FrameLayout>
-
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/cate"
-            android:textStyle="bold|italic"
-            android:textColor="#ffffff"
-            android:layout_weight="0.5"
-            android:text="Category"
-            android:gravity="center_horizontal"
-            android:layout_marginRight="3dp" />
-
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/imageView_diff"
-            android:src="@drawable/diff_easy"
-            android:layout_gravity="right|center_vertical"
-            android:layout_weight="1"
-            android:layout_margin="1dp" />
-
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/difflogo"
-            android:layout_weight="1"
-            android:layout_marginRight="10dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:baselineAligned="false">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1">
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/button1"
-                android:background="@drawable/buttoncolorred"
-                android:textStyle="bold|italic"
-                android:textColor="#ffffff"/>
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/button3"
-                android:background="@drawable/buttoncolorred"
-                android:textStyle="bold|italic"
-                android:textColor="#ffffff"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:layout_marginRight="5dp">
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/button2"
-                android:background="@drawable/buttoncolorred"
-                android:textStyle="bold|italic"
-                android:textColor="#ffffff"/>
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/button4"
-                android:background="@drawable/buttoncolorred"
-                android:textStyle="bold|italic"
-                android:textColor="#ffffff"/>
-        </LinearLayout>
-    </LinearLayout>
 
 </LinearLayout>
