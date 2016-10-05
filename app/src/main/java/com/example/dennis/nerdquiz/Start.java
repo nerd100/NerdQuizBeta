@@ -230,13 +230,12 @@ public class Start extends Activity {
                         //counter = (TextView) findViewById(R.id.counter);
                         counter.setText("3");
                         counter.setVisibility(View.VISIBLE);
-                        title.setText("Next Category");
+                        title.setText("Nächste Kategorie");
                         title.setVisibility(View.VISIBLE);
                         btn1.setEnabled(false);
                         btn2.setEnabled(false);
                         btn3.setEnabled(false);
                         btn4.setEnabled(false);
-                        //counter.setText("3");
                         count_down();
                         //reset();
                     }
@@ -265,7 +264,7 @@ public class Start extends Activity {
                 reset();
             }
         }.start();
-        
+
     }
 
     void reset(){
