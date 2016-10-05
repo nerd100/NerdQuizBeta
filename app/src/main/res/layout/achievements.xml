@@ -8,7 +8,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@drawable/titlebg">
+        android:background="@drawable/titlebg2">
 
         <TextView
             android:layout_width="fill_parent"

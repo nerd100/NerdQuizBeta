@@ -210,12 +210,6 @@ public class Achievements extends Activity{
 
     }
 
-    public void onBackPressed() {
-
-        startActivity(new Intent(Achievements.this, MainActivity.class));
-        finish();
-        super.onBackPressed();
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

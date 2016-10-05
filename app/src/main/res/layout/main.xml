@@ -15,13 +15,13 @@
         android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/titlebg">
+            android:background="@drawable/titlebg2">
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Menü"
+                android:text="NerdQuiz"
                 android:id="@+id/textView33"
                 android:textColor="#ffffff"
                 android:textSize="40dp"
@@ -73,8 +73,10 @@
                     android:textSize="30dp"
                     android:textColor="@color/text_shadow_white"
                     android:textStyle="bold|italic"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="2dp" />
 
                 <Button
                     android:layout_width="fill_parent"
@@ -87,22 +89,26 @@
                     android:textSize="30dp"
                     android:textColor="@color/text_shadow_white"
                     android:textStyle="bold|italic"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="2dp" />
 
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Statistik"
+                    android:text="Fortschritt"
                     android:id="@+id/gstatistic"
                     android:layout_below="@+id/btn_start2"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/buttonbg"
-                    android:textSize="25dp"
+                    android:textSize="30dp"
                     android:textColor="@color/text_shadow_white"
                     android:textStyle="bold|italic"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="2dp" />
 
                 <Button
                     android:layout_width="fill_parent"
@@ -110,11 +116,13 @@
                     android:text="Achievements"
                     android:id="@+id/achieve"
                     android:background="@drawable/buttonbg"
-                    android:textSize="25dp"
+                    android:textSize="30dp"
                     android:textColor="@color/text_shadow_white"
                     android:textStyle="bold|italic"
                     android:layout_weight="1"
-                    android:layout_margin="1dp" />
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="2dp" />
 
                 <Button
                     android:layout_width="fill_parent"
@@ -124,11 +132,13 @@
                     android:layout_below="@+id/gstatistic"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/buttonbg"
-                    android:textSize="25dp"
+                    android:textSize="30dp"
                     android:textColor="@color/text_shadow_white"
                     android:textStyle="bold|italic"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="2dp" />
 
                 <com.google.android.gms.ads.AdView
                     android:id="@+id/adView"
