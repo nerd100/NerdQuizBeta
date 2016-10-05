@@ -47,8 +47,8 @@ public class Start extends Activity {
     SharedPreferences shared_preferences;
     SharedPreferences.Editor shared_preferences_editor;
 
-    TextView question,timer,category,difficulty;
-    ImageView imageViewDiff,imageViewCate;
+    TextView question,timer,category,counter,title;
+    ImageView imageViewDiff,imageViewCate,Splash;
     Button btn1, btn2, btn3, btn4;
 
     ProgressBar pb;
@@ -77,7 +77,7 @@ public class Start extends Activity {
     int QuestionNumberKatQuiz = 10;
     int right = 0;
     int wrong = 0;
-
+    CountDownTimer countdown;
     int globalCounter = 0;
     android.os.Handler h;
     ImageView diffLogo;
@@ -111,11 +111,16 @@ public class Start extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quizstart);
 
+        counter = (TextView) findViewById(R.id.counter);        //Create invisible TextViews
+        counter.setVisibility(View.INVISIBLE);
+        title = (TextView) findViewById(R.id.title_counter);
+        title.setVisibility(View.INVISIBLE);
+
+
         pb = (ProgressBar) findViewById(R.id.progressBar);
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
         diffLogo = (ImageView) findViewById(R.id.difflogo);
         diffLogo.setImageResource(R.drawable.easylogo);
         shared_preferences = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
@@ -181,7 +186,6 @@ public class Start extends Activity {
 
     }
 
-
     private void createTimer() {
         timer = (TextView) findViewById(R.id.timer);
         countDown = new CountDownTimer(progressBarIndex*1000, 1000) {
@@ -209,11 +213,10 @@ public class Start extends Activity {
             }
 
             public void onFinish() {
-                //btn1.getBackground().clearColorFilter();
-               // btn2.getBackground().clearColorFilter();
-               // btn3.getBackground().clearColorFilter();
-               // btn4.getBackground().clearColorFilter();
-               // btn4.getBackground().clearColorFilter();
+                btn1.getBackground().clearColorFilter();
+                btn2.getBackground().clearColorFilter();
+                btn3.getBackground().clearColorFilter();
+                btn4.getBackground().clearColorFilter();
 
                 if(whichQuiz.equals("1")) {
                     timer.setText("0");
@@ -223,7 +226,19 @@ public class Start extends Activity {
                         startActivity(new Intent(Start.this, Score.class));
                         finish();
                     } else {
-                        reset();
+
+                        //counter = (TextView) findViewById(R.id.counter);
+                        counter.setText("3");
+                        counter.setVisibility(View.VISIBLE);
+                        title.setText("Next Category");
+                        title.setVisibility(View.VISIBLE);
+                        btn1.setEnabled(false);
+                        btn2.setEnabled(false);
+                        btn3.setEnabled(false);
+                        btn4.setEnabled(false);
+                        //counter.setText("3");
+                        count_down();
+                        //reset();
                     }
                 }else{
                     startActivity(new Intent(Start.this, Score.class));
@@ -233,7 +248,25 @@ public class Start extends Activity {
         }.start();
 
     }
+    public void count_down(){
 
+        countdown = new CountDownTimer(4000, 500) {
+
+            public void onTick(long millisUntilFinished) {
+
+                if(millisUntilFinished/1000 >= 1){
+                    counter.setText(String.valueOf(millisUntilFinished / 1000));
+                }else {
+                    counter.setText("GO");
+                }
+            }
+
+            public void onFinish() {
+                reset();
+            }
+        }.start();
+        
+    }
 
     void reset(){
         progressBarIndex = 20;
@@ -245,6 +278,12 @@ public class Start extends Activity {
         }else if(globalCounter == 2){
             QuestionAndButtons = Cat3;
         }
+        counter.setVisibility(View.INVISIBLE);
+        title.setVisibility(View.INVISIBLE);
+        btn1.setEnabled(true);
+        btn2.setEnabled(true);
+        btn3.setEnabled(true);
+        btn4.setEnabled(true);
         next();
     }
 
@@ -504,7 +543,7 @@ public class Start extends Activity {
             public void run() {
                 //Put your conditions accordingly
                 v.getBackground().clearColorFilter();
-                if (QuestionAndButtons.size() > 0 && ourCountDownTimer >= 1) {
+                if (QuestionAndButtons.size() > 0) {
                     next();
                 } else {
                     shared_preferences_editor = shared_preferences.edit();

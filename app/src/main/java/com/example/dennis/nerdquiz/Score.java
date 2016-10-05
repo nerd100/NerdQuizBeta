@@ -260,7 +260,7 @@ public class Score extends Activity {
     }
     public String getNerdTitle(int Score){              //r
         for(int i = 0; i < ranksValue.size(); i++){
-            if(Score < Integer.parseInt(ranksValue.get(i))){
+            if(Score <= Integer.parseInt(ranksValue.get(i))){
                 return ranksTitle.get(i);
             }
 
