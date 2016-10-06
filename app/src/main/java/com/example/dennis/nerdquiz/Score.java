@@ -7,6 +7,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +25,8 @@ import java.util.Map;
 public class Score extends Activity {
     SharedPreferences shared_preferences;
     SharedPreferences.Editor shared_preferences_editor;
+
+    Button retry;
 
     TextView rightAnswer,wrongAnswer,points,tmpiq,rank,switchText;
     ImageView tmpmed;
@@ -40,6 +45,8 @@ public class Score extends Activity {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score);
+
+        retry = (Button) findViewById(R.id.retry);
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -197,6 +204,30 @@ public class Score extends Activity {
         rightAnswer.setText(String.valueOf(shared_preferences.getInt("countRightAnswers", 0)));
         wrongAnswer.setText(String.valueOf(shared_preferences.getInt("countWrongAnswers", 0)));
         points.setText(String.valueOf(shared_preferences.getInt("countNerdIQ", 0)));
+
+        retry.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    retry.setBackgroundResource(R.drawable.pressedbutton);
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    String quiz = "";
+                    quiz = shared_preferences.getString("Number","0");
+                    if(quiz.equals("1")) {
+                        shared_preferences_editor.putString("Number", "1");
+                        shared_preferences_editor.apply();
+                    }else if(quiz.equals("0")) {
+                        shared_preferences_editor.putString("Number", "0");
+                        shared_preferences_editor.apply();
+                    }
+                    startActivity(new Intent(Score.this, Start.class));
+                    finish();
+                }
+                return true;
+            }
+        });
+
+
     }
 
     public void setAchievements(int numA){

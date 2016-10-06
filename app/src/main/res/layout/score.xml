@@ -194,4 +194,22 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/retry"
+            android:background="@drawable/buttonbg"
+            android:text="Nochmal"
+            android:textSize="30dp"
+            android:textStyle="bold|italic"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+    </LinearLayout>
+
 </LinearLayout>
