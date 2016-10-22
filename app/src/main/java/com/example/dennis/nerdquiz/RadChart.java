@@ -123,6 +123,7 @@ public class RadChart extends Activity {
         float mR=shared_preferences.getFloat("MoviesR",0);
         float mW=shared_preferences.getFloat("MoviesW",0);
         float MRWproc=Math.round(mR/(mR+mW)*1000)/10f;
+        Toast.makeText(getApplicationContext(), String.valueOf(MRWproc), Toast.LENGTH_SHORT).show();
         float gR=shared_preferences.getFloat("GamesR",0);
         float gW=shared_preferences.getFloat("GamesW",0);
         float GRWproc=Math.round(gR/(gR+gW)*1000)/10f;
@@ -130,7 +131,7 @@ public class RadChart extends Activity {
         float mintW=shared_preferences.getFloat("MINTW",0);
         float MINTRWproc=Math.round(mintR/(mintR+mintW)*1000)/10f;
 
-
+        Log.d("test",String.valueOf(aR+aW)+"anim"+String.valueOf(sR+sW)+"se"+String.valueOf(mR+mW)+"mo"+String.valueOf(gR+gW)+"ga"+String.valueOf(mintR+mintW)+"mint");
         RadarChart chart = (RadarChart) findViewById(R.id.chart);
 
         YAxis yaxis=chart.getYAxis();

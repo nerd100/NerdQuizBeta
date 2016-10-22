@@ -69,6 +69,7 @@ public class Score extends Activity {
             //Toast.makeText(getApplicationContext(),String.valueOf(score),Toast.LENGTH_LONG).show();
             rankSplit(buffer.toString());
             title = getNerdTitle(score);
+            tmpmed.setVisibility(View.INVISIBLE);
 
             //Achievements
             int tmpc=shared_preferences.getInt("counterQuiz",0);
@@ -163,7 +164,7 @@ public class Score extends Activity {
             rank.setText("");
             //switchText.setGravity(Gravity.CENTER_VERTICAL);
             switchText.setText("Deine Medaille:");
-
+            tmpmed.setVisibility(View.VISIBLE);
             category.put("Anime",1);
             category.put("Serien",2);
             category.put("Movies",3);

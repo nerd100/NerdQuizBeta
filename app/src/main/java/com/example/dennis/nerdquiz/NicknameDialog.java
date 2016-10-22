@@ -45,7 +45,7 @@ public class NicknameDialog extends DialogFragment {
                         new AlertDialog.Builder(getActivity()).setTitle("Zeichenlimit erreicht").setMessage("Wähle ein Username mit weniger als " + 12 + " Buchstaben.").setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int which) {
-                                usernameedit.setText("");
+                               // usernameedit.setText("");
                                 ignoreChange=false;
                             }
                         }).show();

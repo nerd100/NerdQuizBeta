@@ -13,6 +13,7 @@ import android.media.Image;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
@@ -432,8 +433,34 @@ public class Start extends Activity {
         btn3.setText(tmpShuffle.get(2));
         btn4.setText(tmpShuffle.get(3));
 
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleClick(indexRA,view,btn1);
+            }
+        });
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleClick(indexRA,view,btn2);
+            }
+        });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleClick(indexRA, view,btn3);
+            }
+        });
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                handleClick(indexRA, view,btn4);
+            }
+        });
 
-        View.OnClickListener listener = new View.OnClickListener() {
+
+
+   /*     View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 questionCounter++;
@@ -445,9 +472,11 @@ public class Start extends Activity {
                     easyCounter=0;
                     mediumCounter=0;
                     hardCounter=0;
+
+//                    Toast.makeText(getApplicationContext(),getCatWrongAnswer,Toast.LENGTH_LONG).show();
                     getCatRightAnswer=0;
                     getCatWrongAnswer=0;
-                    //Toast.makeText(getApplicationContext(),diffNow,Toast.LENGTH_LONG).show();
+
                     tmpCatNow =category.getText().toString();
 
                 }
@@ -491,10 +520,10 @@ public class Start extends Activity {
                     shared_preferences_editor.putFloat("countRightAnswersKat2", Kat2Answer);
                     shared_preferences_editor.putFloat("countRightAnswersKat3", Kat3Answer);
 
-                    float tmpRa=shared_preferences.getFloat(category.getText().toString()+"R",0f)+getCatRightAnswer;
-                    shared_preferences_editor.putFloat(category.getText().toString()+"R", tmpRa);
-                    shared_preferences_editor.putInt("countNerdIQ",countNerdIQ );
-                    shared_preferences_editor.apply();
+                    float tmpRa=shared_preferences.getFloat(category.getText().toString()+"R",0f)+1;
+                    shared_preferences_editor.putFloat(category.getText().toString()+"R", tmpRa).apply();
+                    shared_preferences_editor.putInt("countNerdIQ",countNerdIQ ).apply();
+
                     v.getBackground().setColorFilter(new LightingColorFilter(Color.WHITE,Color.GREEN));
                     setBGChangeIntent(v);
                 } else {
@@ -512,10 +541,11 @@ public class Start extends Activity {
                     wrong++;
                     countWrongAnswers+=1;
                     getCatWrongAnswer+=1;
-                    float tmpWa=shared_preferences.getFloat(category.getText().toString()+"R",0f)+getCatWrongAnswer;
-                    shared_preferences_editor.putInt("countWrongAnswers",countWrongAnswers );
-                    shared_preferences_editor.putFloat(category.getText().toString()+"W", tmpWa);
-                    shared_preferences_editor.apply();
+          //          Log.d("TESTING",category.getText().toString()+"R" +" "+String.valueOf(getCatWrongAnswer));
+           //         Toast.makeText(getApplicationContext(),category.getText().toString()+"R" +" "+String.valueOf(getCatWrongAnswer), Toast.LENGTH_LONG).show();
+                    float tmpWa=shared_preferences.getFloat(category.getText().toString()+"W",0f)+1;
+                    shared_preferences_editor.putFloat(category.getText().toString()+"W", tmpWa).apply();
+                    shared_preferences_editor.putInt("countWrongAnswers",countWrongAnswers ).apply();
                     v.getBackground().setColorFilter(new LightingColorFilter(Color.WHITE,Color.RED));
                     setBGChangeIntent(v);
                 }
@@ -526,8 +556,97 @@ public class Start extends Activity {
         btn2.setOnClickListener(listener);
         btn3.setOnClickListener(listener);
         btn4.setOnClickListener(listener);
+        */
     }
 
+    public void handleClick(int indexRA,View v,Button btn){
+        questionCounter++;
+        String tmpRAindex="button"+String.valueOf(indexRA+1);
+        shared_preferences_editor = shared_preferences.edit();
+        String diffNow = QuestionAndButtonsParts[6];
+
+        if(!category.getText().toString().equals(tmpCatNow)){
+            easyCounter=0;
+            mediumCounter=0;
+            hardCounter=0;
+            getCatRightAnswer=0;
+            getCatWrongAnswer=0;
+
+            tmpCatNow =category.getText().toString();
+
+        }
+        if (String.valueOf(getResources().getResourceName(v.getId())).contains(tmpRAindex)) {
+
+            right++;
+            countRightAnswers +=1;
+
+            //fuer radchart
+            getCatRightAnswer +=1;
+            //  countNerdIQ+=10;
+            switch (diffNow){
+                case "Easy":
+                    if(easyCounter<=4){
+                        countNerdIQ += easyPoints[easyCounter];
+                        easyCounter +=1;
+                    }else countNerdIQ += easyPoints[easyPoints.length-1];
+                    break;
+                case "Medium":
+                    if(mediumCounter<=3){
+                        countNerdIQ += mediumPoints[mediumCounter];
+                        mediumCounter +=1;
+                    }else countNerdIQ += mediumPoints[mediumPoints.length-1];
+                    break;
+                case "Hard":
+                    if(hardCounter<=1){
+                        countNerdIQ += hardPoints[hardCounter];
+                        hardCounter +=1;
+                    }else countNerdIQ += hardPoints[hardPoints.length-1];
+                    break;
+            }
+            shared_preferences_editor.putInt("countRightAnswers",countRightAnswers );
+            if(questionCounter <= QuestionNumberQuiz*3) {
+                Kat1Answer++;
+            } else if(questionCounter <= QuestionNumberQuiz*6) {
+                Kat2Answer++;
+            } else if(questionCounter <= QuestionNumberQuiz*9) {
+                Kat3Answer++;
+            }
+            shared_preferences_editor.putFloat("countRightAnswersKat1", Kat1Answer);
+            shared_preferences_editor.putFloat("countRightAnswersKat2", Kat2Answer);
+            shared_preferences_editor.putFloat("countRightAnswersKat3", Kat3Answer);
+
+            float tmpRa=shared_preferences.getFloat(category.getText().toString()+"R",0f)+1;
+            shared_preferences_editor.putFloat(category.getText().toString()+"R", tmpRa).apply();
+            shared_preferences_editor.putInt("countNerdIQ",countNerdIQ ).apply();
+
+            btn.setBackgroundResource(R.drawable.buttonbgright);
+            //v.getBackground().setColorFilter(new LightingColorFilter(Color.WHITE,Color.GREEN));
+            setBGChangeIntent(v);
+        } else {
+            switch (diffNow){
+                case "Easy":
+                    easyCounter=0;
+                    break;
+                case "Medium":
+                    mediumCounter=0;
+                    break;
+                case "Hard":
+                    hardCounter=0;
+                    break;
+            }
+            wrong++;
+            countWrongAnswers+=1;
+            getCatWrongAnswer+=1;
+            //          Log.d("TESTING",category.getText().toString()+"R" +" "+String.valueOf(getCatWrongAnswer));
+            //         Toast.makeText(getApplicationContext(),category.getText().toString()+"R" +" "+String.valueOf(getCatWrongAnswer), Toast.LENGTH_LONG).show();
+            float tmpWa=shared_preferences.getFloat(category.getText().toString()+"W",0f)+1;
+            shared_preferences_editor.putFloat(category.getText().toString()+"W", tmpWa).apply();
+            shared_preferences_editor.putInt("countWrongAnswers",countWrongAnswers ).apply();
+            btn.setBackgroundResource(R.drawable.buttonbgwrong);
+            // v.getBackground().setColorFilter(new LightingColorFilter(Color.WHITE,Color.RED));
+            setBGChangeIntent(v);
+        }
+    }
 
     public void setBGChangeIntent(final View v){
         btn1.setOnClickListener(null);
@@ -541,7 +660,11 @@ public class Start extends Activity {
             @Override
             public void run() {
                 //Put your conditions accordingly
-                v.getBackground().clearColorFilter();
+                //v.getBackground().clearColorFilter();
+                btn1.setBackgroundResource(R.drawable.buttoncolorred);
+                btn2.setBackgroundResource(R.drawable.buttoncolorred);
+                btn3.setBackgroundResource(R.drawable.buttoncolorred);
+                btn4.setBackgroundResource(R.drawable.buttoncolorred);
                 if (QuestionAndButtons.size() > 0) {
                     next();
                 } else {

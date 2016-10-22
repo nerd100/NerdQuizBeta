@@ -12,12 +12,17 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import com.example.dennis.nerdquiz.R;
 
 /**
@@ -26,11 +31,13 @@ import com.example.dennis.nerdquiz.R;
 public class AddQuestion extends Activity {
 
     EditText editQuestion, editRA, editFA1, editFA2, editFA3;
+    TextView charcounter;
     Button btnAddData;
     SharedPreferences shared_preferences;
     SharedPreferences.Editor shared_preferences_editor;
     Spinner editSpinner1,editSpinner2;
     String Question,Category,Difficulty,RA,FA1,FA2,FA3;
+    int charcnt=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +47,169 @@ public class AddQuestion extends Activity {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         shared_preferences = getSharedPreferences("shared_preferences_test", MODE_PRIVATE);
+        charcounter = (TextView) findViewById(R.id.charcounter);
         editSpinner1 = (Spinner) findViewById(R.id.editSpinner1);
         editSpinner2 = (Spinner) findViewById(R.id.editSpinner2);
         editQuestion = (EditText) findViewById(R.id.editQuestion);
+        editQuestion.addTextChangedListener(new TextWatcher() {
+            boolean ignoreChange = false;
+            String tmpcs="";
+            @Override
+            public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() <= 110) {
+                        tmpcs = charSequence.toString();
+                        ignoreChange=false;
+                }
+                if (charSequence.length() >= 111) {
+                    if(!ignoreChange) {
+                        ignoreChange=true;
+                        editQuestion.setText(String.valueOf(tmpcs));
+                        new AlertDialog.Builder(AddQuestion.this).setTitle("Zeichenlimit erreicht!").setMessage("Deine Frage darf nicht aus mehr als " + 110 + " Zeichen bestehen.").setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+
+                            }
+                        }).show();
+                    }
+                }
+                if(charSequence.length()>110){
+                    charcounter.setText(String.valueOf(tmpcs.length()));
+                }else {
+                    charcounter.setText(String.valueOf(charSequence.length()));
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
         editRA = (EditText) findViewById(R.id.editRA);
+        editRA.addTextChangedListener(new TextWatcher() {
+            boolean ignoreChange = false;
+            String tmpcs="";
+            @Override
+            public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() <= 20) {
+                    tmpcs = charSequence.toString();
+                    ignoreChange=false;
+                }
+                if (charSequence.length() >= 21) {
+                    if(!ignoreChange) {
+                        ignoreChange=true;
+                        editQuestion.setText(String.valueOf(tmpcs));
+                        new AlertDialog.Builder(AddQuestion.this).setTitle("Zeichenlimit erreicht!").setMessage("Deine Frage darf nicht aus mehr als " + 20 + " Zeichen bestehen.").setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+
+                            }
+                        }).show();
+                    }
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
         editFA1 = (EditText) findViewById(R.id.editFA1);
+        editFA1.addTextChangedListener(new TextWatcher() {
+            boolean ignoreChange = false;
+            String tmpcs="";
+            @Override
+            public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() <= 20) {
+                    tmpcs = charSequence.toString();
+                    ignoreChange=false;
+                }
+                if (charSequence.length() >= 21) {
+                    if(!ignoreChange) {
+                        ignoreChange=true;
+                        editQuestion.setText(String.valueOf(tmpcs));
+                        new AlertDialog.Builder(AddQuestion.this).setTitle("Zeichenlimit erreicht!").setMessage("Deine Frage darf nicht aus mehr als " + 20 + " Zeichen bestehen.").setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+
+                            }
+                        }).show();
+                    }
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
         editFA2 = (EditText) findViewById(R.id.editFA2);
+        editFA2.addTextChangedListener(new TextWatcher() {
+            boolean ignoreChange = false;
+            String tmpcs="";
+            @Override
+            public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() <= 20) {
+                    tmpcs = charSequence.toString();
+                    ignoreChange=false;
+                }
+                if (charSequence.length() >= 21) {
+                    if(!ignoreChange) {
+                        ignoreChange=true;
+                        editQuestion.setText(String.valueOf(tmpcs));
+                        new AlertDialog.Builder(AddQuestion.this).setTitle("Zeichenlimit erreicht!").setMessage("Deine Frage darf nicht aus mehr als " + 20 + " Zeichen bestehen.").setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+
+                            }
+                        }).show();
+                    }
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
         editFA3 = (EditText) findViewById(R.id.editFA3);
+        editFA3.addTextChangedListener(new TextWatcher() {
+            boolean ignoreChange = false;
+            String tmpcs="";
+            @Override
+            public void beforeTextChanged(CharSequence s, int i, int i1, int i2) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.length() <= 20) {
+                    tmpcs = charSequence.toString();
+                    ignoreChange=false;
+                }
+                if (charSequence.length() >= 21) {
+                    if(!ignoreChange) {
+                        ignoreChange=true;
+                        editQuestion.setText(String.valueOf(tmpcs));
+                        new AlertDialog.Builder(AddQuestion.this).setTitle("Zeichenlimit erreicht!").setMessage("Deine Frage darf nicht aus mehr als " + 20 + " Zeichen bestehen.").setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int which) {
+
+                            }
+                        }).show();
+                    }
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
         btnAddData = (Button) findViewById(R.id.add_button);
 
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -108,19 +271,6 @@ public class AddQuestion extends Activity {
         });
     }
 
-  /*  public void AddData(View view) {
-        Question = editQuestion.getText().toString();
-        Category = editSpinner1.getSelectedItem().toString();
-        Difficulty = editSpinner2.getSelectedItem().toString();
-        RA = editRA.getText().toString();
-        FA1 = editFA1.getText().toString();
-        FA2 = editFA2.getText().toString();
-        FA3 = editFA3.getText().toString();
-        String method = "Insert";
-        BackgroundTask backgroundTask = new BackgroundTask(this);
-        backgroundTask.execute(method,Category,Difficulty,Question,RA,FA1,FA2,FA3);
-        clearFields();
-    }*/
 
     public void onBackPressed() {
 

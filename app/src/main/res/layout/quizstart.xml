@@ -17,26 +17,6 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="60dp"
-                android:layout_weight="1"
-                android:background="@drawable/titlebg">
-
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Frage"
-                    android:id="@+id/questiontitle"
-                    android:gravity="center"
-                    android:textSize="40sp"
-                    android:textColor="#ffffff"
-                    android:textStyle="bold|italic" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="200">
 
@@ -195,7 +175,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:visibility="invisible">
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
