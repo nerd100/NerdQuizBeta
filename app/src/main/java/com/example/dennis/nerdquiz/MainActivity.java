@@ -6,6 +6,11 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
+import android.graphics.PorterDuff;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.view.MotionEvent;
@@ -68,6 +73,9 @@ public class MainActivity extends Activity {
             userNamebtn.setEnabled(false);
         }
 */
+
+
+
         startbtn1.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -133,6 +141,20 @@ public class MainActivity extends Activity {
                 return true;
             }
         });
+
+        //Toast.makeText(getApplicationContext(),String.valueOf(isOnline()),Toast.LENGTH_LONG).show();
+        if (isOnline() == false){               //Hier Weitermachen
+            startbtn1.setEnabled(false);
+            startbtn2.setEnabled(false);
+            addbtn.setEnabled(false);
+            startbtn1.setBackgroundResource(R.drawable.buttonbg_grey);
+            startbtn2.setBackgroundResource(R.drawable.buttonbg_grey);
+            addbtn.setBackgroundResource(R.drawable.buttonbg_grey);
+            //startbtn1.setClickable(false);
+            //startbtn2.setClickable(false);
+            //startbtn1.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
+
+        }
         /*
 
 
@@ -219,6 +241,18 @@ public class MainActivity extends Activity {
         String method = "Insert";
         BackgroundTask backgroundTask = new BackgroundTask(this);
         backgroundTask.execute(method,Category,Difficulty,Question,RA,FA1,FA2,FA3);*/
+    }
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
     @Override
     public void onBackPressed() {

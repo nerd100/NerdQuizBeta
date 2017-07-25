@@ -35,12 +35,12 @@ public class BackgroundTaskScore extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        json_url = "http://quizdb.net23.net/json_get_data.php";
+        json_url = "http://nerdquiz.000webhostapp.com/json_get_data.php";
     }
 
     protected String doInBackground(String... params){
         if(params[0] == "InsertScore") {
-            String insert_url = "http://quizdb.net23.net/insertscore.php";
+            String insert_url = "http://nerdquiz.000webhostapp.com/insertscore.php";
             String method = params[0];
             if (method.equals("InsertScore")) {
                 String HashedDeviceID = params[1];

@@ -13,6 +13,7 @@ import android.media.Image;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
@@ -77,14 +78,13 @@ public class Start extends Activity {
     int QuestionNumberKatQuiz = 10;
     int right = 0;
     int wrong = 0;
-    CountDownTimer countdown;
     int globalCounter = 0;
     android.os.Handler h;
     ImageView diffLogo;
 
     Random rand = new Random();
     Random r = new Random();
-    CountDownTimer countDown;
+    CountDownTimer countDown, countDown2;
     int ourCountDownTimer=0;
     int msfinished;
     private static final String JSON_ARRAY = "server_response";
@@ -137,7 +137,7 @@ public class Start extends Activity {
         //createTimer();
 
         imageViewDiff = (ImageView) findViewById(R.id.imageView_diff);
-
+        String a;
         if(whichQuiz.equals("1")) {
             categoryList.add("Anime");
             categoryList.add("Serien");
@@ -153,9 +153,11 @@ public class Start extends Activity {
             getData("", categoryList.get(0), String.valueOf(QuestionNumberQuiz),categoryList.get(1),categoryList.get(2));
 
         }else if(whichQuiz.equals("0")){
+            //Toast.makeText(getApplicationContext(), "kate", Toast.LENGTH_SHORT).show();
             String Diff,Cate;
             Diff = shared_preferences.getString("Difficulty", "Default");
             Cate = shared_preferences.getString("Category", "Default");
+
             if(Diff.equals("Easy")){
                 diffLogo.setImageResource(R.drawable.easylogo);
                 imageViewDiff.setImageResource(R.drawable.diff_easy);
@@ -166,6 +168,8 @@ public class Start extends Activity {
                 diffLogo.setImageResource(R.drawable.hardlogo);
                 imageViewDiff.setImageResource(R.drawable.diff_hard);
             }
+            //Toast.makeText(getApplicationContext(), (Diff+Cate+String.valueOf(QuestionNumberKatQuiz)), Toast.LENGTH_SHORT).show();
+            //getData("", categoryList.get(0), String.valueOf(QuestionNumberQuiz),categoryList.get(1),categoryList.get(2));
             getData(Diff, Cate, String.valueOf(QuestionNumberKatQuiz),"","");
         }
 
@@ -249,7 +253,7 @@ public class Start extends Activity {
     }
     public void count_down(){
 
-        countdown = new CountDownTimer(4000, 500) {
+        countDown2 = new CountDownTimer(4000, 500) {
 
             public void onTick(long millisUntilFinished) {
 
@@ -384,6 +388,7 @@ public class Start extends Activity {
             firstQuestion = Question(QuestionAndButtons, "");
         }
         QuestionAndButtonsParts = firstQuestion.split(";");
+
         NameButtons();
     }
 
@@ -577,9 +582,8 @@ public class Start extends Activity {
         protected String doInBackground(String... params) {
             String JSON_STRING;
             String result = "";
-
             try {
-                String json_url = "http://quizdb.net23.net/json_get_data.php";
+                String json_url = "http://nerdquiz.000webhostapp.com/json_get_data.php";
                 URL url = new URL(json_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
 
@@ -597,7 +601,7 @@ public class Start extends Activity {
                     bufferedWriter.write(data);
                     bufferedWriter.flush();
                     bufferedWriter.close();
-                }else if(whichQuiz.equals("0")) {
+                }else {
                     String data =
                             URLEncoder.encode("Category", "UTF-8") + "=" + URLEncoder.encode(params[0], "UTF-8") + "&" +
                                     URLEncoder.encode("Difficulty", "UTF-8") + "=" + URLEncoder.encode(params[1], "UTF-8") + "&" +
@@ -636,21 +640,28 @@ public class Start extends Activity {
         @Override
         protected void onPostExecute(String result) {
             createTimer();
+            Toast.makeText(getApplicationContext(),"OK",Toast.LENGTH_LONG).show();
             if(result.equals("Failed")){
+                Log.d("test",result);
                 Toast.makeText(getApplicationContext(),"No Connection to Database",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(Start.this, MainActivity.class));
+                countDown.cancel();
+                countDown2.cancel();
                 finish();
             }else {
                 super.onPostExecute(result);
                 progressDialog.dismiss();
                 extractJSON(result);
                 QuestionAndButtons = Cat1;
-                Toast.makeText(getApplicationContext(),String.valueOf(QuestionAndButtons.size()),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),String.valueOf(QuestionAndButtons.size()),Toast.LENGTH_LONG).show();
                 if(whichQuiz.equals("1")) {
                     firstQuestion = Question(QuestionAndButtons, "Easy");
-                }else{firstQuestion = Question(QuestionAndButtons, "");}
-                QuestionAndButtonsParts = firstQuestion.split(";");
+                }else{
+                    //Toast.makeText(getApplicationContext(),result,Toast.LENGTH_LONG).show();
+                    firstQuestion = Question(QuestionAndButtons, "");
+                }
 
+                QuestionAndButtonsParts = firstQuestion.split(";");
                 NameButtons();
             }
         }

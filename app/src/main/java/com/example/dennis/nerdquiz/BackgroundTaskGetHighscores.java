@@ -51,7 +51,7 @@ public abstract class BackgroundTaskGetHighscores extends AsyncTask<String,Void,
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        json_url = "http://quizdb.net23.net/json_get_scores.php";
+        json_url = "http://nerdquiz.000webhostapp.com/json_get_scores.php";
     }
 
     protected String doInBackground(String... params){

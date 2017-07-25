@@ -35,13 +35,13 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        json_url = "http://quizdb.net23.net/json_get_data.php";
+        json_url = "http://nerdquiz.000webhostapp.com/json_get_data.php";
     }
 
     @Override
     protected String doInBackground(String... params) {
         if(params[0] == "Insert") {
-            String insert_url = "http://quizdb.net23.net/insert.php";
+            String insert_url = "http://nerdquiz.000webhostapp.com/insert.php";
             String method = params[0];
             if (method.equals("Insert")) {
                 String Category = params[1];
